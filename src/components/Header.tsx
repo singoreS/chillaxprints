@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, User, Menu } from "lucide-react";
+import { User, Menu } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { CartDrawer } from "@/components/CartDrawer";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,12 +42,7 @@ const Header = () => {
               <User className="h-5 w-5" />
             </Button>
           </Link>
-          <Button variant="ghost" size="icon" className="relative">
-            <ShoppingCart className="h-5 w-5" />
-            <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center">
-              0
-            </span>
-          </Button>
+          <CartDrawer />
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
