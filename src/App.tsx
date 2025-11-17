@@ -8,7 +8,9 @@ import Shop from "./pages/Shop";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
-import Login from "./pages/Login";
+import Auth from "./pages/Auth";
+import Account from "./pages/Account";
+import OrderTracking from "./pages/OrderTracking";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 
@@ -27,7 +29,9 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/produit/:id" element={<Product />} />
           <Route path="/panier" element={<Cart />} />
-          <Route path="/connexion" element={<Login />} />
+          <Route path="/connexion" element={<Auth />} />
+          <Route path="/compte" element={<Account />} />
+          <Route path="/suivi-commande" element={<OrderTracking />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

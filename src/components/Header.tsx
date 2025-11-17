@@ -1,18 +1,34 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { User, Menu } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { CartDrawer } from "@/components/CartDrawer";
+import { supabase } from "@/integrations/supabase/client";
+import { User as SupabaseUser } from "@supabase/supabase-js";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const navLinks = [
     { to: "/", label: "Accueil" },
     { to: "/boutique", label: "Boutique" },
     { to: "/a-propos", label: "À Propos" },
     { to: "/contact", label: "Contact" },
+    { to: "/suivi-commande", label: "Suivi" },
   ];
 
   return (
@@ -37,7 +53,7 @@ const Header = () => {
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
-          <Link to="/connexion">
+          <Link to={user ? "/compte" : "/connexion"}>
             <Button variant="ghost" size="icon">
               <User className="h-5 w-5" />
             </Button>
