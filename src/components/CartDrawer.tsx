@@ -9,8 +9,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { Link } from "react-router-dom";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -137,6 +138,18 @@ export const CartDrawer = () => {
                 </div>
                 
                 <Button 
+                  asChild
+                  variant="outline"
+                  className="w-full" 
+                  size="lg"
+                >
+                  <Link to="/panier" onClick={() => setIsOpen(false)}>
+                    <ShoppingBag className="w-4 h-4 mr-2" />
+                    Voir le panier complet
+                  </Link>
+                </Button>
+
+                <Button 
                   onClick={handleCheckout}
                   className="w-full" 
                   size="lg"
@@ -150,7 +163,7 @@ export const CartDrawer = () => {
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Passer commande
+                      Checkout direct
                     </>
                   )}
                 </Button>
