@@ -13,14 +13,25 @@ import { ShoppingCart, Loader2 } from "lucide-react";
 
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const addItem = useCartStore(state => state.addItem);
+
+  const categories = [
+    { value: "all", label: "Tous les produits" },
+    { value: "T-Shirts", label: "T-Shirts" },
+    { value: "Hoodies", label: "Hoodies" },
+    { value: "Bonnets", label: "Bonnets" },
+    { value: "Chaussures", label: "Chaussures" },
+  ];
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const shopifyProducts = await getProducts(20);
         setProducts(shopifyProducts);
+        setFilteredProducts(shopifyProducts);
       } catch (error) {
         console.error('Error loading products:', error);
       } finally {
@@ -29,6 +40,16 @@ const Shop = () => {
     };
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    if (selectedCategory === "all") {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(
+        products.filter(product => product.node.productType === selectedCategory)
+      );
+    }
+  }, [selectedCategory, products]);
 
   const handleAddToCart = (product: ShopifyProduct) => {
     const firstVariant = product.node.variants.edges[0]?.node;
@@ -70,22 +91,35 @@ const Shop = () => {
         {/* Products Section */}
         <section className="py-12">
           <div className="container">
+            {/* Category Filters */}
+            <div className="mb-8">
+              <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
+                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 lg:w-auto">
+                  {categories.map((category) => (
+                    <TabsTrigger key={category.value} value={category.value}>
+                      {category.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
+            </div>
+
             {loading ? (
               <div className="flex justify-center items-center py-20">
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
-            ) : products.length === 0 ? (
+            ) : filteredProducts.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-xl text-muted-foreground mb-4">
-                  Aucun produit disponible pour le moment
-                </p>
-                <p className="text-muted-foreground">
-                  Créez vos premiers produits pour commencer à vendre !
+                  {selectedCategory === "all" 
+                    ? "Aucun produit disponible pour le moment"
+                    : `Aucun produit dans la catégorie ${categories.find(c => c.value === selectedCategory)?.label}`
+                  }
                 </p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <Card key={product.node.id} className="overflow-hidden group hover:shadow-lg transition-all">
                     <Link to={`/produit/${product.node.handle}`}>
                       <div className="relative aspect-square overflow-hidden">
