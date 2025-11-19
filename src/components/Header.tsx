@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { User, Menu } from "lucide-react";
+import { User, Menu, Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
 import { CartDrawer } from "@/components/CartDrawer";
 import { SearchBar } from "@/components/SearchBar";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
+import { useWishlistStore } from "@/stores/wishlistStore";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
+  const wishlistItems = useWishlistStore(state => state.items);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -62,6 +65,16 @@ const Header = () => {
           <Link to={user ? "/compte" : "/connexion"} className="hidden sm:block">
             <Button variant="ghost" size="icon">
               <User className="h-5 w-5" />
+            </Button>
+          </Link>
+          <Link to="/favoris" className="relative">
+            <Button variant="ghost" size="icon">
+              <Heart className="h-5 w-5" />
+              {wishlistItems.length > 0 && (
+                <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-accent">
+                  {wishlistItems.length}
+                </Badge>
+              )}
             </Button>
           </Link>
           <CartDrawer />

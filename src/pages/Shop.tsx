@@ -5,18 +5,20 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
+import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
-import { ShoppingCart, Loader2 } from "lucide-react";
+import { ShoppingCart, Loader2, Heart } from "lucide-react";
 
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const addItem = useCartStore(state => state.addItem);
+  const addToCart = useCartStore(state => state.addItem);
+  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
 
   const categories = [
     { value: "all", label: "Tous les produits" },
@@ -53,7 +55,10 @@ const Shop = () => {
 
   const handleAddToCart = (product: ShopifyProduct) => {
     const firstVariant = product.node.variants.edges[0]?.node;
-    if (!firstVariant) return;
+    if (!firstVariant) {
+      toast.error("Variante non disponible");
+      return;
+    }
 
     const cartItem = {
       product,
@@ -63,11 +68,19 @@ const Shop = () => {
       quantity: 1,
       selectedOptions: firstVariant.selectedOptions || []
     };
-    
-    addItem(cartItem);
-    toast.success("Ajouté au panier !", {
-      description: product.node.title,
-    });
+
+    addToCart(cartItem);
+    toast.success("Produit ajouté au panier");
+  };
+
+  const handleToggleWishlist = (product: ShopifyProduct) => {
+    if (isInWishlist(product.node.id)) {
+      removeFromWishlist(product.node.id);
+      toast.success("Retiré des favoris");
+    } else {
+      addToWishlist(product);
+      toast.success("Ajouté aux favoris");
+    }
   };
 
   return (
@@ -104,55 +117,58 @@ const Shop = () => {
               </Tabs>
             </div>
 
+            {/* Products Grid */}
             {loading ? (
               <div className="flex justify-center items-center py-20">
                 <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-xl text-muted-foreground mb-4">
-                  {selectedCategory === "all" 
-                    ? "Aucun produit disponible pour le moment"
-                    : `Aucun produit dans la catégorie ${categories.find(c => c.value === selectedCategory)?.label}`
-                  }
-                </p>
+                <p className="text-xl text-muted-foreground">Aucun produit trouvé</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
-                  <Card key={product.node.id} className="overflow-hidden group hover:shadow-lg transition-all">
-                    <Link to={`/produit/${product.node.handle}`}>
-                      <div className="relative aspect-square overflow-hidden">
-                        {product.node.images?.edges?.[0]?.node && (
-                          <img
-                            src={product.node.images.edges[0].node.url}
-                            alt={product.node.images.edges[0].node.altText || product.node.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        )}
-                      </div>
-                    </Link>
+                  <Card key={product.node.id} className="group hover:shadow-lg transition-all duration-300">
                     <CardContent className="p-4">
-                      <Link to={`/produit/${product.node.handle}`}>
-                        <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">
-                          {product.node.title}
-                        </h3>
-                      </Link>
-                      <div className="flex items-center justify-between">
-                        <p className="text-xl font-bold text-primary">
-                          {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)} {product.node.priceRange.minVariantPrice.currencyCode}
-                        </p>
-                        <Button 
-                          size="sm" 
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleAddToCart(product);
-                          }}
+                      <div className="relative">
+                        <Link to={`/product/${product.node.handle}`}>
+                          <div className="aspect-square bg-secondary/20 rounded-lg mb-4 overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                            {product.node.images?.edges?.[0]?.node && (
+                              <img
+                                src={product.node.images.edges[0].node.url}
+                                alt={product.node.title}
+                                className="w-full h-full object-cover"
+                              />
+                            )}
+                          </div>
+                        </Link>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="absolute top-2 right-2 bg-background/80 hover:bg-background"
+                          onClick={() => handleToggleWishlist(product)}
                         >
-                          <ShoppingCart className="h-4 w-4 mr-1" />
-                          Panier
+                          <Heart
+                            className={`w-5 h-5 ${
+                              isInWishlist(product.node.id)
+                                ? "fill-accent text-accent"
+                                : "text-foreground"
+                            }`}
+                          />
                         </Button>
                       </div>
+                      <h3 className="font-semibold text-lg mb-2 text-foreground">
+                        {product.node.title}
+                      </h3>
+                      <p className="text-accent font-bold text-xl mb-4">
+                        {product.node.priceRange.minVariantPrice.currencyCode}{" "}
+                        {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}
+                      </p>
+                      <Button onClick={() => handleAddToCart(product)} className="w-full">
+                        <ShoppingCart className="w-4 h-4 mr-2" />
+                        Ajouter au panier
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}

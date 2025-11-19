@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Loader2, ArrowLeft } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Heart } from "lucide-react";
 import { getProductByHandle, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
+import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
 
 const Product = () => {
@@ -20,6 +21,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState("");
   const addItem = useCartStore(state => state.addItem);
+  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -139,12 +141,35 @@ const Product = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
             {/* Product Images Gallery */}
             <div className="space-y-4">
-              <div className="aspect-square overflow-hidden rounded-lg border bg-secondary/20 shadow-lg">
+              <div className="aspect-square overflow-hidden rounded-lg border bg-secondary/20 shadow-lg relative">
                 <img
                   src={mainImage || "/placeholder.svg"}
                   alt={product.title}
                   className="w-full h-full object-cover"
                 />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 bg-background/80 hover:bg-background"
+                  onClick={() => {
+                    const productWrapper: ShopifyProduct = { node: product };
+                    if (isInWishlist(product.id)) {
+                      removeFromWishlist(product.id);
+                      toast.success("Retiré des favoris");
+                    } else {
+                      addToWishlist(productWrapper);
+                      toast.success("Ajouté aux favoris");
+                    }
+                  }}
+                >
+                  <Heart
+                    className={`w-6 h-6 ${
+                      isInWishlist(product.id)
+                        ? "fill-accent text-accent"
+                        : "text-foreground"
+                    }`}
+                  />
+                </Button>
               </div>
               {product.images?.edges && product.images.edges.length > 1 && (
                 <div className="grid grid-cols-4 gap-3">
