@@ -89,27 +89,35 @@ const Shop = () => {
       
       <main className="flex-1">
         {/* Hero Banner */}
-        <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-12">
-          <div className="container text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Notre Boutique</h1>
-            <p className="text-xl text-muted-foreground mb-6">
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 bg-[var(--gradient-hero)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(24_100%_50%/0.08),transparent_60%)]" />
+          <div className="container text-center relative z-10">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+              Notre <span className="text-primary">Boutique</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-150">
               Pas besoin de courir, mais cette collection ne dure pas éternellement 😴
             </p>
-            <Badge variant="secondary" className="text-sm py-2 px-4">
+            <Badge variant="secondary" className="text-base py-3 px-6 shadow-[var(--shadow-soft)] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
               🎉 -15% sur votre première commande avec le code: CHILL15
             </Badge>
           </div>
         </section>
 
         {/* Products Section */}
-        <section className="py-12">
+        <section className="py-16 bg-gradient-to-b from-background to-muted/20">
           <div className="container">
             {/* Category Filters */}
-            <div className="mb-8">
+            <div className="mb-12">
               <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 lg:w-auto">
+                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 lg:w-auto shadow-[var(--shadow-soft)] p-1.5">
                   {categories.map((category) => (
-                    <TabsTrigger key={category.value} value={category.value}>
+                    <TabsTrigger 
+                      key={category.value} 
+                      value={category.value}
+                      className="data-[state=active]:shadow-[var(--shadow-soft)]"
+                    >
                       {category.label}
                     </TabsTrigger>
                   ))}
@@ -127,48 +135,58 @@ const Shop = () => {
                 <p className="text-xl text-muted-foreground">Aucun produit trouvé</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                  <Card key={product.node.id} className="group hover:shadow-lg transition-all duration-300">
-                    <CardContent className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProducts.map((product, index) => (
+                  <Card 
+                    key={product.node.id} 
+                    className="group overflow-hidden hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-2 bg-[var(--gradient-card)] border-border/50 animate-in fade-in slide-in-from-bottom-4"
+                    style={{ animationDelay: `${(index % 3) * 100}ms`, animationDuration: '700ms' }}
+                  >
+                    <CardContent className="p-0">
                       <div className="relative">
                         <Link to={`/product/${product.node.handle}`}>
-                          <div className="aspect-square bg-secondary/20 rounded-lg mb-4 overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                          <div className="aspect-square bg-secondary/20 overflow-hidden relative">
                             {product.node.images?.edges?.[0]?.node && (
                               <img
                                 src={product.node.images.edges[0].node.url}
                                 alt={product.node.title}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                               />
                             )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </div>
                         </Link>
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="absolute top-2 right-2 bg-background/80 hover:bg-background"
+                          className="absolute top-3 right-3 bg-background/90 hover:bg-background shadow-[var(--shadow-soft)] backdrop-blur-sm"
                           onClick={() => handleToggleWishlist(product)}
                         >
                           <Heart
-                            className={`w-5 h-5 ${
+                            className={`w-5 h-5 transition-all ${
                               isInWishlist(product.node.id)
-                                ? "fill-accent text-accent"
+                                ? "fill-accent text-accent scale-110"
                                 : "text-foreground"
                             }`}
                           />
                         </Button>
                       </div>
-                      <h3 className="font-semibold text-lg mb-2 text-foreground">
-                        {product.node.title}
-                      </h3>
-                      <p className="text-accent font-bold text-xl mb-4">
-                        {product.node.priceRange.minVariantPrice.currencyCode}{" "}
-                        {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}
-                      </p>
-                      <Button onClick={() => handleAddToCart(product)} className="w-full">
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                        Ajouter au panier
-                      </Button>
+                      <div className="p-6">
+                        <h3 className="font-semibold text-xl mb-3 text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                          {product.node.title}
+                        </h3>
+                        <p className="text-primary font-bold text-2xl mb-6">
+                          {product.node.priceRange.minVariantPrice.currencyCode}{" "}
+                          {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}
+                        </p>
+                        <Button 
+                          onClick={() => handleAddToCart(product)} 
+                          className="w-full py-6 text-base shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all"
+                        >
+                          <ShoppingCart className="w-5 h-5 mr-2" />
+                          Ajouter au panier
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 ))}
