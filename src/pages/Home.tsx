@@ -3,9 +3,59 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Quote } from "lucide-react";
+import { Quote, ShoppingBag, Heart } from "lucide-react";
+import { useEffect, useState } from "react";
+import { getProducts, ShopifyProduct } from "@/lib/shopify";
+import { useCartStore } from "@/stores/cartStore";
+import { useWishlistStore } from "@/stores/wishlistStore";
+import { toast } from "sonner";
 
 const Home = () => {
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const addItemToCart = useCartStore(state => state.addItem);
+  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const productsData = await getProducts(6);
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
+
+  const handleAddToCart = (product: ShopifyProduct) => {
+    const variant = product.node.variants.edges[0]?.node;
+    if (variant) {
+      addItemToCart({
+        product,
+        variantId: variant.id,
+        variantTitle: variant.title,
+        price: variant.price,
+        quantity: 1,
+        selectedOptions: variant.selectedOptions
+      });
+      toast.success("Produit ajouté au panier !", {
+        position: "top-center",
+      });
+    }
+  };
+
+  const handleToggleWishlist = (product: ShopifyProduct) => {
+    if (isInWishlist(product.node.id)) {
+      removeFromWishlist(product.node.id);
+      toast.success("Retiré des favoris");
+    } else {
+      addToWishlist(product);
+      toast.success("Ajouté aux favoris");
+    }
+  };
 
   const testimonials = [
     {
@@ -48,6 +98,100 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Best Sellers */}
+        <section className="py-24 bg-background">
+          <div className="container">
+            <div className="text-center mb-16 animate-in fade-in duration-1000">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Nos <span className="text-primary">Best Sellers</span>
+              </h2>
+              <p className="text-muted-foreground text-xl max-w-2xl mx-auto">
+                Les produits préférés de notre communauté chill
+              </p>
+            </div>
+
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="bg-muted h-80 rounded-2xl mb-4"></div>
+                    <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-muted rounded w-1/2"></div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {products.map((product, index) => (
+                  <Card
+                    key={product.node.id}
+                    className="group overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-[var(--shadow-hover)] animate-in fade-in slide-in-from-bottom-4"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="relative overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
+                      <Link to={`/produit/${product.node.handle}`}>
+                        {product.node.images.edges[0] ? (
+                          <img
+                            src={product.node.images.edges[0].node.url}
+                            alt={product.node.title}
+                            className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                          />
+                        ) : (
+                          <div className="w-full h-80 flex items-center justify-center bg-muted/20">
+                            <span className="text-muted-foreground">No image</span>
+                          </div>
+                        )}
+                      </Link>
+                      <button
+                        onClick={() => handleToggleWishlist(product)}
+                        className="absolute top-4 right-4 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all duration-300 hover:scale-110 shadow-lg"
+                      >
+                        <Heart
+                          className={`h-5 w-5 transition-colors ${
+                            isInWishlist(product.node.id)
+                              ? "fill-primary text-primary"
+                              : "text-muted-foreground hover:text-primary"
+                          }`}
+                        />
+                      </button>
+                    </div>
+                    <CardContent className="p-6 space-y-4">
+                      <Link to={`/produit/${product.node.handle}`}>
+                        <h3 className="font-bold text-xl group-hover:text-primary transition-colors line-clamp-1">
+                          {product.node.title}
+                        </h3>
+                      </Link>
+                      <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
+                        {product.node.description}
+                      </p>
+                      <div className="flex items-center justify-between pt-2">
+                        <span className="text-2xl font-bold text-primary">
+                          {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)} €
+                        </span>
+                        <Button
+                          onClick={() => handleAddToCart(product)}
+                          size="lg"
+                          className="shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-105"
+                        >
+                          <ShoppingBag className="h-4 w-4 mr-2" />
+                          Ajouter
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+
+            <div className="text-center mt-12 animate-in fade-in duration-1000 delay-500">
+              <Link to="/boutique">
+                <Button size="lg" variant="outline" className="px-10 py-6 text-lg">
+                  Voir tous les produits
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* Univers de la marque */}
         <section className="py-24 bg-gradient-to-b from-background to-muted/30">

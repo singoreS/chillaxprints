@@ -36,10 +36,12 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
-          <span className="text-xl md:text-2xl font-bold text-primary">ChillaxPrints</span>
+    <header className="sticky top-0 z-50 w-full border-b-2 border-border/50 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-[var(--shadow-soft)]">
+      <div className="container flex h-20 items-center justify-between gap-4">
+        <Link to="/" className="flex items-center space-x-2 flex-shrink-0 group">
+          <span className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+            ChillaxPrints
+          </span>
         </Link>
 
         {/* Search Bar - Desktop */}
@@ -53,7 +55,7 @@ const Header = () => {
             <Link
               key={link.to}
               to={link.to}
-              className="text-sm font-medium transition-colors hover:text-primary whitespace-nowrap"
+              className="text-sm font-semibold transition-all duration-300 hover:text-primary hover:scale-105 whitespace-nowrap relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
             >
               {link.label}
             </Link>
