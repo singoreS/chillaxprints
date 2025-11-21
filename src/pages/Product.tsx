@@ -140,17 +140,17 @@ const Product = () => {
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
             {/* Product Images Gallery */}
-            <div className="space-y-4">
-              <div className="aspect-square overflow-hidden rounded-lg border bg-secondary/20 shadow-lg relative">
+            <div className="space-y-4 animate-fade-in">
+              <div className="aspect-square overflow-hidden rounded-2xl border-2 border-border/50 bg-secondary/20 shadow-[var(--shadow-elevated)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 relative group">
                 <img
                   src={mainImage || "/placeholder.svg"}
                   alt={product.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-4 right-4 bg-background/80 hover:bg-background"
+                  className="absolute top-4 right-4 bg-background/90 hover:bg-background backdrop-blur-sm shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-110"
                   onClick={() => {
                     const productWrapper: ShopifyProduct = { node: product };
                     if (isInWishlist(product.id)) {
@@ -163,9 +163,9 @@ const Product = () => {
                   }}
                 >
                   <Heart
-                    className={`w-6 h-6 ${
+                    className={`w-6 h-6 transition-all duration-300 ${
                       isInWishlist(product.id)
-                        ? "fill-accent text-accent"
+                        ? "fill-accent text-accent scale-110"
                         : "text-foreground"
                     }`}
                   />
@@ -177,10 +177,10 @@ const Product = () => {
                     <button
                       key={index}
                       onClick={() => setMainImage(image.node.url)}
-                      className={`aspect-square overflow-hidden rounded-lg border-2 transition-all hover:scale-105 ${
+                      className={`aspect-square overflow-hidden rounded-xl border-2 transition-all duration-300 hover:scale-105 hover:-translate-y-1 ${
                         mainImage === image.node.url
-                          ? "border-primary ring-2 ring-primary/20"
-                          : "border-border hover:border-primary/50"
+                          ? "border-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] scale-105"
+                          : "border-border/50 hover:border-primary/50 shadow-[var(--shadow-soft)]"
                       }`}
                     >
                       <img
@@ -195,47 +195,51 @@ const Product = () => {
             </div>
 
             {/* Product Info */}
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
+            <div className="space-y-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 flex-wrap">
                   {product.productType && (
-                    <Badge variant="secondary" className="text-xs">
+                    <Badge variant="secondary" className="text-xs px-3 py-1 shadow-[var(--shadow-soft)]">
                       {product.productType}
                     </Badge>
                   )}
                   {selectedVariant?.availableForSale ? (
-                    <Badge className="text-xs bg-green-500">En stock</Badge>
+                    <Badge className="text-xs px-3 py-1 bg-green-500 shadow-[var(--shadow-soft)]">En stock</Badge>
                   ) : (
-                    <Badge variant="destructive" className="text-xs">Rupture de stock</Badge>
+                    <Badge variant="destructive" className="text-xs px-3 py-1 shadow-[var(--shadow-soft)]">Rupture de stock</Badge>
                   )}
                 </div>
-                <h1 className="text-3xl md:text-4xl font-bold">{product.title}</h1>
-                <p className="text-3xl md:text-4xl font-bold text-primary">
-                  {selectedVariant ? (
-                    <>
-                      {parseFloat(selectedVariant.price.amount).toFixed(2)} {selectedVariant.price.currencyCode}
-                    </>
-                  ) : (
-                    <>
-                      {parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2)} {product.priceRange.minVariantPrice.currencyCode}
-                    </>
-                  )}
-                </p>
+                <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">{product.title}</h1>
+                <div className="inline-block">
+                  <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-gradient">
+                    {selectedVariant ? (
+                      <>
+                        {parseFloat(selectedVariant.price.amount).toFixed(2)} {selectedVariant.price.currencyCode}
+                      </>
+                    ) : (
+                      <>
+                        {parseFloat(product.priceRange.minVariantPrice.amount).toFixed(2)} {product.priceRange.minVariantPrice.currencyCode}
+                      </>
+                    )}
+                  </p>
+                </div>
               </div>
 
               {product.description && (
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  {product.description}
-                </p>
+                <div className="p-6 rounded-xl bg-secondary/30 border border-border/50 backdrop-blur-sm shadow-[var(--shadow-soft)]">
+                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                    {product.description}
+                  </p>
+                </div>
               )}
 
               {/* Product Options */}
               {product.options && product.options.length > 0 && (
-                <div className="space-y-6">
+                <div className="space-y-6 p-6 rounded-xl bg-secondary/20 border border-border/50 shadow-[var(--shadow-soft)]">
                   {product.options.map((option) => (
-                    <div key={option.name} className="space-y-3">
+                    <div key={option.name} className="space-y-4">
                       <Label className="text-base font-semibold">
-                        {option.name}: <span className="text-primary">{selectedOptions[option.name]}</span>
+                        {option.name}: <span className="text-primary bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{selectedOptions[option.name]}</span>
                       </Label>
                       <RadioGroup
                         value={selectedOptions[option.name] || ""}
@@ -251,7 +255,7 @@ const Product = () => {
                               />
                               <Label
                                 htmlFor={`${option.name}-${value}`}
-                                className="flex items-center justify-center rounded-lg border-2 border-border bg-background p-3 hover:bg-accent hover:border-primary transition-all cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary peer-data-[state=checked]:font-semibold"
+                                className="flex items-center justify-center rounded-xl border-2 border-border bg-background p-3 hover:bg-accent hover:border-primary hover:shadow-[var(--shadow-hover)] transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary peer-data-[state=checked]:font-semibold peer-data-[state=checked]:shadow-[0_0_20px_rgba(var(--primary-rgb),0.2)] peer-data-[state=checked]:scale-105"
                               >
                                 {value}
                               </Label>
@@ -265,23 +269,23 @@ const Product = () => {
               )}
 
               {/* Quantity */}
-              <div className="space-y-3">
+              <div className="space-y-4 p-6 rounded-xl bg-secondary/20 border border-border/50 shadow-[var(--shadow-soft)]">
                 <Label className="text-base font-semibold">Quantité</Label>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="h-10 w-10"
+                    className="h-12 w-12 rounded-xl shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-105 transition-all duration-300"
                   >
                     -
                   </Button>
-                  <span className="text-xl font-semibold w-12 text-center">{quantity}</span>
+                  <span className="text-2xl font-bold w-16 text-center bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{quantity}</span>
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="h-10 w-10"
+                    className="h-12 w-12 rounded-xl shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-105 transition-all duration-300"
                   >
                     +
                   </Button>
@@ -293,29 +297,29 @@ const Product = () => {
                 size="lg"
                 onClick={handleAddToCart}
                 disabled={!selectedVariant?.availableForSale}
-                className="w-full text-base"
+                className="w-full text-lg h-14 rounded-xl shadow-[var(--shadow-elevated)] hover:shadow-[var(--shadow-glow)] hover:scale-[1.02] transition-all duration-300"
               >
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 {selectedVariant?.availableForSale ? "Ajouter au panier" : "Rupture de stock"}
               </Button>
 
               {/* Product Features */}
-              <div className="grid grid-cols-2 gap-4 pt-6 border-t">
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border/50">
+                <div className="flex items-center gap-3 text-sm p-4 rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all duration-300 hover:scale-105">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-xl shadow-[var(--shadow-soft)]">
                     🚚
                   </div>
                   <div>
-                    <p className="font-medium">Livraison gratuite</p>
+                    <p className="font-semibold">Livraison gratuite</p>
                     <p className="text-muted-foreground text-xs">Dès 50€ d'achat</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <div className="flex items-center gap-3 text-sm p-4 rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all duration-300 hover:scale-105">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-xl shadow-[var(--shadow-soft)]">
                     🔄
                   </div>
                   <div>
-                    <p className="font-medium">Retours faciles</p>
+                    <p className="font-semibold">Retours faciles</p>
                     <p className="text-muted-foreground text-xs">30 jours</p>
                   </div>
                 </div>
