@@ -144,7 +144,7 @@ const Shop = () => {
                   >
                     <CardContent className="p-0">
                       <div className="relative">
-                        <Link to={`/product/${product.node.handle}`}>
+                        <Link to={`/produit/${product.node.handle}`}>
                           <div className="aspect-square bg-secondary/20 overflow-hidden relative">
                             {product.node.images?.edges?.[0]?.node && (
                               <img
