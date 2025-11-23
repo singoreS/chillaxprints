@@ -9,6 +9,8 @@ import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const Home = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -121,66 +123,82 @@ const Home = () => {
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {products.map((product, index) => (
-                  <Card
-                    key={product.node.id}
-                    className="group overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-[var(--shadow-hover)] animate-in fade-in slide-in-from-bottom-4"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="relative overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
-                      <Link to={`/produit/${product.node.handle}`}>
-                        {product.node.images.edges[0] ? (
-                          <img
-                            src={product.node.images.edges[0].node.url}
-                            alt={product.node.title}
-                            className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
-                        ) : (
-                          <div className="w-full h-80 flex items-center justify-center bg-muted/20">
-                            <span className="text-muted-foreground">No image</span>
-                          </div>
-                        )}
-                      </Link>
-                      <button
-                        onClick={() => handleToggleWishlist(product)}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all duration-300 hover:scale-110 shadow-lg"
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                plugins={[
+                  Autoplay({
+                    delay: 3000,
+                  }),
+                ]}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-4">
+                  {products.map((product, index) => (
+                    <CarouselItem key={product.node.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                      <Card
+                        className="group overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-[var(--shadow-hover)] animate-in fade-in slide-in-from-bottom-4"
+                        style={{ animationDelay: `${index * 100}ms` }}
                       >
-                        <Heart
-                          className={`h-5 w-5 transition-colors ${
-                            isInWishlist(product.node.id)
-                              ? "fill-primary text-primary"
-                              : "text-muted-foreground hover:text-primary"
-                          }`}
-                        />
-                      </button>
-                    </div>
-                    <CardContent className="p-6 space-y-4">
-                      <Link to={`/produit/${product.node.handle}`}>
-                        <h3 className="font-bold text-xl group-hover:text-primary transition-colors line-clamp-1">
-                          {product.node.title}
-                        </h3>
-                      </Link>
-                      <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
-                        {product.node.description}
-                      </p>
-                      <div className="flex items-center justify-between pt-2">
-                        <span className="text-2xl font-bold text-primary">
-                          {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)} €
-                        </span>
-                        <Button
-                          onClick={() => handleAddToCart(product)}
-                          size="lg"
-                          className="shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-105"
-                        >
-                          <ShoppingBag className="h-4 w-4 mr-2" />
-                          Ajouter
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+                        <div className="relative overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
+                          <Link to={`/produit/${product.node.handle}`}>
+                            {product.node.images.edges[0] ? (
+                              <img
+                                src={product.node.images.edges[0].node.url}
+                                alt={product.node.title}
+                                className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
+                              />
+                            ) : (
+                              <div className="w-full h-80 flex items-center justify-center bg-muted/20">
+                                <span className="text-muted-foreground">No image</span>
+                              </div>
+                            )}
+                          </Link>
+                          <button
+                            onClick={() => handleToggleWishlist(product)}
+                            className="absolute top-4 right-4 p-2 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-all duration-300 hover:scale-110 shadow-lg"
+                          >
+                            <Heart
+                              className={`h-5 w-5 transition-colors ${
+                                isInWishlist(product.node.id)
+                                  ? "fill-primary text-primary"
+                                  : "text-muted-foreground hover:text-primary"
+                              }`}
+                            />
+                          </button>
+                        </div>
+                        <CardContent className="p-6 space-y-4">
+                          <Link to={`/produit/${product.node.handle}`}>
+                            <h3 className="font-bold text-xl group-hover:text-primary transition-colors line-clamp-1">
+                              {product.node.title}
+                            </h3>
+                          </Link>
+                          <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">
+                            {product.node.description}
+                          </p>
+                          <div className="flex items-center justify-between pt-2">
+                            <span className="text-2xl font-bold text-primary">
+                              {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)} €
+                            </span>
+                            <Button
+                              onClick={() => handleAddToCart(product)}
+                              size="lg"
+                              className="shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-105"
+                            >
+                              <ShoppingBag className="h-4 w-4 mr-2" />
+                              Ajouter
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden md:flex" />
+                <CarouselNext className="hidden md:flex" />
+              </Carousel>
             )}
 
             <div className="text-center mt-12 animate-in fade-in duration-1000 delay-500">
