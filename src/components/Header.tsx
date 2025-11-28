@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { CartDrawer } from "@/components/CartDrawer";
 import { SearchBar } from "@/components/SearchBar";
+import { PromoBanner } from "@/components/PromoBanner";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { useWishlistStore } from "@/stores/wishlistStore";
@@ -36,8 +37,10 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-2 border-border/50 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-[var(--shadow-soft)]">
-      <div className="container flex h-20 items-center justify-between gap-4">
+    <>
+      <PromoBanner />
+      <header className="sticky top-0 z-50 w-full border-b-2 border-border/50 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-[var(--shadow-soft)]">
+        <div className="container flex h-20 items-center justify-between gap-4">
         <Link to="/" className="flex items-center space-x-2 flex-shrink-0 group">
           <span className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
             ChillaxPrints
@@ -122,7 +125,8 @@ const Header = () => {
           </Sheet>
         </div>
       </div>
-    </header>
+      </header>
+    </>
   );
 };
 
