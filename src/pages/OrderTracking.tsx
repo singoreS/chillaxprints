@@ -73,7 +73,16 @@ const OrderTracking = () => {
         return;
       }
 
-      const order = orderData[0];
+      const orderResult = orderData[0];
+      const order: Order = {
+        id: orderResult.order_id,
+        order_number: orderResult.order_number,
+        total_amount: orderResult.total_amount,
+        currency: orderResult.currency,
+        status: orderResult.status,
+        shipping_address: orderResult.shipping_address,
+        created_at: orderResult.created_at,
+      };
       setOrder(order);
       setOrderNumber(order.order_number);
 
@@ -81,7 +90,7 @@ const OrderTracking = () => {
       const { data: trackingData, error: trackingError } = await supabase
         .from("order_tracking")
         .select("*")
-        .eq("order_id", order.order_id)
+        .eq("order_id", order.id)
         .order("created_at", { ascending: false });
 
       if (trackingError) throw trackingError;
@@ -91,7 +100,7 @@ const OrderTracking = () => {
       const { data: itemsData, error: itemsError } = await supabase
         .from("order_items")
         .select("*")
-        .eq("order_id", order.order_id);
+        .eq("order_id", order.id);
 
       if (itemsError) throw itemsError;
       setOrderItems(itemsData || []);
