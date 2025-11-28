@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -36,11 +37,83 @@ interface OrderItem {
 }
 
 const OrderTracking = () => {
+  const [searchParams] = useSearchParams();
   const [orderNumber, setOrderNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [order, setOrder] = useState<Order | null>(null);
   const [trackingEvents, setTrackingEvents] = useState<OrderTracking[]>([]);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
+
+  // Check for token in URL and auto-load order
+  useEffect(() => {
+    const token = searchParams.get('token');
+    if (token) {
+      loadOrderByToken(token);
+    }
+  }, [searchParams]);
+
+  const loadOrderByToken = async (token: string) => {
+    setLoading(true);
+    try {
+      // Verify token exists and is valid
+      const { data: tokenData, error: tokenError } = await supabase
+        .from("order_access_tokens")
+        .select("order_id, expires_at")
+        .eq("token", token)
+        .maybeSingle();
+
+      if (tokenError) throw tokenError;
+      
+      if (!tokenData) {
+        toast.error("Lien de suivi invalide ou expiré");
+        return;
+      }
+
+      // Check if token is expired
+      if (new Date(tokenData.expires_at) < new Date()) {
+        toast.error("Ce lien de suivi a expiré");
+        return;
+      }
+
+      // Load order data
+      const { data: orderData, error: orderError } = await supabase
+        .from("orders")
+        .select("*")
+        .eq("id", tokenData.order_id)
+        .single();
+
+      if (orderError) throw orderError;
+      
+      setOrder(orderData);
+      setOrderNumber(orderData.order_number);
+
+      // Load tracking events
+      const { data: trackingData, error: trackingError } = await supabase
+        .from("order_tracking")
+        .select("*")
+        .eq("order_id", orderData.id)
+        .order("created_at", { ascending: false });
+
+      if (trackingError) throw trackingError;
+      setTrackingEvents(trackingData || []);
+
+      // Load order items
+      const { data: itemsData, error: itemsError } = await supabase
+        .from("order_items")
+        .select("*")
+        .eq("order_id", orderData.id);
+
+      if (itemsError) throw itemsError;
+      setOrderItems(itemsData || []);
+
+      toast.success("Commande chargée avec succès!");
+    } catch (error) {
+      console.error("Error loading order by token:", error);
+      toast.error("Erreur lors du chargement de la commande");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
