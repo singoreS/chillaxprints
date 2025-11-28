@@ -6,17 +6,31 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { ProductFilters, FilterState } from "@/components/ProductFilters";
 import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
-import { ShoppingCart, Loader2, Heart } from "lucide-react";
+import { ShoppingCart, Loader2, Heart, ArrowUpDown } from "lucide-react";
 
 const Shop = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("default");
+  const [filters, setFilters] = useState<FilterState>({
+    priceRange: [0, 200],
+    colors: [],
+    sizes: [],
+  });
   const addToCart = useCartStore(state => state.addItem);
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
 
@@ -44,14 +58,66 @@ const Shop = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedCategory === "all") {
-      setFilteredProducts(products);
-    } else {
-      setFilteredProducts(
-        products.filter(product => product.node.productType === selectedCategory)
-      );
+    let result = [...products];
+
+    // Filter by category
+    if (selectedCategory !== "all") {
+      result = result.filter(product => product.node.productType === selectedCategory);
     }
-  }, [selectedCategory, products]);
+
+    // Filter by price
+    result = result.filter(product => {
+      const price = parseFloat(product.node.priceRange.minVariantPrice.amount);
+      return price >= filters.priceRange[0] && price <= filters.priceRange[1];
+    });
+
+    // Filter by colors (if colors are in product tags or options)
+    if (filters.colors.length > 0) {
+      result = result.filter(product => {
+        const productColors = product.node.options
+          ?.find(opt => opt.name.toLowerCase() === "color" || opt.name.toLowerCase() === "couleur")
+          ?.values.map(v => v.toLowerCase()) || [];
+        return filters.colors.some(color => productColors.includes(color));
+      });
+    }
+
+    // Filter by sizes (if sizes are in product options)
+    if (filters.sizes.length > 0) {
+      result = result.filter(product => {
+        const productSizes = product.node.options
+          ?.find(opt => opt.name.toLowerCase() === "size" || opt.name.toLowerCase() === "taille")
+          ?.values || [];
+        return filters.sizes.some(size => productSizes.includes(size));
+      });
+    }
+
+    // Sort products
+    switch (sortBy) {
+      case "price-asc":
+        result.sort((a, b) => 
+          parseFloat(a.node.priceRange.minVariantPrice.amount) - 
+          parseFloat(b.node.priceRange.minVariantPrice.amount)
+        );
+        break;
+      case "price-desc":
+        result.sort((a, b) => 
+          parseFloat(b.node.priceRange.minVariantPrice.amount) - 
+          parseFloat(a.node.priceRange.minVariantPrice.amount)
+        );
+        break;
+      case "name-asc":
+        result.sort((a, b) => a.node.title.localeCompare(b.node.title));
+        break;
+      case "name-desc":
+        result.sort((a, b) => b.node.title.localeCompare(a.node.title));
+        break;
+      default:
+        // Keep default order
+        break;
+    }
+
+    setFilteredProducts(result);
+  }, [selectedCategory, products, filters, sortBy]);
 
   const handleAddToCart = (product: ShopifyProduct) => {
     const firstVariant = product.node.variants.edges[0]?.node;
@@ -83,6 +149,11 @@ const Shop = () => {
     }
   };
 
+  const activeFiltersCount = 
+    (filters.priceRange[0] !== 0 || filters.priceRange[1] !== 200 ? 1 : 0) +
+    filters.colors.length +
+    filters.sizes.length;
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -108,10 +179,10 @@ const Shop = () => {
         {/* Products Section */}
         <section className="py-8 md:py-12 bg-gradient-to-b from-background to-muted/20">
           <div className="container">
-            {/* Category Filters */}
-            <div className="mb-8">
-              <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 lg:w-auto shadow-[var(--shadow-soft)] p-1">
+            {/* Category Filters and Sort */}
+            <div className="flex flex-col md:flex-row gap-4 mb-8">
+              <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="flex-1">
+                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 shadow-[var(--shadow-soft)] p-1">
                   {categories.map((category) => (
                     <TabsTrigger 
                       key={category.value} 
@@ -123,6 +194,27 @@ const Shop = () => {
                   ))}
                 </TabsList>
               </Tabs>
+
+              <div className="flex gap-2">
+                <ProductFilters 
+                  onFilterChange={setFilters}
+                  activeFiltersCount={activeFiltersCount}
+                />
+                
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-[180px]">
+                    <ArrowUpDown className="w-4 h-4 mr-2" />
+                    <SelectValue placeholder="Trier par" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="default">Par défaut</SelectItem>
+                    <SelectItem value="price-asc">Prix croissant</SelectItem>
+                    <SelectItem value="price-desc">Prix décroissant</SelectItem>
+                    <SelectItem value="name-asc">Nom A-Z</SelectItem>
+                    <SelectItem value="name-desc">Nom Z-A</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             {/* Products Grid */}
