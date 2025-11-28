@@ -55,43 +55,33 @@ const OrderTracking = () => {
   const loadOrderByToken = async (token: string) => {
     setLoading(true);
     try {
-      // Verify token exists and is valid
-      const { data: tokenData, error: tokenError } = await supabase
-        .from("order_access_tokens")
-        .select("order_id, expires_at")
-        .eq("token", token)
-        .maybeSingle();
-
-      if (tokenError) throw tokenError;
-      
-      if (!tokenData) {
-        toast.error("Lien de suivi invalide ou expiré");
-        return;
-      }
-
-      // Check if token is expired
-      if (new Date(tokenData.expires_at) < new Date()) {
-        toast.error("Ce lien de suivi a expiré");
-        return;
-      }
-
-      // Load order data
+      // Use secure function to validate token and get order data
       const { data: orderData, error: orderError } = await supabase
-        .from("orders")
-        .select("*")
-        .eq("id", tokenData.order_id)
-        .single();
+        .rpc("validate_order_token", { _token: token });
 
-      if (orderError) throw orderError;
+      if (orderError) {
+        if (orderError.message.includes("Invalid or expired token")) {
+          toast.error("Lien de suivi invalide ou expiré");
+        } else {
+          toast.error("Erreur lors du chargement de la commande");
+        }
+        return;
+      }
       
-      setOrder(orderData);
-      setOrderNumber(orderData.order_number);
+      if (!orderData || orderData.length === 0) {
+        toast.error("Commande introuvable");
+        return;
+      }
+
+      const order = orderData[0];
+      setOrder(order);
+      setOrderNumber(order.order_number);
 
       // Load tracking events
       const { data: trackingData, error: trackingError } = await supabase
         .from("order_tracking")
         .select("*")
-        .eq("order_id", orderData.id)
+        .eq("order_id", order.order_id)
         .order("created_at", { ascending: false });
 
       if (trackingError) throw trackingError;
@@ -101,7 +91,7 @@ const OrderTracking = () => {
       const { data: itemsData, error: itemsError } = await supabase
         .from("order_items")
         .select("*")
-        .eq("order_id", orderData.id);
+        .eq("order_id", order.order_id);
 
       if (itemsError) throw itemsError;
       setOrderItems(itemsData || []);

@@ -299,6 +299,19 @@ export type Database = {
         }
         Returns: boolean
       }
+      validate_order_token: {
+        Args: { _token: string }
+        Returns: {
+          created_at: string
+          currency: string
+          order_id: string
+          order_number: string
+          shipping_address: Json
+          status: string
+          total_amount: number
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       app_role: "admin" | "user"
