@@ -7,6 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, MessageSquare, Clock, Linkedin, Instagram } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Le nom est requis").max(100, "Le nom ne peut pas dépasser 100 caractères"),
+  email: z.string().trim().email("Email invalide").max(255, "L'email ne peut pas dépasser 255 caractères"),
+  message: z.string().trim().min(10, "Le message doit contenir au moins 10 caractères").max(2000, "Le message ne peut pas dépasser 2000 caractères"),
+});
 
 const Contact = () => {
   const { toast } = useToast();
@@ -18,11 +25,25 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message envoyé ! 📨",
-      description: "On répond vite… sauf si on fait la sieste 😴",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    
+    // Validate with Zod
+    try {
+      contactSchema.parse(formData);
+      
+      toast({
+        title: "Message envoyé ! 📨",
+        description: "On répond vite… sauf si on fait la sieste 😴",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Erreur de validation",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      }
+    }
   };
 
   const faqs = [
