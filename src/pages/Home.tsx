@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag, Star, Quote, Users, Package, ThumbsUp, Globe, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -38,8 +40,21 @@ import winterBonnet from "@/assets/products/winter-chill-bonnet.jpg";
 const Home = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
   const addItemToCart = useCartStore((state) => state.addItem);
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -602,7 +617,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Loyalty Program Section */}
+      {/* Loyalty Program Section - Only for logged-in users or as teaser */}
       <section className="py-20 bg-muted/30">
         <div className="container">
           <div className="text-center mb-12 space-y-4">
@@ -618,17 +633,22 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <LoyaltyInfoCard />
-          </div>
-
-          <div className="text-center mt-8">
-            <Button asChild size="lg">
-              <Link to="/connexion">
-                Rejoindre le programme <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
-            </Button>
-          </div>
+          {user ? (
+            <div className="max-w-3xl mx-auto">
+              <LoyaltyInfoCard />
+            </div>
+          ) : (
+            <div className="max-w-3xl mx-auto">
+              <LoyaltyInfoCard />
+              <div className="text-center mt-8">
+                <Button asChild size="lg">
+                  <Link to="/connexion">
+                    Rejoindre le programme <ArrowRight className="ml-2 w-4 h-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
