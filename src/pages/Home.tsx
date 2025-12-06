@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag, Star, Quote, Users, Package, ThumbsUp, Globe } from "lucide-react";
+import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag, Star, Quote, Users, Package, ThumbsUp, Globe, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -21,6 +21,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { LoyaltyInfoCard } from "@/components/LoyaltyCard";
 import heroImage from "@/assets/hero-chill.jpg";
 import lifestyle1 from "@/assets/lifestyle-1.jpg";
 import lifestyle2 from "@/assets/lifestyle-2.jpg";
@@ -597,6 +598,36 @@ const Home = () => {
               <Shield className="w-4 h-4 text-primary" />
               <span className="text-sm">Avis vérifiés</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Loyalty Program Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container">
+          <div className="text-center mb-12 space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <Gift className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Récompenses exclusives</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold">
+              Gagne des points, <span className="text-primary">profite des avantages</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Chaque achat te rapproche de réductions exclusives et d'avantages VIP. Plus tu achètes, plus tu économises !
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <LoyaltyInfoCard />
+          </div>
+
+          <div className="text-center mt-8">
+            <Button asChild size="lg">
+              <Link to="/connexion">
+                Rejoindre le programme <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
