@@ -6,6 +6,7 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
   SelectContent,
@@ -185,148 +186,113 @@ const Shop = () => {
         {/* Products Section */}
         <section className="py-8 md:py-12 bg-gradient-to-b from-background to-muted/20">
           <div className="container">
-            <div className="flex flex-col lg:flex-row gap-8">
-              {/* Sidebar - Categories */}
-              <aside className="lg:w-64 shrink-0">
-                <div className="sticky top-24 space-y-6">
-                  {/* Categories */}
-                  <div className="bg-card border border-border/50 rounded-xl p-5 shadow-[var(--shadow-soft)]">
-                    <h3 className="font-semibold text-foreground mb-4">Catégories</h3>
-                    <nav className="space-y-1">
-                      {categories.map((category) => (
-                        <button
-                          key={category.value}
-                          onClick={() => setSelectedCategory(category.value)}
-                          className={`w-full text-left px-4 py-2.5 rounded-lg text-sm transition-all duration-300 ${
-                            selectedCategory === category.value
-                              ? "bg-primary text-primary-foreground font-medium shadow-[var(--shadow-soft)]"
-                              : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-                          }`}
-                        >
-                          {category.label}
-                        </button>
-                      ))}
-                    </nav>
-                  </div>
+            {/* Category Filters and Sort */}
+            <div className="flex flex-col md:flex-row gap-4 mb-8">
+              <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="flex-1">
+                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 shadow-[var(--shadow-soft)] p-1">
+                  {categories.map((category) => (
+                    <TabsTrigger 
+                      key={category.value} 
+                      value={category.value}
+                      className="data-[state=active]:shadow-[var(--shadow-soft)] text-sm py-2"
+                    >
+                      {category.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
 
-                  {/* Filters & Sort */}
-                  <div className="bg-card border border-border/50 rounded-xl p-5 shadow-[var(--shadow-soft)]">
-                    <h3 className="font-semibold text-foreground mb-4">Filtres</h3>
-                    <div className="space-y-3">
-                      <ProductFilters 
-                        onFilterChange={setFilters}
-                        activeFiltersCount={activeFiltersCount}
-                      />
-                      
-                      <Select value={sortBy} onValueChange={setSortBy}>
-                        <SelectTrigger className="w-full">
-                          <ArrowUpDown className="w-4 h-4 mr-2" />
-                          <SelectValue placeholder="Trier par" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="default">Par défaut</SelectItem>
-                          <SelectItem value="price-asc">Prix croissant</SelectItem>
-                          <SelectItem value="price-desc">Prix décroissant</SelectItem>
-                          <SelectItem value="name-asc">Nom A-Z</SelectItem>
-                          <SelectItem value="name-desc">Nom Z-A</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  {/* Size Guide Link */}
-                  <Link
-                    to="/guide-des-tailles"
-                    className="flex items-center gap-3 p-4 bg-primary/5 border border-primary/20 rounded-xl hover:bg-primary/10 hover:border-primary/40 transition-all duration-300"
-                  >
-                    <span className="text-lg">📏</span>
-                    <div>
-                      <p className="font-medium text-sm text-foreground">Guide des tailles</p>
-                      <p className="text-xs text-muted-foreground">Trouve ta taille parfaite</p>
-                    </div>
-                  </Link>
-                </div>
-              </aside>
-
-              {/* Products Grid */}
-              <div className="flex-1">
-                {/* Results count */}
-                <div className="flex items-center justify-between mb-6">
-                  <p className="text-sm text-muted-foreground">
-                    {filteredProducts.length} produit{filteredProducts.length > 1 ? "s" : ""} trouvé{filteredProducts.length > 1 ? "s" : ""}
-                  </p>
-                </div>
-
-                {loading ? (
-                  <div className="flex justify-center items-center py-20">
-                    <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  </div>
-                ) : filteredProducts.length === 0 ? (
-                  <div className="text-center py-20">
-                    <p className="text-xl text-muted-foreground">Aucun produit trouvé</p>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                    {filteredProducts.map((product, index) => (
-                      <Card 
-                        key={product.node.id} 
-                        className="group overflow-hidden hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-1 bg-card border-border/50 animate-in fade-in slide-in-from-bottom-4"
-                        style={{ animationDelay: `${(index % 4) * 100}ms`, animationDuration: '700ms' }}
-                      >
-                        <CardContent className="p-0">
-                          <div className="relative">
-                            <Link to={`/produit/${product.node.handle}`}>
-                              <div className="aspect-[3/4] bg-secondary/20 overflow-hidden relative">
-                                {product.node.images?.edges?.[0]?.node && (
-                                  <img
-                                    src={product.node.images.edges[0].node.url}
-                                    alt={product.node.title}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                  />
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                              </div>
-                            </Link>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="absolute top-2 right-2 h-8 w-8 bg-background/90 hover:bg-background shadow-[var(--shadow-soft)] backdrop-blur-sm"
-                              onClick={() => handleToggleWishlist(product)}
-                            >
-                              <Heart
-                                className={`w-4 h-4 transition-all ${
-                                  isInWishlist(product.node.id)
-                                    ? "fill-accent text-accent scale-110"
-                                    : "text-foreground"
-                                }`}
-                              />
-                            </Button>
-                          </div>
-                          <div className="p-3">
-                            <Link to={`/produit/${product.node.handle}`}>
-                              <h3 className="font-semibold text-sm mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2 min-h-[2.5rem]">
-                                {product.node.title}
-                              </h3>
-                            </Link>
-                            <p className="text-primary font-bold text-lg mb-3">
-                              {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}€
-                            </p>
-                            <Button 
-                              onClick={() => handleAddToCart(product)} 
-                              size="sm"
-                              className="w-full text-xs shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all"
-                            >
-                              <ShoppingCart className="w-3 h-3 mr-1" />
-                              Ajouter
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
+              <div className="flex gap-2">
+                <ProductFilters 
+                  onFilterChange={setFilters}
+                  activeFiltersCount={activeFiltersCount}
+                />
+                
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-[180px]">
+                    <ArrowUpDown className="w-4 h-4 mr-2" />
+                    <SelectValue placeholder="Trier par" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="default">Par défaut</SelectItem>
+                    <SelectItem value="price-asc">Prix croissant</SelectItem>
+                    <SelectItem value="price-desc">Prix décroissant</SelectItem>
+                    <SelectItem value="name-asc">Nom A-Z</SelectItem>
+                    <SelectItem value="name-desc">Nom Z-A</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
+
+            {/* Products Grid */}
+            {loading ? (
+              <div className="flex justify-center items-center py-20">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              </div>
+            ) : filteredProducts.length === 0 ? (
+              <div className="text-center py-20">
+                <p className="text-xl text-muted-foreground">Aucun produit trouvé</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                {filteredProducts.map((product, index) => (
+                  <Card 
+                    key={product.node.id} 
+                    className="group overflow-hidden hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-1 bg-card border-border/50 animate-in fade-in slide-in-from-bottom-4"
+                    style={{ animationDelay: `${(index % 4) * 100}ms`, animationDuration: '700ms' }}
+                  >
+                    <CardContent className="p-0">
+                      <div className="relative">
+                        <Link to={`/produit/${product.node.handle}`}>
+                          <div className="aspect-[3/4] bg-secondary/20 overflow-hidden relative">
+                            {product.node.images?.edges?.[0]?.node && (
+                              <img
+                                src={product.node.images.edges[0].node.url}
+                                alt={product.node.title}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                              />
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          </div>
+                        </Link>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="absolute top-2 right-2 h-8 w-8 bg-background/90 hover:bg-background shadow-[var(--shadow-soft)] backdrop-blur-sm"
+                          onClick={() => handleToggleWishlist(product)}
+                        >
+                          <Heart
+                            className={`w-4 h-4 transition-all ${
+                              isInWishlist(product.node.id)
+                                ? "fill-accent text-accent scale-110"
+                                : "text-foreground"
+                            }`}
+                          />
+                        </Button>
+                      </div>
+                      <div className="p-3">
+                        <Link to={`/produit/${product.node.handle}`}>
+                          <h3 className="font-semibold text-sm mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2 min-h-[2.5rem]">
+                            {product.node.title}
+                          </h3>
+                        </Link>
+                        <p className="text-primary font-bold text-lg mb-3">
+                          {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}€
+                        </p>
+                        <Button 
+                          onClick={() => handleAddToCart(product)} 
+                          size="sm"
+                          className="w-full text-xs shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all"
+                        >
+                          <ShoppingCart className="w-3 h-3 mr-1" />
+                          Ajouter
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>
