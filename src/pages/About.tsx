@@ -126,6 +126,67 @@ const About = () => {
           </div>
         </section>
 
+        {/* Comment ça marche - Print on Demand */}
+        <section className="py-20 bg-muted/30">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Comment ça marche ?</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Notre modèle Print-on-Demand : créé pour vous, imprimé à la demande
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+                  <h3 className="font-bold mb-2">Vous commandez</h3>
+                  <p className="text-sm text-muted-foreground">Choisissez vos designs préférés sur notre boutique</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+                  <h3 className="font-bold mb-2">Production</h3>
+                  <p className="text-sm text-muted-foreground">Votre article est imprimé sur demande par nos partenaires certifiés</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+                  <h3 className="font-bold mb-2">Contrôle qualité</h3>
+                  <p className="text-sm text-muted-foreground">Chaque produit est vérifié avant expédition</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
+                  <h3 className="font-bold mb-2">Livraison</h3>
+                  <p className="text-sm text-muted-foreground">Expédié directement chez vous, partout dans le monde</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="mt-12 p-6 bg-background rounded-lg border">
+              <h3 className="text-xl font-bold mb-4 text-center">Pourquoi le Print-on-Demand ?</h3>
+              <div className="grid md:grid-cols-3 gap-6 text-center">
+                <div>
+                  <p className="font-semibold text-primary mb-2">🌱 Éco-responsable</p>
+                  <p className="text-sm text-muted-foreground">Pas de surproduction, chaque article est fabriqué à la demande. Moins de gaspillage !</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-primary mb-2">🎨 Designs uniques</p>
+                  <p className="text-sm text-muted-foreground">Nos créations exclusives, impossibles à trouver ailleurs</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-primary mb-2">🌍 Production locale</p>
+                  <p className="text-sm text-muted-foreground">Imprimé au plus proche de chez vous pour réduire l'empreinte carbone</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Quality & Commitment */}
         <section className="py-20 bg-gradient-to-br from-primary/10 via-background to-accent/10">
           <div className="container">
@@ -139,22 +200,26 @@ const About = () => {
               </div>
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Qualité & Confort
+                  Qualité & Partenaires
                 </h2>
                 <div className="space-y-4 text-lg text-muted-foreground">
                   <p>
+                    Nous travaillons avec <strong>Printify</strong>, l'un des leaders mondiaux du Print-on-Demand, 
+                    et leur réseau de fournisseurs certifiés pour garantir une qualité exceptionnelle.
+                  </p>
+                  <p>
+                    Nos partenaires de production sont sélectionnés pour leur expertise, 
+                    leurs équipements de pointe et leur engagement qualité. Que ce soit aux États-Unis, 
+                    en Europe ou ailleurs, chaque impression répond à nos standards exigeants.
+                  </p>
+                  <p>
+                    <strong>Techniques d'impression :</strong> DTG (Direct-to-Garment) pour des couleurs vives et durables, 
+                    broderie pour un rendu premium, et sublimation pour des designs all-over.
+                  </p>
+                  <p>
                     Être paresseux ne signifie pas faire des compromis sur la qualité. 
-                    Tous nos vêtements sont fabriqués avec des matériaux premium, doux et 
-                    durables.
-                  </p>
-                  <p>
-                    Nous sélectionnons méticuleusement nos tissus pour garantir un confort 
-                    optimal, que vous soyez en train de binge-watcher votre série préférée 
-                    ou de faire semblant d'être productif.
-                  </p>
-                  <p>
-                    Chaque pièce est conçue pour durer, parce que nous savons que vous 
-                    n'avez pas envie de faire du shopping tous les quatre matins.
+                    Chaque pièce est conçue pour durer, parce que vous n'avez pas envie de faire 
+                    du shopping tous les quatre matins 😎
                   </p>
                 </div>
               </div>
