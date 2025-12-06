@@ -68,7 +68,7 @@ const Header = () => {
 
         {/* Actions */}
         <div className="flex items-center space-x-1 md:space-x-3">
-          <NotificationCenter />
+          {user && <NotificationCenter />}
           <Link to={user ? "/compte" : "/connexion"} className="hidden sm:block">
             <Button variant="ghost" size="icon">
               <User className="h-5 w-5" />

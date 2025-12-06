@@ -1,9 +1,5 @@
-import { useAutoNotifications } from "@/hooks/useAutoNotifications";
-
-// Component that initializes auto notifications
+// NotificationProvider - No auto notifications on mount
+// Notifications are triggered manually via useAutoNotifications hook
 export const NotificationProvider = ({ children }: { children: React.ReactNode }) => {
-  // Initialize auto notifications hook
-  useAutoNotifications();
-  
   return <>{children}</>;
 };
