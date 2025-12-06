@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { useCartStore } from "@/stores/cartStore";
 import { Heart, ShoppingCart, Trash2 } from "lucide-react";
@@ -34,6 +35,13 @@ export default function Wishlist() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title="Mes Favoris"
+        description="Retrouvez vos produits favoris ChillaxPrints. Vêtements humoristiques sauvegardés pour plus tard."
+        keywords="favoris, wishlist, produits sauvegardés"
+        canonicalUrl="/favoris"
+        noIndex={true}
+      />
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-8">

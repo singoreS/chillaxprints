@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -50,6 +51,13 @@ const Cart = () => {
   if (items.length === 0) {
     return (
       <div className="min-h-screen flex flex-col">
+        <SEO
+          title="Panier"
+          description="Votre panier ChillaxPrints. Finalisez votre commande de vêtements humoristiques et confortables."
+          keywords="panier, commande, checkout, achat vêtements"
+          canonicalUrl="/panier"
+          noIndex={true}
+        />
         <Header />
         <main className="flex-1 container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
@@ -73,6 +81,13 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Panier"
+        description="Votre panier ChillaxPrints. Finalisez votre commande de vêtements humoristiques et confortables."
+        keywords="panier, commande, checkout, achat vêtements"
+        canonicalUrl="/panier"
+        noIndex={true}
+      />
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="mb-6">

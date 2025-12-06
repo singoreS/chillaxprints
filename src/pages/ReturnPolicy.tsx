@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,12 @@ import { Package, RotateCcw, Clock, CheckCircle, AlertCircle } from "lucide-reac
 const ReturnPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title="Politique de Retour & Remboursement"
+        description="Politique de retour ChillaxPrints. Retours gratuits sous 14 jours, échanges de taille offerts. Satisfait ou remboursé."
+        keywords="retour, remboursement, échange, politique retour, 14 jours"
+        canonicalUrl="/retours"
+      />
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-12">

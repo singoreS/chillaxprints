@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -195,6 +196,13 @@ const OrderTracking = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Suivi de Commande"
+        description="Suivez votre commande ChillaxPrints en temps réel. Entrez votre numéro de commande pour connaître le statut de livraison."
+        keywords="suivi commande, tracking, livraison, statut colis"
+        canonicalUrl="/suivi-commande"
+        noIndex={true}
+      />
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">

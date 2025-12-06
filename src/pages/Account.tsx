@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -197,6 +198,13 @@ const Account = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Mon Compte"
+        description="Gérez votre compte ChillaxPrints. Consultez vos commandes, adresses et informations personnelles."
+        keywords="mon compte, espace client, commandes, profil"
+        canonicalUrl="/compte"
+        noIndex={true}
+      />
       <Header />
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">

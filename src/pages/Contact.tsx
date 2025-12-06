@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -63,6 +64,12 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Contactez-Nous - Service Client"
+        description="Besoin d'aide ? Contactez l'équipe ChillaxPrints par email. Réponse rapide garantie. FAQ, horaires et informations de contact."
+        keywords="contact ChillaxPrints, service client, aide commande, question livraison, support client"
+        canonicalUrl="/contact"
+      />
       <Header />
       
       <main className="flex-1">

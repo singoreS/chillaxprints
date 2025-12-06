@@ -19,6 +19,7 @@ import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import heroImage from "@/assets/hero-chill.jpg";
 import lifestyle1 from "@/assets/lifestyle-1.jpg";
 import lifestyle2 from "@/assets/lifestyle-2.jpg";
@@ -132,6 +133,12 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Vêtements Humoristiques Confortables"
+        description="ChillaxPrints - La boutique de vêtements pour ceux qui assument leur flemme avec style. T-shirts, hoodies, bonnets et chaussures avec des designs sarcastiques et humoristiques. Livraison internationale."
+        keywords="vêtements confortables, t-shirts humoristiques, hoodies drôles, mode lazy lifestyle, ChillaxPrints, vêtements sarcastiques, streetwear décontracté"
+        canonicalUrl="/"
+      />
       <Header />
       <main className="flex-1">
       {/* Hero Section */}

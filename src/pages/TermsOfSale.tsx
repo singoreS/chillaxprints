@@ -1,10 +1,17 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Separator } from "@/components/ui/separator";
 
 const TermsOfSale = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title="Conditions Générales de Vente - CGV"
+        description="Conditions générales de vente ChillaxPrints. Informations sur les commandes, paiements, livraisons et retours."
+        keywords="CGV, conditions générales vente, mentions légales, commande"
+        canonicalUrl="/cgv"
+      />
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-12">
