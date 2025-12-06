@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, MessageSquare, Clock, Linkedin, Instagram } from "lucide-react";
+import { Mail, MessageSquare, Clock, Linkedin, Instagram, HelpCircle, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
@@ -206,13 +207,24 @@ const Contact = () => {
         <section className="py-20 bg-muted/50">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Questions Fréquentes</h2>
-              <p className="text-xl text-muted-foreground">
-                Les réponses aux questions les plus posées
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/20 rounded-full mb-6">
+                <HelpCircle className="h-8 w-8 text-primary" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Avant de nous contacter...</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+                Consultez notre FAQ ! Vous y trouverez peut-être la réponse à votre question.
               </p>
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+                <Link to="/faq">
+                  <HelpCircle className="h-4 w-4 mr-2" />
+                  Consulter la FAQ complète
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
             </div>
 
             <div className="max-w-3xl mx-auto space-y-4">
+              <p className="text-center text-muted-foreground mb-6">Aperçu des questions fréquentes :</p>
               {faqs.map((faq, index) => (
                 <Card key={index}>
                   <CardContent className="p-6">
@@ -221,6 +233,12 @@ const Contact = () => {
                   </CardContent>
                 </Card>
               ))}
+              <div className="text-center pt-4">
+                <Link to="/faq" className="text-primary hover:underline inline-flex items-center gap-1">
+                  Voir toutes les questions
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
