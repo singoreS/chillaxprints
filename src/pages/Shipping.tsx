@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +37,12 @@ const Shipping = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title="Livraison - Tarifs et Délais"
+        description="Informations livraison ChillaxPrints. Livraison France et internationale. Suivi en temps réel, livraison gratuite dès 50€."
+        keywords="livraison, expédition, délai livraison, frais port, colissimo"
+        canonicalUrl="/livraison"
+      />
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-12">

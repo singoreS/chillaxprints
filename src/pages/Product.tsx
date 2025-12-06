@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -125,6 +126,13 @@ const Product = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title={product.title}
+        description={product.description || `Découvrez ${product.title} - Vêtement confortable et humoristique ChillaxPrints. Livraison rapide, qualité premium.`}
+        keywords={`${product.title}, ${product.productType || 'vêtement'}, ChillaxPrints, achat en ligne`}
+        canonicalUrl={`/produit/${id}`}
+        ogType="product"
+      />
       <Header />
       
       <main className="flex-1 py-6 md:py-8 lg:py-10">

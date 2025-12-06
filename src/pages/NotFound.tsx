@@ -1,5 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { SEO } from "@/components/SEO";
+import { Button } from "@/components/ui/button";
+import { Home } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,13 +12,24 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <SEO
+        title="Page Non Trouvée - 404"
+        description="La page que vous recherchez n'existe pas. Retournez à l'accueil ChillaxPrints."
+        noIndex={true}
+      />
       <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
-        </a>
+        <h1 className="mb-4 text-6xl font-bold text-primary">404</h1>
+        <p className="mb-2 text-2xl font-semibold text-foreground">Oups ! Page introuvable</p>
+        <p className="mb-8 text-muted-foreground">
+          On dirait que cette page fait la sieste... 😴
+        </p>
+        <Button asChild>
+          <Link to="/">
+            <Home className="mr-2 h-4 w-4" />
+            Retour à l'accueil
+          </Link>
+        </Button>
       </div>
     </div>
   );

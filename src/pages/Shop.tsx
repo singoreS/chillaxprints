@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -156,6 +157,12 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Boutique - T-Shirts, Hoodies, Bonnets & Chaussures"
+        description="Découvrez notre collection de vêtements humoristiques et confortables. T-shirts sarcastiques, hoodies lazy lifestyle, bonnets et chaussures. Livraison gratuite dès 50€."
+        keywords="acheter t-shirt humoristique, hoodie confortable, bonnet original, chaussures streetwear, boutique vêtements drôles, mode lazy"
+        canonicalUrl="/boutique"
+      />
       <Header />
       
       <main className="flex-1">

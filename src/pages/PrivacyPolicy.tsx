@@ -1,10 +1,17 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Separator } from "@/components/ui/separator";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title="Politique de Confidentialité - RGPD"
+        description="Politique de confidentialité ChillaxPrints. Découvrez comment nous protégeons vos données personnelles conformément au RGPD."
+        keywords="politique confidentialité, RGPD, protection données, vie privée"
+        canonicalUrl="/politique-confidentialite"
+      />
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-12">

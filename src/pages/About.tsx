@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { SEO } from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Sparkles, Users } from "lucide-react";
 
@@ -24,6 +25,12 @@ const About = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="À Propos - Notre Histoire et Nos Valeurs"
+        description="Découvrez l'histoire de ChillaxPrints, la marque qui célèbre le confort, l'humour et l'authenticité. Nos valeurs : créativité, qualité premium et communauté chill."
+        keywords="à propos ChillaxPrints, histoire marque vêtements, valeurs entreprise, mode confortable, philosophie lazy lifestyle"
+        canonicalUrl="/a-propos"
+      />
       <Header />
       
       <main className="flex-1">
