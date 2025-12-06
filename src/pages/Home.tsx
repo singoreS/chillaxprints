@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag, Star, Quote } from "lucide-react";
+import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag, Star, Quote, Users, Package, ThumbsUp, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import heroImage from "@/assets/hero-chill.jpg";
 import lifestyle1 from "@/assets/lifestyle-1.jpg";
 import lifestyle2 from "@/assets/lifestyle-2.jpg";
@@ -230,6 +231,53 @@ const Home = () => {
             </div>
             <div className="absolute top-1/2 right-1/4 w-48 h-48 rounded-full overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105 animate-fade-in border-4 border-background" style={{ animationDelay: "0.4s" }}>
               <img src={lifestyle2} alt="Coffee time" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Counter Section */}
+      <section className="py-16 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-y border-border/50">
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
+                <Users className="w-7 h-7 text-primary" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold text-foreground">
+                <AnimatedCounter end={2500} suffix="+" />
+              </div>
+              <p className="text-muted-foreground font-medium">Clients Satisfaits</p>
+            </div>
+            
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
+                <Package className="w-7 h-7 text-primary" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold text-foreground">
+                <AnimatedCounter end={5000} suffix="+" />
+              </div>
+              <p className="text-muted-foreground font-medium">Produits Vendus</p>
+            </div>
+            
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
+                <ThumbsUp className="w-7 h-7 text-primary" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold text-foreground">
+                <AnimatedCounter end={98} suffix="%" />
+              </div>
+              <p className="text-muted-foreground font-medium">Taux de Satisfaction</p>
+            </div>
+            
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
+                <Globe className="w-7 h-7 text-primary" />
+              </div>
+              <div className="text-4xl md:text-5xl font-bold text-foreground">
+                <AnimatedCounter end={35} suffix="+" />
+              </div>
+              <p className="text-muted-foreground font-medium">Pays Livrés</p>
             </div>
           </div>
         </div>
