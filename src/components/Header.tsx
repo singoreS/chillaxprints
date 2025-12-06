@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { CartDrawer } from "@/components/CartDrawer";
 import { SearchBar } from "@/components/SearchBar";
 import { PromoBanner } from "@/components/PromoBanner";
+import { NotificationCenter } from "@/components/NotificationCenter";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { useWishlistStore } from "@/stores/wishlistStore";
@@ -66,7 +67,8 @@ const Header = () => {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center space-x-2 md:space-x-4">
+        <div className="flex items-center space-x-1 md:space-x-3">
+          <NotificationCenter />
           <Link to={user ? "/compte" : "/connexion"} className="hidden sm:block">
             <Button variant="ghost" size="icon">
               <User className="h-5 w-5" />
