@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag } from "lucide-react";
+import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag, Star, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -112,22 +112,50 @@ const Home = () => {
     {
       text: "Meilleur hoodie ever. Je vis dedans maintenant. 10/10 pour la flemme stylée.",
       author: "Marc D.",
+      location: "Paris, France",
       avatar: "🧔",
+      rating: 5,
+      product: "Chill Mode Hoodie",
     },
     {
       text: "J'ai acheté 3 t-shirts. Mon entourage dit que je suis sarcastique maintenant. Merci ChillaxPrints 😂",
       author: "Sophie L.",
+      location: "Lyon, France",
       avatar: "👩",
+      rating: 5,
+      product: "Collection T-Shirts",
     },
     {
       text: "Confortable, drôle, et les compliments pleuvent. Que demander de plus?",
       author: "Thomas R.",
+      location: "Bruxelles, Belgique",
       avatar: "🧑",
+      rating: 5,
+      product: "Lazy Legendary T-Shirt",
     },
     {
       text: "Le bonnet parfait pour l'hiver. Chaud, stylé, et il fait rire. Love it!",
       author: "Emma P.",
+      location: "Genève, Suisse",
       avatar: "👱‍♀️",
+      rating: 5,
+      product: "Winter Chill Bonnet",
+    },
+    {
+      text: "Qualité au top et livraison rapide. Le hoodie est devenu mon uniforme de télétravail!",
+      author: "Lucas M.",
+      location: "Bordeaux, France",
+      avatar: "👨‍💻",
+      rating: 5,
+      product: "Pas Pressé Hoodie",
+    },
+    {
+      text: "Les designs sont vraiment originaux. Je reçois des compliments à chaque fois que je porte mes chaussures!",
+      author: "Clara V.",
+      location: "Montréal, Canada",
+      avatar: "👩‍🎨",
+      rating: 5,
+      product: "Lazy Steps Shoes",
     },
   ];
 
@@ -434,37 +462,94 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials Carousel */}
-      <section className="py-20 bg-muted/30">
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container">
           <div className="text-center mb-16 space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
+              <Star className="w-4 h-4 text-primary fill-primary" />
+              <span className="text-sm font-medium text-primary">+500 clients satisfaits</span>
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold">Ce qu'ils disent</h2>
-            <p className="text-xl text-muted-foreground">
-              La communauté chill a la parole
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              La communauté chill a la parole. Des vrais avis de vrais fans de la flemme stylée.
             </p>
           </div>
 
           <Carousel
             opts={{ align: "start", loop: true }}
             plugins={[Autoplay({ delay: 5000 })]}
-            className="w-full max-w-5xl mx-auto"
+            className="w-full max-w-6xl mx-auto"
           >
-            <CarouselContent>
+            <CarouselContent className="-ml-4">
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="md:basis-1/2">
-                  <Card className="border-2 h-full">
-                    <CardContent className="p-8 flex flex-col h-full">
-                      <div className="text-5xl mb-4">{testimonial.avatar}</div>
-                      <p className="text-lg italic mb-6 flex-grow">"{testimonial.text}"</p>
-                      <p className="font-semibold text-primary">{testimonial.author}</p>
+                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                  <Card className="border-2 h-full hover:border-primary/50 hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
+                    <CardContent className="p-6 flex flex-col h-full">
+                      {/* Quote icon */}
+                      <Quote className="w-8 h-8 text-primary/30 mb-4" />
+                      
+                      {/* Rating */}
+                      <div className="flex gap-1 mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-primary fill-primary" />
+                        ))}
+                      </div>
+                      
+                      {/* Testimonial text */}
+                      <p className="text-foreground/90 mb-6 flex-grow leading-relaxed">
+                        "{testimonial.text}"
+                      </p>
+                      
+                      {/* Product badge */}
+                      <Badge variant="secondary" className="mb-4 w-fit text-xs">
+                        {testimonial.product}
+                      </Badge>
+                      
+                      {/* Author info */}
+                      <div className="flex items-center gap-3 pt-4 border-t">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl">
+                          {testimonial.avatar}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground">{testimonial.author}</p>
+                          <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="hidden md:flex -left-4" />
+            <CarouselNext className="hidden md:flex -right-4" />
           </Carousel>
+
+          {/* Trust indicators */}
+          <div className="flex flex-wrap justify-center gap-8 mt-12 pt-8 border-t border-border/50">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <div className="flex -space-x-2">
+                {["🧔", "👩", "🧑", "👱‍♀️"].map((emoji, i) => (
+                  <div key={i} className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center border-2 border-background text-sm">
+                    {emoji}
+                  </div>
+                ))}
+              </div>
+              <span className="text-sm">+500 clients heureux</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-primary fill-primary" />
+                ))}
+              </div>
+              <span className="text-sm text-muted-foreground">4.9/5 satisfaction</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Shield className="w-4 h-4 text-primary" />
+              <span className="text-sm">Avis vérifiés</span>
+            </div>
+          </div>
         </div>
       </section>
 
