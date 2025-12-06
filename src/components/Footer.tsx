@@ -40,18 +40,23 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-4 text-foreground">Informations</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/mentions-legales" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Mentions légales
-                </Link>
-              </li>
-              <li>
-                <Link to="/politique-retour" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Politique de retour
-                </Link>
-              </li>
-              <li>
                 <Link to="/livraison" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
                   Livraison
+                </Link>
+              </li>
+              <li>
+                <Link to="/retours" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
+                  Retours & Remboursements
+                </Link>
+              </li>
+              <li>
+                <Link to="/cgv" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
+                  CGV
+                </Link>
+              </li>
+              <li>
+                <Link to="/politique-confidentialite" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
+                  Confidentialité
                 </Link>
               </li>
             </ul>
