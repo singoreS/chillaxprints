@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Loader2, ArrowLeft, Heart } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler } from "lucide-react";
 import { getProductByHandle, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
@@ -308,6 +308,20 @@ const Product = () => {
                 <ShoppingCart className="mr-2 h-5 w-5 md:h-6 md:w-6" />
                 {selectedVariant?.availableForSale ? "Ajouter au panier" : "Rupture de stock"}
               </Button>
+
+              {/* Size Guide Link */}
+              <Link
+                to="/guide-des-tailles"
+                className="flex items-center gap-3 p-4 rounded-xl bg-primary/5 border border-primary/20 hover:bg-primary/10 hover:border-primary/40 transition-all duration-300 group"
+              >
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Ruler className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="font-semibold text-sm text-foreground">Besoin d'aide pour la taille ?</p>
+                  <p className="text-muted-foreground text-xs">Consulte notre guide des tailles →</p>
+                </div>
+              </Link>
 
               {/* Product Features */}
               <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border/50">
