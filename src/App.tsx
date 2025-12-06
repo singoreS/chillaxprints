@@ -22,6 +22,7 @@ import TermsOfSale from "./pages/TermsOfSale";
 import ReturnPolicy from "./pages/ReturnPolicy";
 import Shipping from "./pages/Shipping";
 import SizeGuide from "./pages/SizeGuide";
+import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
             <Route path="/cgv" element={<TermsOfSale />} />
             <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
             <Route path="/guide-des-tailles" element={<SizeGuide />} />
+            <Route path="/faq" element={<FAQ />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
