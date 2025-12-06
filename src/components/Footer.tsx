@@ -64,6 +64,11 @@ const Footer = () => {
                   Confidentialité
                 </Link>
               </li>
+              <li>
+                <Link to="/faq" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
