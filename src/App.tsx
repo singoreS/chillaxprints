@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "@/components/SEO";
 import { NewsletterPopup } from "@/components/NewsletterPopup";
 import { CookieConsent } from "@/components/CookieConsent";
+import { NotificationProvider } from "@/components/NotificationProvider";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
@@ -33,28 +34,30 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <NewsletterPopup />
-          <CookieConsent />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/boutique" element={<Shop />} />
-            <Route path="/a-propos" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/produit/:id" element={<Product />} />
-            <Route path="/panier" element={<Cart />} />
-            <Route path="/favoris" element={<Wishlist />} />
-            <Route path="/connexion" element={<Auth />} />
-            <Route path="/compte" element={<Account />} />
-            <Route path="/suivi-commande" element={<OrderTracking />} />
-            <Route path="/livraison" element={<Shipping />} />
-            <Route path="/retours" element={<ReturnPolicy />} />
-            <Route path="/cgv" element={<TermsOfSale />} />
-            <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
-            <Route path="/guide-des-tailles" element={<SizeGuide />} />
-            <Route path="/faq" element={<FAQ />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <NotificationProvider>
+            <NewsletterPopup />
+            <CookieConsent />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/boutique" element={<Shop />} />
+              <Route path="/a-propos" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/produit/:id" element={<Product />} />
+              <Route path="/panier" element={<Cart />} />
+              <Route path="/favoris" element={<Wishlist />} />
+              <Route path="/connexion" element={<Auth />} />
+              <Route path="/compte" element={<Account />} />
+              <Route path="/suivi-commande" element={<OrderTracking />} />
+              <Route path="/livraison" element={<Shipping />} />
+              <Route path="/retours" element={<ReturnPolicy />} />
+              <Route path="/cgv" element={<TermsOfSale />} />
+              <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
+              <Route path="/guide-des-tailles" element={<SizeGuide />} />
+              <Route path="/faq" element={<FAQ />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </NotificationProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
