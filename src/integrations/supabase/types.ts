@@ -65,6 +65,77 @@ export type Database = {
         }
         Relationships: []
       }
+      loyalty_points: {
+        Row: {
+          created_at: string | null
+          id: string
+          points_balance: number
+          tier: string
+          total_earned: number
+          total_spent: number
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          points_balance?: number
+          tier?: string
+          total_earned?: number
+          total_spent?: number
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          points_balance?: number
+          tier?: string
+          total_earned?: number
+          total_spent?: number
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      loyalty_transactions: {
+        Row: {
+          created_at: string | null
+          description: string
+          id: string
+          order_id: string | null
+          points: number
+          transaction_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          description: string
+          id?: string
+          order_id?: string | null
+          points: number
+          transaction_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string
+          id?: string
+          order_id?: string | null
+          points?: number
+          transaction_type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "loyalty_transactions_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       newsletter_subscriptions: {
         Row: {
           email: string
@@ -292,9 +363,32 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_loyalty_points: {
+        Args: {
+          _description: string
+          _order_id?: string
+          _points: number
+          _type: string
+          _user_id: string
+        }
+        Returns: undefined
+      }
+      calculate_loyalty_tier: {
+        Args: { total_points: number }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      spend_loyalty_points: {
+        Args: {
+          _description: string
+          _order_id?: string
+          _points: number
           _user_id: string
         }
         Returns: boolean
