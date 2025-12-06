@@ -21,6 +21,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfSale from "./pages/TermsOfSale";
 import ReturnPolicy from "./pages/ReturnPolicy";
 import Shipping from "./pages/Shipping";
+import SizeGuide from "./pages/SizeGuide";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/retours" element={<ReturnPolicy />} />
             <Route path="/cgv" element={<TermsOfSale />} />
             <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
+            <Route path="/guide-des-tailles" element={<SizeGuide />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -40,6 +40,11 @@ const Footer = () => {
             <h4 className="font-bold text-lg mb-4 text-foreground">Informations</h4>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link to="/guide-des-tailles" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
+                  Guide des Tailles
+                </Link>
+              </li>
+              <li>
                 <Link to="/livraison" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
                   Livraison
                 </Link>
