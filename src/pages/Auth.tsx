@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
+import { z } from "zod";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -12,6 +13,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Loader2, Lock, Mail, User as UserIcon } from "lucide-react";
+
+// Zod validation schemas for security
+const loginSchema = z.object({
+  email: z.string()
+    .trim()
+    .min(1, "L'email est requis")
+    .email("Format d'email invalide")
+    .max(255, "L'email est trop long"),
+  password: z.string()
+    .min(1, "Le mot de passe est requis")
+    .max(128, "Le mot de passe est trop long"),
+});
+
+const signupSchema = z.object({
+  firstName: z.string()
+    .trim()
+    .min(1, "Le prénom est requis")
+    .max(50, "Le prénom est trop long")
+    .regex(/^[a-zA-ZÀ-ÿ\s'-]+$/, "Le prénom contient des caractères invalides"),
+  lastName: z.string()
+    .trim()
+    .min(1, "Le nom est requis")
+    .max(50, "Le nom est trop long")
+    .regex(/^[a-zA-ZÀ-ÿ\s'-]+$/, "Le nom contient des caractères invalides"),
+  email: z.string()
+    .trim()
+    .min(1, "L'email est requis")
+    .email("Format d'email invalide")
+    .max(255, "L'email est trop long"),
+  password: z.string()
+    .min(6, "Le mot de passe doit contenir au moins 6 caractères")
+    .max(128, "Le mot de passe est trop long"),
+});
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -52,16 +86,23 @@ const Auth = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!loginEmail || !loginPassword) {
-      toast.error("Veuillez remplir tous les champs");
+    // Validate with Zod schema
+    const validation = loginSchema.safeParse({
+      email: loginEmail,
+      password: loginPassword,
+    });
+
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
+      toast.error(firstError.message);
       return;
     }
 
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithPassword({
-        email: loginEmail,
-        password: loginPassword,
+        email: validation.data.email,
+        password: validation.data.password,
       });
 
       if (error) {
@@ -83,13 +124,17 @@ const Auth = () => {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!signupEmail || !signupPassword || !signupFirstName || !signupLastName) {
-      toast.error("Veuillez remplir tous les champs");
-      return;
-    }
+    // Validate with Zod schema
+    const validation = signupSchema.safeParse({
+      firstName: signupFirstName,
+      lastName: signupLastName,
+      email: signupEmail,
+      password: signupPassword,
+    });
 
-    if (signupPassword.length < 6) {
-      toast.error("Le mot de passe doit contenir au moins 6 caractères");
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
+      toast.error(firstError.message);
       return;
     }
 
@@ -98,13 +143,13 @@ const Auth = () => {
       const redirectUrl = `${window.location.origin}/`;
       
       const { error } = await supabase.auth.signUp({
-        email: signupEmail,
-        password: signupPassword,
+        email: validation.data.email,
+        password: validation.data.password,
         options: {
           emailRedirectTo: redirectUrl,
           data: {
-            first_name: signupFirstName,
-            last_name: signupLastName,
+            first_name: validation.data.firstName,
+            last_name: validation.data.lastName,
           }
         }
       });
