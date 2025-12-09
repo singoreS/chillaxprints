@@ -187,65 +187,65 @@ const Home = () => {
       <Header />
       <main className="flex-1">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="absolute inset-0 opacity-20">
           <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-transparent" />
         
-        <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center py-20">
+        <div className="container relative z-10 grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center py-8 md:py-12 lg:py-20 px-4 md:px-6">
           {/* Left: Text Content */}
-          <div className="space-y-8 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Nouveauté : Collection Hiver 2025</span>
+          <div className="space-y-4 md:space-y-6 lg:space-y-8 animate-fade-in">
+            <div className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-primary/10 border border-primary/20">
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+              <span className="text-xs md:text-sm font-medium text-primary">Nouveauté : Collection Hiver 2025</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
               Lazy but{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Legendary
               </span>
             </h1>
             
-            <p className="text-xl text-muted-foreground max-w-lg">
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-lg">
               Le confort rencontre l'humour. Des vêtements pour ceux qui assument leur flemme avec style. 
               Parce que pourquoi se presser quand on peut rester chill? 😎
             </p>
 
-            <div className="flex flex-wrap gap-3">
-              <Badge variant="secondary" className="px-4 py-2 text-sm">
+            <div className="flex flex-wrap gap-2 md:gap-3">
+              <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
                 🌍 Livraison Internationale
               </Badge>
-              <Badge variant="secondary" className="px-4 py-2 text-sm">
+              <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
                 ✨ Qualité Premium
               </Badge>
-              <Badge variant="secondary" className="px-4 py-2 text-sm">
+              <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
                 😊 Satisfaction Garantie
               </Badge>
             </div>
 
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button asChild size="lg" className="text-lg px-8">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
+              <Button asChild size="default" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 w-full sm:w-auto">
                 <Link to="/boutique">
-                  Découvrir la Boutique <ArrowRight className="ml-2 w-5 h-5" />
+                  Découvrir la Boutique <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="text-lg px-8">
+              <Button asChild size="default" variant="outline" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 w-full sm:w-auto">
                 <a href="#best-sellers">Voir les Best Sellers</a>
               </Button>
             </div>
           </div>
 
-          {/* Right: Floating Images */}
-          <div className="relative hidden lg:block h-[600px] animate-scale-in">
-            <div className="absolute top-0 right-0 w-80 h-96 rounded-2xl overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105">
+          {/* Right: Floating Images - Hidden on mobile, visible on tablet+ */}
+          <div className="relative hidden md:block h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] animate-scale-in">
+            <div className="absolute top-0 right-0 w-48 md:w-56 lg:w-72 xl:w-80 h-60 md:h-72 lg:h-80 xl:h-96 rounded-2xl overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105">
               <img src={heroImage} alt="Chill lifestyle" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute bottom-0 left-0 w-64 h-80 rounded-2xl overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <div className="absolute bottom-0 left-0 w-36 md:w-44 lg:w-56 xl:w-64 h-48 md:h-56 lg:h-72 xl:h-80 rounded-2xl overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105 animate-fade-in" style={{ animationDelay: "0.2s" }}>
               <img src={lifestyle1} alt="Lifestyle" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute top-1/2 right-1/4 w-48 h-48 rounded-full overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105 animate-fade-in border-4 border-background" style={{ animationDelay: "0.4s" }}>
+            <div className="absolute top-1/2 right-1/4 w-28 md:w-36 lg:w-44 xl:w-48 h-28 md:h-36 lg:h-44 xl:h-48 rounded-full overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105 animate-fade-in border-4 border-background hidden lg:block" style={{ animationDelay: "0.4s" }}>
               <img src={lifestyle2} alt="Coffee time" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -253,77 +253,77 @@ const Home = () => {
       </section>
 
       {/* Stats Counter Section */}
-      <section className="py-16 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-y border-border/50">
-        <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            <div className="text-center space-y-2">
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
-                <Users className="w-7 h-7 text-primary" />
+      <section className="py-8 md:py-12 lg:py-16 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-y border-border/50">
+        <div className="container px-4 md:px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-12">
+            <div className="text-center space-y-1 md:space-y-2">
+              <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-primary/20 rounded-full mb-2 md:mb-3">
+                <Users className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-primary" />
               </div>
-              <div className="text-4xl md:text-5xl font-bold text-foreground">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
                 <AnimatedCounter end={2500} suffix="+" />
               </div>
-              <p className="text-muted-foreground font-medium">Clients Satisfaits</p>
+              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium">Clients Satisfaits</p>
             </div>
             
-            <div className="text-center space-y-2">
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
-                <Package className="w-7 h-7 text-primary" />
+            <div className="text-center space-y-1 md:space-y-2">
+              <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-primary/20 rounded-full mb-2 md:mb-3">
+                <Package className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-primary" />
               </div>
-              <div className="text-4xl md:text-5xl font-bold text-foreground">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
                 <AnimatedCounter end={5000} suffix="+" />
               </div>
-              <p className="text-muted-foreground font-medium">Produits Vendus</p>
+              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium">Produits Vendus</p>
             </div>
             
-            <div className="text-center space-y-2">
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
-                <ThumbsUp className="w-7 h-7 text-primary" />
+            <div className="text-center space-y-1 md:space-y-2">
+              <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-primary/20 rounded-full mb-2 md:mb-3">
+                <ThumbsUp className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-primary" />
               </div>
-              <div className="text-4xl md:text-5xl font-bold text-foreground">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
                 <AnimatedCounter end={98} suffix="%" />
               </div>
-              <p className="text-muted-foreground font-medium">Taux de Satisfaction</p>
+              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium">Taux de Satisfaction</p>
             </div>
             
-            <div className="text-center space-y-2">
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/20 rounded-full mb-3">
-                <Globe className="w-7 h-7 text-primary" />
+            <div className="text-center space-y-1 md:space-y-2">
+              <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-primary/20 rounded-full mb-2 md:mb-3">
+                <Globe className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-primary" />
               </div>
-              <div className="text-4xl md:text-5xl font-bold text-foreground">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
                 <AnimatedCounter end={35} suffix="+" />
               </div>
-              <p className="text-muted-foreground font-medium">Pays Livrés</p>
+              <p className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium">Pays Livrés</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Why ChillaxPrints Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
               Pourquoi <span className="text-primary">ChillaxPrints</span>?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
               Parce qu'on comprend que le confort et l'humour sont les vrais luxes de la vie
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
             {reasons.map((reason, index) => (
               <Card 
                 key={index} 
                 className="group hover:shadow-[var(--shadow-elegant)] transition-all duration-300 hover:-translate-y-2 animate-fade-in border-2"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardContent className="p-6 text-center space-y-4">
-                  <div className="w-16 h-16 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <reason.icon className="w-8 h-8 text-primary" />
+                <CardContent className="p-3 md:p-4 lg:p-6 text-center space-y-2 md:space-y-4">
+                  <div className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto bg-primary/10 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <reason.icon className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold">{reason.title}</h3>
-                  <p className="text-muted-foreground">{reason.description}</p>
+                  <h3 className="text-sm md:text-lg lg:text-xl font-semibold">{reason.title}</h3>
+                  <p className="text-xs md:text-sm lg:text-base text-muted-foreground hidden sm:block">{reason.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -332,12 +332,12 @@ const Home = () => {
       </section>
 
       {/* Best Sellers Carousel */}
-      <section id="best-sellers" className="py-20 bg-gradient-to-b from-background to-primary/5">
-        <div className="container">
-          <div className="text-center mb-16 space-y-4">
-            <Badge className="px-4 py-2">🔥 Produits Populaires</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold">Best Sellers</h2>
-            <p className="text-xl text-muted-foreground">
+      <section id="best-sellers" className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background to-primary/5">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
+            <Badge className="px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm">🔥 Produits Populaires</Badge>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Best Sellers</h2>
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground">
               Les favoris de la communauté chill
             </p>
           </div>
@@ -425,16 +425,16 @@ const Home = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">Explorer par Catégorie</h2>
-            <p className="text-xl text-muted-foreground">
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Explorer par Catégorie</h2>
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground">
               Trouve ton style chill parfait
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
             {categories.map((category, index) => (
               <Link
                 key={index}
@@ -443,16 +443,16 @@ const Home = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <Card className="overflow-hidden border-2 hover:border-primary hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
-                  <div className="relative h-64 overflow-hidden bg-muted">
+                  <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden bg-muted">
                     <img
                       src={category.image}
                       alt={category.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <div className="text-4xl mb-2">{category.emoji}</div>
-                      <h3 className="text-2xl font-bold text-foreground">{category.name}</h3>
+                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
+                      <div className="text-2xl md:text-3xl lg:text-4xl mb-1 md:mb-2">{category.emoji}</div>
+                      <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground">{category.name}</h3>
                     </div>
                   </div>
                 </Card>
@@ -463,38 +463,38 @@ const Home = () => {
       </section>
 
       {/* Notre Univers - Bento Grid */}
-      <section className="py-20 bg-gradient-to-b from-background to-accent/5">
-        <div className="container">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold">Notre Univers</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background to-accent/5">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Notre Univers</h2>
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
               Un style de vie où le confort rencontre l'humour, et où la flemme devient un art de vivre
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {/* Large text card */}
             <Card className="md:col-span-2 md:row-span-2 border-2 bg-gradient-to-br from-primary/10 to-accent/10">
-              <CardContent className="p-12 h-full flex flex-col justify-center">
-                <h3 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+              <CardContent className="p-6 md:p-8 lg:p-12 h-full flex flex-col justify-center">
+                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 leading-tight">
                   "Pas besoin de te presser… mais ton hoodie préféré t'attend 😎"
                 </h3>
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="text-sm md:text-base lg:text-lg text-muted-foreground mb-4 md:mb-6">
                   Chez ChillaxPrints, on célèbre la philosophie du "prends ton temps". 
                   Nos designs humoristiques et sarcastiques sont faits pour ceux qui 
                   comprennent que la vie est trop courte pour être stressé.
                 </p>
-                <Button asChild size="lg" className="w-fit">
+                <Button asChild size="default" className="w-fit text-sm md:text-base">
                   <Link to="/a-propos">
-                    En savoir plus <ArrowRight className="ml-2 w-5 h-5" />
+                    En savoir plus <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
                   </Link>
                 </Button>
               </CardContent>
             </Card>
 
             {/* Image cards */}
-            <Card className="overflow-hidden border-2 group">
-              <div className="relative h-64 md:h-full">
+            <Card className="overflow-hidden border-2 group hidden md:block">
+              <div className="relative h-48 md:h-full min-h-[150px]">
                 <img
                   src={lifestyle1}
                   alt="Lifestyle"
@@ -503,8 +503,8 @@ const Home = () => {
               </div>
             </Card>
 
-            <Card className="overflow-hidden border-2 group">
-              <div className="relative h-64 md:h-full">
+            <Card className="overflow-hidden border-2 group hidden md:block">
+              <div className="relative h-48 md:h-full min-h-[150px]">
                 <img
                   src={lifestyle2}
                   alt="Coffee time"
@@ -513,8 +513,8 @@ const Home = () => {
               </div>
             </Card>
 
-            <Card className="overflow-hidden border-2 group md:col-span-2">
-              <div className="relative h-64">
+            <Card className="overflow-hidden border-2 group md:col-span-2 hidden md:block">
+              <div className="relative h-48 md:h-64">
                 <img
                   src={lifestyle3}
                   alt="Comfortable shoes"
@@ -527,15 +527,15 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-        <div className="container">
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Star className="w-4 h-4 text-primary fill-primary" />
-              <span className="text-sm font-medium text-primary">+500 clients satisfaits</span>
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
+            <div className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-primary/10 border border-primary/20">
+              <Star className="w-3 h-3 md:w-4 md:h-4 text-primary fill-primary" />
+              <span className="text-xs md:text-sm font-medium text-primary">+500 clients satisfaits</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold">Ce qu'ils disent</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Ce qu'ils disent</h2>
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
               La communauté chill a la parole. Des vrais avis de vrais fans de la flemme stylée.
             </p>
           </div>
@@ -618,17 +618,17 @@ const Home = () => {
       </section>
 
       {/* Loyalty Program Section - Only for logged-in users or as teaser */}
-      <section className="py-20 bg-muted/30">
-        <div className="container">
-          <div className="text-center mb-12 space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Gift className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Récompenses exclusives</span>
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 space-y-2 md:space-y-4">
+            <div className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-primary/10 border border-primary/20">
+              <Gift className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+              <span className="text-xs md:text-sm font-medium text-primary">Récompenses exclusives</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
               Gagne des points, <span className="text-primary">profite des avantages</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
               Chaque achat te rapproche de réductions exclusives et d'avantages VIP. Plus tu achètes, plus tu économises !
             </p>
           </div>
@@ -640,8 +640,8 @@ const Home = () => {
           ) : (
             <div className="max-w-3xl mx-auto">
               <LoyaltyInfoCard />
-              <div className="text-center mt-8">
-                <Button asChild size="lg">
+              <div className="text-center mt-6 md:mt-8">
+                <Button asChild size="default" className="text-sm md:text-base">
                   <Link to="/connexion">
                     Rejoindre le programme <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
@@ -653,21 +653,21 @@ const Home = () => {
       </section>
 
       {/* Instagram / Social Proof */}
-      <section className="py-20 bg-gradient-to-b from-background to-primary/5">
-        <div className="container">
-          <div className="text-center mb-16 space-y-4">
-            <Instagram className="w-12 h-12 mx-auto text-primary" />
-            <h2 className="text-4xl md:text-5xl font-bold">Rejoins la Communauté</h2>
-            <p className="text-xl text-muted-foreground">
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background to-primary/5">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
+            <Instagram className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 mx-auto text-primary" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Rejoins la Communauté</h2>
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground">
               Partage ton style chill avec #ChillaxPrints
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
             {[social1, social2, lifestyle1, lifestyle2, lifestyle3, heroImage].map((img, index) => (
               <div
                 key={index}
-                className="relative aspect-square overflow-hidden rounded-2xl group cursor-pointer animate-fade-in"
+                className="relative aspect-square overflow-hidden rounded-lg md:rounded-2xl group cursor-pointer animate-fade-in"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <img
@@ -676,16 +676,16 @@ const Home = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Instagram className="w-12 h-12 text-background" />
+                  <Instagram className="w-6 h-6 md:w-10 md:h-10 lg:w-12 lg:h-12 text-background" />
                 </div>
               </div>
             ))}
           </div>
 
           <div className="text-center">
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="default" variant="outline" className="text-sm md:text-base">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <Instagram className="mr-2 w-5 h-5" />
+                <Instagram className="mr-2 w-4 h-4 md:w-5 md:h-5" />
                 Suivre sur Instagram
               </a>
             </Button>
@@ -694,7 +694,7 @@ const Home = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroImage}
@@ -704,20 +704,20 @@ const Home = () => {
           <div className="absolute inset-0 bg-foreground/80 backdrop-blur-sm" />
         </div>
 
-        <div className="container relative z-10 text-center space-y-8">
-          <h2 className="text-4xl md:text-6xl font-bold text-background">
+        <div className="container relative z-10 text-center space-y-4 md:space-y-6 lg:space-y-8 px-4 md:px-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-background">
             Prêt à rejoindre le club des Chill?
           </h2>
-          <p className="text-xl text-background/90 max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg lg:text-xl text-background/90 max-w-2xl mx-auto">
             Découvre nos designs uniques et commence ta collection de vêtements confortables et humoristiques
           </p>
-          <div className="flex flex-wrap gap-4 justify-center pt-4">
-            <Button asChild size="lg" className="text-lg px-8 bg-background text-foreground hover:bg-background/90">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
+            <Button asChild size="default" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 bg-background text-foreground hover:bg-background/90">
               <Link to="/boutique">
-                Explorer la Boutique <ArrowRight className="ml-2 w-5 h-5" />
+                Explorer la Boutique <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="text-lg px-8 border-background text-background hover:bg-background/10">
+            <Button asChild size="default" variant="outline" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 border-background text-background hover:bg-background/10">
               <Link to="/a-propos">
                 Notre Histoire
               </Link>

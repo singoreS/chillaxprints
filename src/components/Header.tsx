@@ -41,9 +41,9 @@ const Header = () => {
     <>
       <PromoBanner />
       <header className="sticky top-0 z-50 w-full border-b-2 border-border/50 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-[var(--shadow-soft)]">
-        <div className="container flex h-20 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center space-x-2 flex-shrink-0 group">
-          <span className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+        <div className="container flex h-16 md:h-20 items-center justify-between gap-2 md:gap-4 px-3 md:px-6">
+        <Link to="/" className="flex items-center flex-shrink-0 group">
+          <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
             ChillaxPrints
           </span>
         </Link>
@@ -67,18 +67,18 @@ const Header = () => {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center space-x-1 md:space-x-3">
+        <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2">
           {user && <NotificationCenter />}
           <Link to={user ? "/compte" : "/connexion"} className="hidden sm:block">
-            <Button variant="ghost" size="icon">
-              <User className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="h-8 w-8 md:h-10 md:w-10">
+              <User className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
           </Link>
           <Link to="/favoris" className="relative">
-            <Button variant="ghost" size="icon">
-              <Heart className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="h-8 w-8 md:h-10 md:w-10">
+              <Heart className="h-4 w-4 md:h-5 md:w-5" />
               {wishlistItems.length > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-accent">
+                <Badge className="absolute -top-1 -right-1 h-4 w-4 md:h-5 md:w-5 rounded-full p-0 flex items-center justify-center text-[10px] md:text-xs bg-accent">
                   {wishlistItems.length}
                 </Badge>
               )}
