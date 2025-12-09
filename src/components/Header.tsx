@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Heart } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
@@ -43,9 +44,11 @@ const Header = () => {
       <header className="sticky top-0 z-50 w-full border-b-2 border-border/50 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-[var(--shadow-soft)]">
         <div className="container flex h-16 md:h-20 items-center justify-between gap-2 md:gap-4 px-3 md:px-6">
         <Link to="/" className="flex items-center flex-shrink-0 group">
-          <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
-            ChillaxPrints
-          </span>
+          <img 
+            src={logo} 
+            alt="ChillaxPrints" 
+            className="h-10 sm:h-12 md:h-14 w-auto group-hover:scale-105 transition-transform duration-300"
+          />
         </Link>
 
         {/* Search Bar - Desktop */}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Linkedin, Instagram } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -7,9 +8,11 @@ const Footer = () => {
       <div className="container py-8 md:py-12 lg:py-16 px-4 md:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           <div className="col-span-2 md:col-span-1">
-            <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-3 md:mb-4">
-              ChillaxPrints
-            </h3>
+            <img 
+              src={logo} 
+              alt="ChillaxPrints" 
+              className="h-12 md:h-14 w-auto mb-3 md:mb-4"
+            />
             <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
               Des vêtements pour les esprits drôles et paresseux. Lazy but Legendary 🎯
             </p>
