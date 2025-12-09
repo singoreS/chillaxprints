@@ -167,34 +167,35 @@ const Shop = () => {
       
       <main className="flex-1">
         {/* Hero Banner */}
-        <section className="relative py-12 md:py-16 overflow-hidden">
+        <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
           <div className="absolute inset-0 bg-[var(--gradient-hero)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(24_100%_50%/0.08),transparent_60%)]" />
-          <div className="container text-center relative z-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <div className="container px-4 md:px-6 text-center relative z-10">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
               Notre <span className="text-primary">Boutique</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-150">
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground mb-4 md:mb-6 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-150">
               Pas besoin de courir, mais cette collection ne dure pas éternellement 😴
             </p>
-            <Badge variant="secondary" className="text-sm py-2 px-4 shadow-[var(--shadow-soft)] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+            <Badge variant="secondary" className="text-xs md:text-sm py-1.5 md:py-2 px-3 md:px-4 shadow-[var(--shadow-soft)] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
               🎉 -15% sur votre première commande avec le code: CHILL15
             </Badge>
           </div>
         </section>
 
         {/* Products Section */}
-        <section className="py-8 md:py-12 bg-gradient-to-b from-background to-muted/20">
-          <div className="container">
+        <section className="py-6 md:py-8 lg:py-12 bg-gradient-to-b from-background to-muted/20">
+          <div className="container px-4 md:px-6">
             {/* Category Filters and Sort */}
-            <div className="flex flex-col md:flex-row gap-4 mb-8">
-              <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="flex-1">
-                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 shadow-[var(--shadow-soft)] p-1">
+            <div className="flex flex-col gap-4 md:gap-6 mb-6 md:mb-8">
+              {/* Categories Tabs */}
+              <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
+                <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 gap-1 shadow-[var(--shadow-soft)] p-1 h-auto">
                   {categories.map((category) => (
                     <TabsTrigger 
                       key={category.value} 
                       value={category.value}
-                      className="data-[state=active]:shadow-[var(--shadow-soft)] text-sm py-2"
+                      className="data-[state=active]:shadow-[var(--shadow-soft)] text-xs md:text-sm py-2 md:py-2.5 px-1 md:px-3"
                     >
                       {category.label}
                     </TabsTrigger>
@@ -202,18 +203,19 @@ const Shop = () => {
                 </TabsList>
               </Tabs>
 
-              <div className="flex gap-2">
+              {/* Filters and Sort Row */}
+              <div className="flex flex-row items-center justify-between gap-3">
                 <ProductFilters 
                   onFilterChange={setFilters}
                   activeFiltersCount={activeFiltersCount}
                 />
                 
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-[180px]">
-                    <ArrowUpDown className="w-4 h-4 mr-2" />
+                  <SelectTrigger className="w-auto min-w-[140px] md:min-w-[180px] text-xs md:text-sm">
+                    <ArrowUpDown className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" />
                     <SelectValue placeholder="Trier par" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-background border shadow-lg z-50">
                     <SelectItem value="default">Par défaut</SelectItem>
                     <SelectItem value="price-asc">Prix croissant</SelectItem>
                     <SelectItem value="price-desc">Prix décroissant</SelectItem>
@@ -226,15 +228,15 @@ const Shop = () => {
 
             {/* Products Grid */}
             {loading ? (
-              <div className="flex justify-center items-center py-20">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <div className="flex justify-center items-center py-16 md:py-20">
+                <Loader2 className="h-6 w-6 md:h-8 md:w-8 animate-spin text-primary" />
               </div>
             ) : filteredProducts.length === 0 ? (
-              <div className="text-center py-20">
-                <p className="text-xl text-muted-foreground">Aucun produit trouvé</p>
+              <div className="text-center py-16 md:py-20">
+                <p className="text-base md:text-xl text-muted-foreground">Aucun produit trouvé</p>
               </div>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
                 {filteredProducts.map((product, index) => (
                   <Card 
                     key={product.node.id} 
@@ -258,11 +260,11 @@ const Shop = () => {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="absolute top-2 right-2 h-8 w-8 bg-background/90 hover:bg-background shadow-[var(--shadow-soft)] backdrop-blur-sm"
+                          className="absolute top-1.5 right-1.5 md:top-2 md:right-2 h-7 w-7 md:h-8 md:w-8 bg-background/90 hover:bg-background shadow-[var(--shadow-soft)] backdrop-blur-sm"
                           onClick={() => handleToggleWishlist(product)}
                         >
                           <Heart
-                            className={`w-4 h-4 transition-all ${
+                            className={`w-3.5 h-3.5 md:w-4 md:h-4 transition-all ${
                               isInWishlist(product.node.id)
                                 ? "fill-accent text-accent scale-110"
                                 : "text-foreground"
@@ -270,19 +272,19 @@ const Shop = () => {
                           />
                         </Button>
                       </div>
-                      <div className="p-3">
+                      <div className="p-2 md:p-3">
                         <Link to={`/produit/${product.node.handle}`}>
-                          <h3 className="font-semibold text-sm mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2 min-h-[2.5rem]">
+                          <h3 className="font-semibold text-xs md:text-sm mb-1.5 md:mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2 min-h-[2rem] md:min-h-[2.5rem]">
                             {product.node.title}
                           </h3>
                         </Link>
-                        <p className="text-primary font-bold text-lg mb-3">
+                        <p className="text-primary font-bold text-sm md:text-lg mb-2 md:mb-3">
                           {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}€
                         </p>
                         <Button 
                           onClick={() => handleAddToCart(product)} 
                           size="sm"
-                          className="w-full text-xs shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all"
+                          className="w-full text-[10px] md:text-xs py-1.5 md:py-2 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all"
                         >
                           <ShoppingCart className="w-3 h-3 mr-1" />
                           Ajouter
