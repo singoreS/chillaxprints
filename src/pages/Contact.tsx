@@ -75,28 +75,28 @@ const Contact = () => {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary/10 via-background to-accent/10 py-20">
-          <div className="container text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Contactez-nous</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <section className="bg-gradient-to-br from-primary/10 via-background to-accent/10 py-10 md:py-16 lg:py-20">
+          <div className="container px-4 md:px-6 text-center">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 md:mb-6">Contactez-nous</h1>
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
               On répond vite… sauf si on fait la sieste 😴
             </p>
           </div>
         </section>
 
         {/* Contact Form & Info */}
-        <section className="py-20">
-          <div className="container">
-            <div className="grid md:grid-cols-2 gap-12">
+        <section className="py-10 md:py-16 lg:py-20">
+          <div className="container px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
               {/* Form */}
               <Card>
-                <CardHeader>
-                  <CardTitle className="text-2xl">Envoyez-nous un message</CardTitle>
+                <CardHeader className="p-4 md:p-6">
+                  <CardTitle className="text-lg md:text-xl lg:text-2xl">Envoyez-nous un message</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                <CardContent className="p-4 md:p-6 pt-0 md:pt-0">
+                  <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      <label htmlFor="name" className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">
                         Nom complet
                       </label>
                       <Input
@@ -105,10 +105,11 @@ const Contact = () => {
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Votre nom"
                         required
+                        className="text-sm"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      <label htmlFor="email" className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">
                         Email
                       </label>
                       <Input
@@ -118,10 +119,11 @@ const Contact = () => {
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="votre@email.com"
                         required
+                        className="text-sm"
                       />
                     </div>
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
+                      <label htmlFor="message" className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">
                         Message
                       </label>
                       <Textarea
@@ -129,11 +131,12 @@ const Contact = () => {
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         placeholder="Votre message..."
-                        rows={6}
+                        rows={4}
                         required
+                        className="text-sm"
                       />
                     </div>
-                    <Button type="submit" className="w-full" size="lg">
+                    <Button type="submit" className="w-full text-sm md:text-base" size="default">
                       Envoyer le message
                     </Button>
                   </form>
@@ -141,27 +144,27 @@ const Contact = () => {
               </Card>
 
               {/* Contact Info */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 <Card>
-                  <CardContent className="p-6 flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Mail className="h-6 w-6 text-primary" />
+                  <CardContent className="p-4 md:p-6 flex items-start space-x-3 md:space-x-4">
+                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Mail className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-2">Email</h3>
-                      <p className="text-muted-foreground">contact@chillaxprints.com</p>
+                      <h3 className="font-semibold text-sm md:text-lg mb-1 md:mb-2">Email</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground">contact@chillaxprints.com</p>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardContent className="p-6 flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Clock className="h-6 w-6 text-primary" />
+                  <CardContent className="p-4 md:p-6 flex items-start space-x-3 md:space-x-4">
+                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Clock className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-2">Horaires</h3>
-                      <p className="text-muted-foreground">
+                      <h3 className="font-semibold text-sm md:text-lg mb-1 md:mb-2">Horaires</h3>
+                      <p className="text-xs md:text-sm text-muted-foreground">
                         Lundi - Vendredi : 9h - 18h
                         <br />
                         (Sauf pendant la sieste)
@@ -171,20 +174,20 @@ const Contact = () => {
                 </Card>
 
                 <Card>
-                  <CardContent className="p-6 flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <MessageSquare className="h-6 w-6 text-primary" />
+                  <CardContent className="p-4 md:p-6 flex items-start space-x-3 md:space-x-4">
+                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                      <MessageSquare className="h-5 w-5 md:h-6 md:w-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-2">Réseaux Sociaux</h3>
-                      <div className="flex space-x-4 mt-3">
+                      <h3 className="font-semibold text-sm md:text-lg mb-1 md:mb-2">Réseaux Sociaux</h3>
+                      <div className="flex space-x-3 md:space-x-4 mt-2 md:mt-3">
                         <a
                           href="https://linkedin.com"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-muted-foreground hover:text-primary transition-colors"
                         >
-                          <Linkedin className="h-6 w-6" />
+                          <Linkedin className="h-5 w-5 md:h-6 md:w-6" />
                         </a>
                         <a
                           href="https://instagram.com"
@@ -192,7 +195,7 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           className="text-muted-foreground hover:text-primary transition-colors"
                         >
-                          <Instagram className="h-6 w-6" />
+                          <Instagram className="h-5 w-5 md:h-6 md:w-6" />
                         </a>
                       </div>
                     </div>
@@ -204,39 +207,39 @@ const Contact = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-muted/50">
-          <div className="container">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/20 rounded-full mb-6">
-                <HelpCircle className="h-8 w-8 text-primary" />
+        <section className="py-10 md:py-16 lg:py-20 bg-muted/50">
+          <div className="container px-4 md:px-6">
+            <div className="text-center mb-8 md:mb-12">
+              <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-primary/20 rounded-full mb-4 md:mb-6">
+                <HelpCircle className="h-6 w-6 md:h-8 md:w-8 text-primary" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Avant de nous contacter...</h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">Avant de nous contacter...</h2>
+              <p className="text-sm md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 md:mb-6">
                 Consultez notre FAQ ! Vous y trouverez peut-être la réponse à votre question.
               </p>
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
+              <Button asChild size="default" className="bg-primary hover:bg-primary/90 text-sm md:text-base">
                 <Link to="/faq">
-                  <HelpCircle className="h-4 w-4 mr-2" />
+                  <HelpCircle className="h-3 w-3 md:h-4 md:w-4 mr-2" />
                   Consulter la FAQ complète
-                  <ArrowRight className="h-4 w-4 ml-2" />
+                  <ArrowRight className="h-3 w-3 md:h-4 md:w-4 ml-2" />
                 </Link>
               </Button>
             </div>
 
-            <div className="max-w-3xl mx-auto space-y-4">
-              <p className="text-center text-muted-foreground mb-6">Aperçu des questions fréquentes :</p>
+            <div className="max-w-3xl mx-auto space-y-3 md:space-y-4">
+              <p className="text-center text-xs md:text-sm text-muted-foreground mb-4 md:mb-6">Aperçu des questions fréquentes :</p>
               {faqs.map((faq, index) => (
                 <Card key={index}>
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
-                    <p className="text-muted-foreground">{faq.answer}</p>
+                  <CardContent className="p-4 md:p-6">
+                    <h3 className="font-semibold text-sm md:text-lg mb-1 md:mb-2">{faq.question}</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">{faq.answer}</p>
                   </CardContent>
                 </Card>
               ))}
-              <div className="text-center pt-4">
-                <Link to="/faq" className="text-primary hover:underline inline-flex items-center gap-1">
+              <div className="text-center pt-3 md:pt-4">
+                <Link to="/faq" className="text-primary hover:underline inline-flex items-center gap-1 text-sm md:text-base">
                   Voir toutes les questions
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
                 </Link>
               </div>
             </div>

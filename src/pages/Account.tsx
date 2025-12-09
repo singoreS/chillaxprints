@@ -206,91 +206,94 @@ const Account = () => {
         noIndex={true}
       />
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-4 md:py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold">Mon Compte</h1>
-            <Button variant="outline" onClick={handleLogout}>
-              <LogOut className="mr-2 h-4 w-4" />
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6 md:mb-8">
+            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold">Mon Compte</h1>
+            <Button variant="outline" onClick={handleLogout} size="sm" className="text-xs md:text-sm">
+              <LogOut className="mr-1.5 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
               Déconnexion
             </Button>
           </div>
 
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="profile">
-                <UserIcon className="mr-2 h-4 w-4" />
-                Profil
+            <TabsList className="grid w-full grid-cols-3 h-auto">
+              <TabsTrigger value="profile" className="text-xs md:text-sm py-2 md:py-2.5 px-1 md:px-3">
+                <UserIcon className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                <span className="hidden sm:inline">Profil</span>
+                <span className="sm:hidden">Profil</span>
               </TabsTrigger>
-              <TabsTrigger value="orders">
-                <Package className="mr-2 h-4 w-4" />
-                Commandes
+              <TabsTrigger value="orders" className="text-xs md:text-sm py-2 md:py-2.5 px-1 md:px-3">
+                <Package className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                <span className="hidden sm:inline">Commandes</span>
+                <span className="sm:hidden">Cmd</span>
               </TabsTrigger>
-              <TabsTrigger value="addresses">
-                <MapPin className="mr-2 h-4 w-4" />
-                Adresses
+              <TabsTrigger value="addresses" className="text-xs md:text-sm py-2 md:py-2.5 px-1 md:px-3">
+                <MapPin className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                <span className="hidden sm:inline">Adresses</span>
+                <span className="sm:hidden">Adr</span>
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="profile" className="mt-6">
+            <TabsContent value="profile" className="mt-4 md:mt-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Informations personnelles</CardTitle>
-                  <CardDescription>
+                <CardHeader className="p-4 md:p-6">
+                  <CardTitle className="text-base md:text-lg">Informations personnelles</CardTitle>
+                  <CardDescription className="text-xs md:text-sm">
                     Gérez vos informations de compte
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                <CardContent className="p-4 md:p-6 pt-0 md:pt-0 space-y-3 md:space-y-4">
+                  <div className="grid grid-cols-2 gap-3 md:gap-4">
                     <div>
-                      <Label>Prénom</Label>
-                      <p className="text-lg">{profile?.first_name || "-"}</p>
+                      <Label className="text-xs md:text-sm">Prénom</Label>
+                      <p className="text-sm md:text-lg">{profile?.first_name || "-"}</p>
                     </div>
                     <div>
-                      <Label>Nom</Label>
-                      <p className="text-lg">{profile?.last_name || "-"}</p>
+                      <Label className="text-xs md:text-sm">Nom</Label>
+                      <p className="text-sm md:text-lg">{profile?.last_name || "-"}</p>
                     </div>
                   </div>
                   <div>
-                    <Label>Email</Label>
-                    <p className="text-lg">{profile?.email || "-"}</p>
+                    <Label className="text-xs md:text-sm">Email</Label>
+                    <p className="text-sm md:text-lg break-all">{profile?.email || "-"}</p>
                   </div>
                   <div>
-                    <Label>Téléphone</Label>
-                    <p className="text-lg">{profile?.phone || "Non renseigné"}</p>
+                    <Label className="text-xs md:text-sm">Téléphone</Label>
+                    <p className="text-sm md:text-lg">{profile?.phone || "Non renseigné"}</p>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
-            <TabsContent value="orders" className="mt-6">
+            <TabsContent value="orders" className="mt-4 md:mt-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Historique des commandes</CardTitle>
-                  <CardDescription>
+                <CardHeader className="p-4 md:p-6">
+                  <CardTitle className="text-base md:text-lg">Historique des commandes</CardTitle>
+                  <CardDescription className="text-xs md:text-sm">
                     Consultez vos commandes passées
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4 md:p-6 pt-0 md:pt-0">
                   {orders.length === 0 ? (
-                    <div className="text-center py-8">
-                      <Package className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground">Aucune commande</p>
+                    <div className="text-center py-6 md:py-8">
+                      <Package className="h-10 w-10 md:h-12 md:w-12 mx-auto text-muted-foreground mb-3 md:mb-4" />
+                      <p className="text-sm md:text-base text-muted-foreground">Aucune commande</p>
                     </div>
                   ) : (
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                       {orders.map((order) => (
-                        <div key={order.id} className="border rounded-lg p-4">
-                          <div className="flex justify-between items-start">
+                        <div key={order.id} className="border rounded-lg p-3 md:p-4">
+                          <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                             <div>
-                              <p className="font-semibold">Commande #{order.order_number}</p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="font-semibold text-sm md:text-base">Commande #{order.order_number}</p>
+                              <p className="text-xs md:text-sm text-muted-foreground">
                                 {new Date(order.created_at).toLocaleDateString("fr-FR")}
                               </p>
                             </div>
-                            <div className="text-right">
-                              <p className="font-bold">{order.total_amount.toFixed(2)} {order.currency}</p>
-                              <p className="text-sm text-muted-foreground capitalize">{order.status}</p>
+                            <div className="text-left sm:text-right">
+                              <p className="font-bold text-sm md:text-base">{order.total_amount.toFixed(2)} {order.currency}</p>
+                              <p className="text-xs md:text-sm text-muted-foreground capitalize">{order.status}</p>
                             </div>
                           </div>
                         </div>
@@ -301,70 +304,70 @@ const Account = () => {
               </Card>
             </TabsContent>
 
-            <TabsContent value="addresses" className="mt-6">
+            <TabsContent value="addresses" className="mt-4 md:mt-6">
               <Card>
-                <CardHeader>
-                  <div className="flex justify-between items-center">
+                <CardHeader className="p-4 md:p-6">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                     <div>
-                      <CardTitle>Mes adresses</CardTitle>
-                      <CardDescription>
+                      <CardTitle className="text-base md:text-lg">Mes adresses</CardTitle>
+                      <CardDescription className="text-xs md:text-sm">
                         Gérez vos adresses de livraison
                       </CardDescription>
                     </div>
-                    <Button onClick={() => setShowAddAddress(!showAddAddress)}>
-                      <Plus className="mr-2 h-4 w-4" />
+                    <Button onClick={() => setShowAddAddress(!showAddAddress)} size="sm" className="text-xs md:text-sm">
+                      <Plus className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
                       Ajouter
                     </Button>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="p-4 md:p-6 pt-0 md:pt-0 space-y-3 md:space-y-4">
                   {showAddAddress && (
-                    <form onSubmit={handleAddAddress} className="border rounded-lg p-4 space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
+                    <form onSubmit={handleAddAddress} className="border rounded-lg p-3 md:p-4 space-y-3 md:space-y-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                         <div>
-                          <Label htmlFor="label">Libellé</Label>
-                          <Input id="label" name="label" placeholder="Maison, Bureau..." required />
+                          <Label htmlFor="label" className="text-xs md:text-sm">Libellé</Label>
+                          <Input id="label" name="label" placeholder="Maison, Bureau..." required className="text-sm" />
                         </div>
                         <div>
-                          <Label htmlFor="country">Pays</Label>
-                          <Input id="country" name="country" defaultValue="France" required />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="first_name">Prénom</Label>
-                          <Input id="first_name" name="first_name" required />
-                        </div>
-                        <div>
-                          <Label htmlFor="last_name">Nom</Label>
-                          <Input id="last_name" name="last_name" required />
+                          <Label htmlFor="country" className="text-xs md:text-sm">Pays</Label>
+                          <Input id="country" name="country" defaultValue="France" required className="text-sm" />
                         </div>
                       </div>
-                      <div>
-                        <Label htmlFor="address_line1">Adresse</Label>
-                        <Input id="address_line1" name="address_line1" required />
-                      </div>
-                      <div>
-                        <Label htmlFor="address_line2">Complément d'adresse</Label>
-                        <Input id="address_line2" name="address_line2" />
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                         <div>
-                          <Label htmlFor="postal_code">Code postal</Label>
-                          <Input id="postal_code" name="postal_code" required />
+                          <Label htmlFor="first_name" className="text-xs md:text-sm">Prénom</Label>
+                          <Input id="first_name" name="first_name" required className="text-sm" />
                         </div>
                         <div>
-                          <Label htmlFor="city">Ville</Label>
-                          <Input id="city" name="city" required />
+                          <Label htmlFor="last_name" className="text-xs md:text-sm">Nom</Label>
+                          <Input id="last_name" name="last_name" required className="text-sm" />
                         </div>
                       </div>
                       <div>
-                        <Label htmlFor="phone">Téléphone</Label>
-                        <Input id="phone" name="phone" type="tel" />
+                        <Label htmlFor="address_line1" className="text-xs md:text-sm">Adresse</Label>
+                        <Input id="address_line1" name="address_line1" required className="text-sm" />
+                      </div>
+                      <div>
+                        <Label htmlFor="address_line2" className="text-xs md:text-sm">Complément d'adresse</Label>
+                        <Input id="address_line2" name="address_line2" className="text-sm" />
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                        <div>
+                          <Label htmlFor="postal_code" className="text-xs md:text-sm">Code postal</Label>
+                          <Input id="postal_code" name="postal_code" required className="text-sm" />
+                        </div>
+                        <div>
+                          <Label htmlFor="city" className="text-xs md:text-sm">Ville</Label>
+                          <Input id="city" name="city" required className="text-sm" />
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="phone" className="text-xs md:text-sm">Téléphone</Label>
+                        <Input id="phone" name="phone" type="tel" className="text-sm" />
                       </div>
                       <div className="flex gap-2">
-                        <Button type="submit">Enregistrer</Button>
-                        <Button type="button" variant="outline" onClick={() => setShowAddAddress(false)}>
+                        <Button type="submit" size="sm" className="text-xs md:text-sm">Enregistrer</Button>
+                        <Button type="button" variant="outline" size="sm" className="text-xs md:text-sm" onClick={() => setShowAddAddress(false)}>
                           Annuler
                         </Button>
                       </div>
@@ -372,29 +375,29 @@ const Account = () => {
                   )}
 
                   {addresses.length === 0 ? (
-                    <div className="text-center py-8">
-                      <MapPin className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                      <p className="text-muted-foreground">Aucune adresse enregistrée</p>
+                    <div className="text-center py-6 md:py-8">
+                      <MapPin className="h-10 w-10 md:h-12 md:w-12 mx-auto text-muted-foreground mb-3 md:mb-4" />
+                      <p className="text-sm md:text-base text-muted-foreground">Aucune adresse enregistrée</p>
                     </div>
                   ) : (
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                       {addresses.map((address) => (
-                        <div key={address.id} className="border rounded-lg p-4">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <p className="font-semibold">{address.label}</p>
-                              <p className="text-sm">
+                        <div key={address.id} className="border rounded-lg p-3 md:p-4">
+                          <div className="flex justify-between items-start gap-2">
+                            <div className="min-w-0 flex-1">
+                              <p className="font-semibold text-sm md:text-base">{address.label}</p>
+                              <p className="text-xs md:text-sm">
                                 {address.first_name} {address.last_name}
                               </p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-xs md:text-sm text-muted-foreground">
                                 {address.address_line1}
                                 {address.address_line2 && `, ${address.address_line2}`}
                               </p>
-                              <p className="text-sm text-muted-foreground">
+                              <p className="text-xs md:text-sm text-muted-foreground">
                                 {address.postal_code} {address.city}, {address.country}
                               </p>
                               {address.phone && (
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-xs md:text-sm text-muted-foreground">
                                   Tél: {address.phone}
                                 </p>
                               )}
@@ -402,9 +405,10 @@ const Account = () => {
                             <Button
                               variant="ghost"
                               size="icon"
+                              className="h-7 w-7 md:h-9 md:w-9 flex-shrink-0"
                               onClick={() => handleDeleteAddress(address.id)}
                             >
-                              <Trash2 className="h-4 w-4" />
+                              <Trash2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
                             </Button>
                           </div>
                         </div>
