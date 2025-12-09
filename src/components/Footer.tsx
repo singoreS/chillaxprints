@@ -4,20 +4,20 @@ import { Linkedin, Instagram } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="border-t-2 border-border/50 bg-gradient-to-b from-background to-muted/30">
-      <div className="container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 className="text-2xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-4">
+      <div className="container py-8 md:py-12 lg:py-16 px-4 md:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="col-span-2 md:col-span-1">
+            <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-3 md:mb-4">
               ChillaxPrints
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
               Des vêtements pour les esprits drôles et paresseux. Lazy but Legendary 🎯
             </p>
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-4 text-foreground">Navigation</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">Navigation</h4>
+            <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm">
               <li>
                 <Link to="/boutique" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
                   Boutique
@@ -37,8 +37,8 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold text-lg mb-4 text-foreground">Informations</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">Informations</h4>
+            <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm">
               <li>
                 <Link to="/guide-des-tailles" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
                   Guide des Tailles
@@ -51,7 +51,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/retours" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Retours & Remboursements
+                  Retours
                 </Link>
               </li>
               <li>
@@ -72,30 +72,30 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-bold text-lg mb-4 text-foreground">Suivez-nous</h4>
-            <div className="flex space-x-4">
+          <div className="col-span-2 md:col-span-1">
+            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">Suivez-nous</h4>
+            <div className="flex space-x-3 md:space-x-4">
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 shadow-[var(--shadow-soft)]"
+                className="p-2 md:p-3 rounded-full bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 shadow-[var(--shadow-soft)]"
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="h-4 w-4 md:h-5 md:w-5" />
               </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 shadow-[var(--shadow-soft)]"
+                className="p-2 md:p-3 rounded-full bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 shadow-[var(--shadow-soft)]"
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram className="h-4 w-4 md:h-5 md:w-5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
+        <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t text-center text-xs md:text-sm text-muted-foreground">
           <p>© 2024 ChillaxPrints. Tous droits réservés.</p>
         </div>
       </div>
