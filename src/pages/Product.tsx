@@ -135,21 +135,21 @@ const Product = () => {
       />
       <Header />
       
-      <main className="flex-1 py-6 md:py-8 lg:py-10">
-        <div className="container">
+      <main className="flex-1 py-4 md:py-6 lg:py-10">
+        <div className="container px-4 md:px-6">
           {/* Breadcrumb */}
-          <div className="mb-6 md:mb-8 text-sm text-muted-foreground">
+          <div className="mb-4 md:mb-6 lg:mb-8 text-xs md:text-sm text-muted-foreground">
             <Link to="/" className="hover:text-primary transition-colors">Accueil</Link>
             {" / "}
             <Link to="/boutique" className="hover:text-primary transition-colors">Boutique</Link>
             {" / "}
-            <span className="text-foreground">{product.title}</span>
+            <span className="text-foreground line-clamp-1">{product.title}</span>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12">
             {/* Product Images Gallery */}
-            <div className="space-y-4 animate-fade-in">
-              <div className="aspect-square overflow-hidden rounded-2xl border-2 border-border/50 bg-secondary/20 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 relative group">
+            <div className="space-y-3 md:space-y-4 animate-fade-in">
+              <div className="aspect-square overflow-hidden rounded-xl md:rounded-2xl border-2 border-border/50 bg-secondary/20 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 relative group">
                 <img
                   src={mainImage || "/placeholder.svg"}
                   alt={product.title}
@@ -158,7 +158,7 @@ const Product = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-4 right-4 h-10 w-10 md:h-12 md:w-12 bg-background/90 hover:bg-background backdrop-blur-sm shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-110"
+                  className="absolute top-2 right-2 md:top-4 md:right-4 h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 bg-background/90 hover:bg-background backdrop-blur-sm shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-110"
                   onClick={() => {
                     const productWrapper: ShopifyProduct = { node: product };
                     if (isInWishlist(product.id)) {
@@ -171,7 +171,7 @@ const Product = () => {
                   }}
                 >
                   <Heart
-                    className={`w-5 h-5 md:w-6 md:h-6 transition-all duration-300 ${
+                    className={`w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-300 ${
                       isInWishlist(product.id)
                         ? "fill-accent text-accent scale-110"
                         : "text-foreground"
@@ -180,12 +180,12 @@ const Product = () => {
                 </Button>
               </div>
               {product.images?.edges && product.images.edges.length > 1 && (
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-4 gap-2 md:gap-3">
                   {product.images.edges.map((image, index) => (
                     <button
                       key={index}
                       onClick={() => setMainImage(image.node.url)}
-                      className={`aspect-square overflow-hidden rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+                      className={`aspect-square overflow-hidden rounded-lg md:rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
                         mainImage === image.node.url
                           ? "border-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] scale-105"
                           : "border-border/50 hover:border-primary/50 shadow-[var(--shadow-soft)]"
@@ -203,22 +203,22 @@ const Product = () => {
             </div>
 
             {/* Product Info */}
-            <div className="space-y-5 md:space-y-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="space-y-4">
+            <div className="space-y-4 md:space-y-5 lg:space-y-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="space-y-3 md:space-y-4">
                 <div className="flex items-center gap-2 flex-wrap">
                   {product.productType && (
-                    <Badge variant="secondary" className="text-xs md:text-sm px-3 py-1 shadow-[var(--shadow-soft)]">
+                    <Badge variant="secondary" className="text-[10px] md:text-xs lg:text-sm px-2 md:px-3 py-0.5 md:py-1 shadow-[var(--shadow-soft)]">
                       {product.productType}
                     </Badge>
                   )}
                   {selectedVariant?.availableForSale ? (
-                    <Badge className="text-xs md:text-sm px-3 py-1 bg-green-500 shadow-[var(--shadow-soft)]">En stock</Badge>
+                    <Badge className="text-[10px] md:text-xs lg:text-sm px-2 md:px-3 py-0.5 md:py-1 bg-green-500 shadow-[var(--shadow-soft)]">En stock</Badge>
                   ) : (
-                    <Badge variant="destructive" className="text-xs md:text-sm px-3 py-1 shadow-[var(--shadow-soft)]">Rupture de stock</Badge>
+                    <Badge variant="destructive" className="text-[10px] md:text-xs lg:text-sm px-2 md:px-3 py-0.5 md:py-1 shadow-[var(--shadow-soft)]">Rupture de stock</Badge>
                   )}
                 </div>
-                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">{product.title}</h1>
-                <p className="text-3xl md:text-5xl font-bold text-primary">
+                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">{product.title}</h1>
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary">
                   {selectedVariant ? (
                     <>
                       {parseFloat(selectedVariant.price.amount).toFixed(2)}€
@@ -232,8 +232,8 @@ const Product = () => {
               </div>
 
               {product.description && (
-                <div className="p-5 md:p-6 rounded-xl bg-secondary/30 border border-border/50">
-                  <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                <div className="p-3 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/30 border border-border/50">
+                  <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
                     {product.description}
                   </p>
                 </div>
@@ -241,17 +241,17 @@ const Product = () => {
 
               {/* Product Options */}
               {product.options && product.options.length > 0 && (
-                <div className="space-y-5 p-5 md:p-6 rounded-xl bg-secondary/20 border border-border/50">
+                <div className="space-y-4 md:space-y-5 p-3 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/50">
                   {product.options.map((option) => (
-                    <div key={option.name} className="space-y-4">
-                      <Label className="text-base md:text-lg font-semibold">
+                    <div key={option.name} className="space-y-2 md:space-y-3">
+                      <Label className="text-sm md:text-base lg:text-lg font-semibold">
                         {option.name}: <span className="text-primary">{selectedOptions[option.name]}</span>
                       </Label>
                       <RadioGroup
                         value={selectedOptions[option.name] || ""}
                         onValueChange={(value) => handleOptionChange(option.name, value)}
                       >
-                        <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
                           {option.values.map((value) => (
                             <div key={value}>
                               <RadioGroupItem
@@ -261,7 +261,7 @@ const Product = () => {
                               />
                               <Label
                                 htmlFor={`${option.name}-${value}`}
-                                className="flex items-center justify-center rounded-xl border-2 border-border bg-background p-3 md:p-4 text-sm md:text-base hover:bg-accent hover:border-primary transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary peer-data-[state=checked]:font-semibold peer-data-[state=checked]:scale-105"
+                                className="flex items-center justify-center rounded-lg md:rounded-xl border-2 border-border bg-background p-2 md:p-3 lg:p-4 text-xs md:text-sm lg:text-base hover:bg-accent hover:border-primary transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary peer-data-[state=checked]:font-semibold peer-data-[state=checked]:scale-105"
                               >
                                 {value}
                               </Label>
@@ -275,23 +275,23 @@ const Product = () => {
               )}
 
               {/* Quantity */}
-              <div className="space-y-4 p-5 md:p-6 rounded-xl bg-secondary/20 border border-border/50">
-                <Label className="text-base md:text-lg font-semibold">Quantité</Label>
-                <div className="flex items-center gap-4">
+              <div className="space-y-3 md:space-y-4 p-3 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/50">
+                <Label className="text-sm md:text-base lg:text-lg font-semibold">Quantité</Label>
+                <div className="flex items-center gap-3 md:gap-4">
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="h-12 w-12 md:h-14 md:w-14 rounded-xl text-lg"
+                    className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-lg md:rounded-xl text-base md:text-lg"
                   >
                     -
                   </Button>
-                  <span className="text-2xl md:text-3xl font-bold w-16 md:w-20 text-center text-primary">{quantity}</span>
+                  <span className="text-xl md:text-2xl lg:text-3xl font-bold w-12 md:w-16 lg:w-20 text-center text-primary">{quantity}</span>
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="h-12 w-12 md:h-14 md:w-14 rounded-xl text-lg"
+                    className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-lg md:rounded-xl text-base md:text-lg"
                   >
                     +
                   </Button>
@@ -303,44 +303,44 @@ const Product = () => {
                 size="lg"
                 onClick={handleAddToCart}
                 disabled={!selectedVariant?.availableForSale}
-                className="w-full h-14 md:h-16 text-base md:text-lg rounded-xl shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300"
+                className="w-full h-12 md:h-14 lg:h-16 text-sm md:text-base lg:text-lg rounded-lg md:rounded-xl shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300"
               >
-                <ShoppingCart className="mr-2 h-5 w-5 md:h-6 md:w-6" />
+                <ShoppingCart className="mr-2 h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6" />
                 {selectedVariant?.availableForSale ? "Ajouter au panier" : "Rupture de stock"}
               </Button>
 
               {/* Size Guide Link */}
               <Link
                 to="/guide-des-tailles"
-                className="flex items-center gap-3 p-4 rounded-xl bg-primary/5 border border-primary/20 hover:bg-primary/10 hover:border-primary/40 transition-all duration-300 group"
+                className="flex items-center gap-2 md:gap-3 p-3 md:p-4 rounded-lg md:rounded-xl bg-primary/5 border border-primary/20 hover:bg-primary/10 hover:border-primary/40 transition-all duration-300 group"
               >
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Ruler className="w-5 h-5 text-primary" />
+                <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                  <Ruler className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                 </div>
-                <div>
-                  <p className="font-semibold text-sm text-foreground">Besoin d'aide pour la taille ?</p>
-                  <p className="text-muted-foreground text-xs">Consulte notre guide des tailles →</p>
+                <div className="min-w-0">
+                  <p className="font-semibold text-xs md:text-sm text-foreground">Besoin d'aide pour la taille ?</p>
+                  <p className="text-muted-foreground text-[10px] md:text-xs truncate">Consulte notre guide des tailles →</p>
                 </div>
               </Link>
 
               {/* Product Features */}
-              <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border/50">
-                <div className="flex items-center gap-3 p-4 md:p-5 rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all">
-                  <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-lg md:text-xl">
+              <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4 pt-4 md:pt-6 border-t border-border/50">
+                <div className="flex items-center gap-2 md:gap-3 p-2.5 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all">
+                  <div className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-sm md:text-lg lg:text-xl flex-shrink-0">
                     🚚
                   </div>
-                  <div>
-                    <p className="font-semibold text-xs md:text-sm">Livraison gratuite</p>
-                    <p className="text-muted-foreground text-[10px] md:text-xs">Dès 50€ d'achat</p>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-[10px] md:text-xs lg:text-sm">Livraison gratuite</p>
+                    <p className="text-muted-foreground text-[9px] md:text-[10px] lg:text-xs">Dès 50€ d'achat</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-4 md:p-5 rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all">
-                  <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-lg md:text-xl">
+                <div className="flex items-center gap-2 md:gap-3 p-2.5 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all">
+                  <div className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-sm md:text-lg lg:text-xl flex-shrink-0">
                     🔄
                   </div>
-                  <div>
-                    <p className="font-semibold text-xs md:text-sm">Retours faciles</p>
-                    <p className="text-muted-foreground text-[10px] md:text-xs">30 jours</p>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-[10px] md:text-xs lg:text-sm">Retours faciles</p>
+                    <p className="text-muted-foreground text-[9px] md:text-[10px] lg:text-xs">30 jours</p>
                   </div>
                 </div>
               </div>
