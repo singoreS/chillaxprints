@@ -7,9 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, ExternalLink } from "lucide-react";
-
-const SHOPIFY_STORE_DOMAIN = "lazy-legend-store-dbhdg.myshopify.com";
+import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette } from "lucide-react";
+import { isProductCustomizable } from "@/lib/customizableProducts";
 import { getProductByHandle, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
@@ -312,23 +311,20 @@ const Product = () => {
                   {selectedVariant?.availableForSale ? "Ajouter au panier" : "Rupture de stock"}
                 </Button>
                 
-                {/* Personalization Button */}
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="flex-1 h-12 md:h-14 lg:h-16 text-sm md:text-base lg:text-lg rounded-lg md:rounded-xl border-2 border-primary/50 hover:border-primary hover:bg-primary/5 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300 group"
-                >
-                  <a 
-                    href={`https://${SHOPIFY_STORE_DOMAIN}/products/${product.handle}?channel=online_store`} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                {/* Personalization Button - Only for customizable products */}
+                {isProductCustomizable(product.handle) && (
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    asChild
+                    className="flex-1 h-12 md:h-14 lg:h-16 text-sm md:text-base lg:text-lg rounded-lg md:rounded-xl border-2 border-primary/50 hover:border-primary hover:bg-primary/5 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300 group"
                   >
-                    <Palette className="mr-2 h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6 text-primary group-hover:scale-110 transition-transform" />
-                    <span>Personnaliser</span>
-                    <ExternalLink className="ml-2 h-3 w-3 md:h-4 md:w-4 opacity-60" />
-                  </a>
-                </Button>
+                    <Link to="/personnalisation">
+                      <Palette className="mr-2 h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6 text-primary group-hover:scale-110 transition-transform" />
+                      <span>Personnaliser</span>
+                    </Link>
+                  </Button>
+                )}
               </div>
 
               {/* Size Guide Link */}
