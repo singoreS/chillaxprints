@@ -69,18 +69,23 @@ const Customization = () => {
   const partners = [
     {
       name: "Printify",
-      description: "Notre partenaire principal pour l'impression à la demande. Qualité professionnelle et large choix de produits.",
+      description: "Notre partenaire principal pour l'impression à la demande. Qualité professionnelle, personnalisation avancée et large choix de produits.",
       logo: "🖨️",
     },
     {
-      name: "Shopify",
-      description: "Plateforme e-commerce sécurisée pour gérer tes commandes personnalisées.",
-      logo: "🛒",
+      name: "Printful",
+      description: "Fournisseur premium avec entrepôts en Europe et USA. Idéal pour des livraisons rapides et une qualité exceptionnelle.",
+      logo: "👕",
     },
     {
-      name: "Fournisseurs Premium",
-      description: "Réseau de fournisseurs certifiés pour des finitions et matériaux de qualité supérieure.",
-      logo: "⭐",
+      name: "Gelato",
+      description: "Production locale dans 30+ pays. Réduction de l'empreinte carbone et livraisons express partout dans le monde.",
+      logo: "🌍",
+    },
+    {
+      name: "Shopify",
+      description: "Plateforme e-commerce sécurisée pour gérer tes commandes personnalisées et paiements.",
+      logo: "🛒",
     },
   ];
 

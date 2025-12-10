@@ -24,6 +24,7 @@ import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { LoyaltyInfoCard } from "@/components/LoyaltyCard";
+import { useAffiliateTracking } from "@/hooks/useAffiliateTracking";
 import heroImage from "@/assets/hero-chill.jpg";
 import lifestyle1 from "@/assets/lifestyle-1.jpg";
 import lifestyle2 from "@/assets/lifestyle-2.jpg";
