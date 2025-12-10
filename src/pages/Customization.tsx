@@ -68,23 +68,24 @@ const Customization = () => {
 
   const partners = [
     {
+      name: "Gelato",
+      description: "Notre partenaire principal pour la personnalisation. Production locale dans 30+ pays, outil de personnalisation avancé et livraisons express.",
+      logo: "🌍",
+      highlight: true,
+    },
+    {
       name: "Printify",
-      description: "Notre partenaire principal pour l'impression à la demande. Qualité professionnelle, personnalisation avancée et large choix de produits.",
+      description: "Impression à la demande de haute qualité avec un large choix de produits et finitions professionnelles.",
       logo: "🖨️",
     },
     {
       name: "Printful",
-      description: "Fournisseur premium avec entrepôts en Europe et USA. Idéal pour des livraisons rapides et une qualité exceptionnelle.",
+      description: "Fournisseur premium avec entrepôts en Europe et USA. Idéal pour des livraisons rapides.",
       logo: "👕",
     },
     {
-      name: "Gelato",
-      description: "Production locale dans 30+ pays. Réduction de l'empreinte carbone et livraisons express partout dans le monde.",
-      logo: "🌍",
-    },
-    {
       name: "Shopify",
-      description: "Plateforme e-commerce sécurisée pour gérer tes commandes personnalisées et paiements.",
+      description: "Plateforme e-commerce sécurisée pour gérer tes commandes et paiements.",
       logo: "🛒",
     },
   ];
@@ -142,7 +143,7 @@ const Customization = () => {
                 Crée ton style <span className="text-primary">unique</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8">
-                Des vêtements et accessoires à ton image. Personnalise tout ce que tu veux avec nos partenaires de confiance comme Printify.
+                Des vêtements et accessoires à ton image. Personnalise tout ce que tu veux grâce à notre partenaire <span className="font-semibold text-primary">Gelato</span> et son outil de personnalisation avancé.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#devis">
