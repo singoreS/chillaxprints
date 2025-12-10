@@ -25,6 +25,7 @@ import Shipping from "./pages/Shipping";
 import SizeGuide from "./pages/SizeGuide";
 import FAQ from "./pages/FAQ";
 import Customization from "./pages/Customization";
+import Affiliate from "./pages/Affiliate";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => (
               <Route path="/guide-des-tailles" element={<SizeGuide />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/personnalisation" element={<Customization />} />
+              <Route path="/affiliation" element={<Affiliate />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
