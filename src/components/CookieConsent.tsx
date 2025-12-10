@@ -10,6 +10,11 @@ interface CookiePreferences {
   essential: boolean;
   analytics: boolean;
   marketing: boolean;
+  socialMedia: {
+    facebook: boolean;
+    instagram: boolean;
+    tiktok: boolean;
+  };
 }
 
 const COOKIE_CONSENT_KEY = "chillax-cookie-consent";
@@ -22,6 +27,11 @@ export const CookieConsent = () => {
     essential: true,
     analytics: false,
     marketing: false,
+    socialMedia: {
+      facebook: false,
+      instagram: false,
+      tiktok: false,
+    },
   });
 
   useEffect(() => {
@@ -38,6 +48,11 @@ export const CookieConsent = () => {
       essential: true,
       analytics: true,
       marketing: true,
+      socialMedia: {
+        facebook: true,
+        instagram: true,
+        tiktok: true,
+      },
     };
     saveConsent(allAccepted);
   };
@@ -47,6 +62,11 @@ export const CookieConsent = () => {
       essential: true,
       analytics: false,
       marketing: false,
+      socialMedia: {
+        facebook: false,
+        instagram: false,
+        tiktok: false,
+      },
     };
     saveConsent(essentialOnly);
   };
@@ -63,11 +83,18 @@ export const CookieConsent = () => {
     // Here you would typically initialize analytics/marketing based on preferences
     if (prefs.analytics) {
       console.log("Analytics cookies enabled");
-      // Initialize Google Analytics, etc.
     }
     if (prefs.marketing) {
       console.log("Marketing cookies enabled");
-      // Initialize Facebook Pixel, etc.
+    }
+    if (prefs.socialMedia.facebook) {
+      console.log("Facebook data sharing enabled");
+    }
+    if (prefs.socialMedia.instagram) {
+      console.log("Instagram data sharing enabled");
+    }
+    if (prefs.socialMedia.tiktok) {
+      console.log("TikTok data sharing enabled");
     }
   };
 
@@ -197,6 +224,76 @@ export const CookieConsent = () => {
                       setPreferences(prev => ({ ...prev, marketing: checked }))
                     }
                   />
+                </div>
+
+                {/* Social Media Data Sharing */}
+                <div className="space-y-3">
+                  <Label className="font-medium text-foreground block">
+                    Partage de données réseaux sociaux
+                  </Label>
+                  
+                  {/* Facebook */}
+                  <div className="flex items-start justify-between gap-4 p-3 bg-secondary/20 rounded-lg ml-2">
+                    <div className="flex-1">
+                      <Label className="font-medium text-foreground text-sm">
+                        Facebook
+                      </Label>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Partage des données avec Facebook pour des publicités ciblées.
+                      </p>
+                    </div>
+                    <Switch 
+                      checked={preferences.socialMedia.facebook}
+                      onCheckedChange={(checked) => 
+                        setPreferences(prev => ({ 
+                          ...prev, 
+                          socialMedia: { ...prev.socialMedia, facebook: checked }
+                        }))
+                      }
+                    />
+                  </div>
+
+                  {/* Instagram */}
+                  <div className="flex items-start justify-between gap-4 p-3 bg-secondary/20 rounded-lg ml-2">
+                    <div className="flex-1">
+                      <Label className="font-medium text-foreground text-sm">
+                        Instagram
+                      </Label>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Partage des données avec Instagram pour des publicités ciblées.
+                      </p>
+                    </div>
+                    <Switch 
+                      checked={preferences.socialMedia.instagram}
+                      onCheckedChange={(checked) => 
+                        setPreferences(prev => ({ 
+                          ...prev, 
+                          socialMedia: { ...prev.socialMedia, instagram: checked }
+                        }))
+                      }
+                    />
+                  </div>
+
+                  {/* TikTok */}
+                  <div className="flex items-start justify-between gap-4 p-3 bg-secondary/20 rounded-lg ml-2">
+                    <div className="flex-1">
+                      <Label className="font-medium text-foreground text-sm">
+                        TikTok
+                      </Label>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Partage des données avec TikTok pour des publicités ciblées.
+                      </p>
+                    </div>
+                    <Switch 
+                      checked={preferences.socialMedia.tiktok}
+                      onCheckedChange={(checked) => 
+                        setPreferences(prev => ({ 
+                          ...prev, 
+                          socialMedia: { ...prev.socialMedia, tiktok: checked }
+                        }))
+                      }
+                    />
+                  </div>
                 </div>
               </div>
               
