@@ -43,11 +43,11 @@ const Header = () => {
       <PromoBanner />
       <header className="sticky top-0 z-50 w-full border-b-2 border-border/50 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-[var(--shadow-soft)]">
         <div className="container flex h-16 md:h-20 items-center justify-between gap-2 md:gap-4 px-3 md:px-6">
-        <Link to="/" className="flex items-center flex-shrink-0 group">
+        <Link to="/" className="flex items-center flex-shrink-0 group min-w-0">
           <img 
             src={logo} 
             alt="ChillaxPrints" 
-            className="h-10 sm:h-12 md:h-14 w-auto group-hover:scale-105 transition-transform duration-300"
+            className="h-8 xs:h-9 sm:h-10 md:h-12 lg:h-14 w-auto max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-none object-contain group-hover:scale-105 transition-transform duration-300"
           />
         </Link>
 

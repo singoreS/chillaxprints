@@ -11,7 +11,7 @@ const Footer = () => {
             <img 
               src={logo} 
               alt="ChillaxPrints" 
-              className="h-12 md:h-14 w-auto mb-3 md:mb-4"
+              className="h-10 sm:h-12 md:h-14 w-auto max-w-[140px] sm:max-w-[160px] md:max-w-none object-contain mb-3 md:mb-4"
             />
             <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
               Des vêtements pour les esprits drôles et paresseux. Lazy but Legendary 🎯
