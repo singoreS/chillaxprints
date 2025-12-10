@@ -1,1 +1,7 @@
 project_id = "pwckvvfrqgesirdtmsqy"
+
+[functions.generate-order-token]
+verify_jwt = true
+
+[functions.track-referral]
+verify_jwt = false
