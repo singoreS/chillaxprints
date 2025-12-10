@@ -35,13 +35,31 @@ const Shop = () => {
   const addToCart = useCartStore(state => state.addItem);
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
 
+  // Mapping des types Shopify vers les catégories du site
+  const categoryMapping: Record<string, string[]> = {
+    "T-Shirts": ["T-Shirt", "Tee", "Tshirt"],
+    "Hoodies": ["Hoodie", "Sweatshirt", "Crewneck", "Pull", "Sweater"],
+    "Bonnets": ["Bonnet", "Beanie", "Hat", "Cap"],
+    "Chaussures": ["Shoes", "Sneakers", "Chaussures", "Footwear"],
+  };
+
   const categories = [
     { value: "all", label: "Tous les produits" },
     { value: "T-Shirts", label: "T-Shirts" },
-    { value: "Hoodies", label: "Hoodies" },
+    { value: "Hoodies", label: "Hoodies & Pulls" },
     { value: "Bonnets", label: "Bonnets" },
     { value: "Chaussures", label: "Chaussures" },
   ];
+
+  // Fonction pour vérifier si un produit appartient à une catégorie
+  const productMatchesCategory = (productType: string, category: string): boolean => {
+    const types = categoryMapping[category];
+    if (!types) return false;
+    return types.some(type => 
+      productType.toLowerCase().includes(type.toLowerCase()) ||
+      type.toLowerCase().includes(productType.toLowerCase())
+    );
+  };
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -61,9 +79,11 @@ const Shop = () => {
   useEffect(() => {
     let result = [...products];
 
-    // Filter by category
+    // Filter by category using intelligent mapping
     if (selectedCategory !== "all") {
-      result = result.filter(product => product.node.productType === selectedCategory);
+      result = result.filter(product => 
+        productMatchesCategory(product.node.productType || "", selectedCategory)
+      );
     }
 
     // Filter by price
