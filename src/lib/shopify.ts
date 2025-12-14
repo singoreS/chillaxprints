@@ -40,6 +40,10 @@ export interface ShopifyProduct {
             name: string;
             value: string;
           }>;
+          image?: {
+            url: string;
+            altText: string | null;
+          };
         };
       }>;
     };
@@ -74,7 +78,7 @@ const STOREFRONT_QUERY = `
               }
             }
           }
-          variants(first: 10) {
+          variants(first: 100) {
             edges {
               node {
                 id
@@ -87,6 +91,10 @@ const STOREFRONT_QUERY = `
                 selectedOptions {
                   name
                   value
+                }
+                image {
+                  url
+                  altText
                 }
               }
             }
@@ -123,7 +131,7 @@ const PRODUCT_BY_HANDLE_QUERY = `
           }
         }
       }
-      variants(first: 10) {
+      variants(first: 100) {
         edges {
           node {
             id
@@ -136,6 +144,10 @@ const PRODUCT_BY_HANDLE_QUERY = `
             selectedOptions {
               name
               value
+            }
+            image {
+              url
+              altText
             }
           }
         }
