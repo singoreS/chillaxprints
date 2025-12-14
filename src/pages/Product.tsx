@@ -66,6 +66,19 @@ const Product = () => {
     
     if (variant) {
       setSelectedVariant(variant.node);
+      
+      // Update main image based on the selected variant
+      // Try to find variant-specific image or use the variant's image if available
+      if (variant.node.image?.url) {
+        setMainImage(variant.node.image.url);
+      } else {
+        // Find image index based on variant position
+        const variantIndex = product?.variants.edges.findIndex(v => v.node.id === variant.node.id) || 0;
+        const imageAtIndex = product?.images?.edges?.[variantIndex]?.node?.url;
+        if (imageAtIndex) {
+          setMainImage(imageAtIndex);
+        }
+      }
     }
   };
 
