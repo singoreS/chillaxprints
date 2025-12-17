@@ -148,10 +148,10 @@ const Product = () => {
       />
       <Header />
       
-      <main className="flex-1 py-4 md:py-6 lg:py-10">
+      <main className="flex-1 py-3 md:py-4 lg:py-6">
         <div className="container px-4 md:px-6">
           {/* Breadcrumb */}
-          <div className="mb-4 md:mb-6 lg:mb-8 text-xs md:text-sm text-muted-foreground">
+          <div className="mb-3 md:mb-4 text-xs md:text-sm text-muted-foreground">
             <Link to="/" className="hover:text-primary transition-colors">Accueil</Link>
             {" / "}
             <Link to="/boutique" className="hover:text-primary transition-colors">Boutique</Link>
@@ -159,7 +159,7 @@ const Product = () => {
             <span className="text-foreground line-clamp-1">{product.title}</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8">
             {/* Product Images Gallery */}
             <div className="space-y-3 md:space-y-4 animate-fade-in">
               <div className="aspect-square overflow-hidden rounded-xl md:rounded-2xl border-2 border-border/50 bg-secondary/20 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 relative group">
@@ -216,22 +216,22 @@ const Product = () => {
             </div>
 
             {/* Product Info */}
-            <div className="space-y-4 md:space-y-5 lg:space-y-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="space-y-3 md:space-y-4">
+            <div className="space-y-3 md:space-y-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="space-y-2 md:space-y-3">
                 <div className="flex items-center gap-2 flex-wrap">
                   {product.productType && (
-                    <Badge variant="secondary" className="text-[10px] md:text-xs lg:text-sm px-2 md:px-3 py-0.5 md:py-1 shadow-[var(--shadow-soft)]">
+                    <Badge variant="secondary" className="text-[10px] md:text-xs px-2 py-0.5 shadow-[var(--shadow-soft)]">
                       {product.productType}
                     </Badge>
                   )}
                   {selectedVariant?.availableForSale ? (
-                    <Badge className="text-[10px] md:text-xs lg:text-sm px-2 md:px-3 py-0.5 md:py-1 bg-green-500 shadow-[var(--shadow-soft)]">En stock</Badge>
+                    <Badge className="text-[10px] md:text-xs px-2 py-0.5 bg-green-500 shadow-[var(--shadow-soft)]">En stock</Badge>
                   ) : (
-                    <Badge variant="destructive" className="text-[10px] md:text-xs lg:text-sm px-2 md:px-3 py-0.5 md:py-1 shadow-[var(--shadow-soft)]">Rupture de stock</Badge>
+                    <Badge variant="destructive" className="text-[10px] md:text-xs px-2 py-0.5 shadow-[var(--shadow-soft)]">Rupture de stock</Badge>
                   )}
                 </div>
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight">{product.title}</h1>
-                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary">
+                <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight">{product.title}</h1>
+                <p className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">
                   {selectedVariant ? (
                     <>
                       {parseFloat(selectedVariant.price.amount).toFixed(2)}€
@@ -245,8 +245,8 @@ const Product = () => {
               </div>
 
               {product.description && (
-                <div className="p-3 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/30 border border-border/50">
-                  <p className="text-sm md:text-base lg:text-lg text-muted-foreground leading-relaxed">
+                <div className="p-2 md:p-3 rounded-lg bg-secondary/30 border border-border/50">
+                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed line-clamp-3">
                     {product.description}
                   </p>
                 </div>
@@ -254,17 +254,17 @@ const Product = () => {
 
               {/* Product Options */}
               {product.options && product.options.length > 0 && (
-                <div className="space-y-4 md:space-y-5 p-3 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/50">
+                <div className="space-y-3 p-2 md:p-3 rounded-lg bg-secondary/20 border border-border/50">
                   {product.options.map((option) => (
-                    <div key={option.name} className="space-y-2 md:space-y-3">
-                      <Label className="text-sm md:text-base lg:text-lg font-semibold">
+                    <div key={option.name} className="space-y-1.5">
+                      <Label className="text-xs md:text-sm font-semibold">
                         {option.name}: <span className="text-primary">{selectedOptions[option.name]}</span>
                       </Label>
                       <RadioGroup
                         value={selectedOptions[option.name] || ""}
                         onValueChange={(value) => handleOptionChange(option.name, value)}
                       >
-                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3">
+                        <div className="grid grid-cols-4 sm:grid-cols-5 gap-1.5 md:gap-2">
                           {option.values.map((value) => (
                             <div key={value}>
                               <RadioGroupItem
@@ -274,7 +274,7 @@ const Product = () => {
                               />
                               <Label
                                 htmlFor={`${option.name}-${value}`}
-                                className="flex items-center justify-center rounded-lg md:rounded-xl border-2 border-border bg-background p-2 md:p-3 lg:p-4 text-xs md:text-sm lg:text-base hover:bg-accent hover:border-primary transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary peer-data-[state=checked]:font-semibold peer-data-[state=checked]:scale-105"
+                                className="flex items-center justify-center rounded-lg border-2 border-border bg-background p-1.5 md:p-2 text-[10px] md:text-xs hover:bg-accent hover:border-primary transition-all duration-300 cursor-pointer peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/10 peer-data-[state=checked]:text-primary peer-data-[state=checked]:font-semibold"
                               >
                                 {value}
                               </Label>
@@ -288,23 +288,23 @@ const Product = () => {
               )}
 
               {/* Quantity */}
-              <div className="space-y-3 md:space-y-4 p-3 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/50">
-                <Label className="text-sm md:text-base lg:text-lg font-semibold">Quantité</Label>
-                <div className="flex items-center gap-3 md:gap-4">
+              <div className="flex items-center gap-3 p-2 md:p-3 rounded-lg bg-secondary/20 border border-border/50">
+                <Label className="text-xs md:text-sm font-semibold">Quantité:</Label>
+                <div className="flex items-center gap-2">
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-lg md:rounded-xl text-base md:text-lg"
+                    className="h-8 w-8 md:h-9 md:w-9 rounded-lg text-sm"
                   >
                     -
                   </Button>
-                  <span className="text-xl md:text-2xl lg:text-3xl font-bold w-12 md:w-16 lg:w-20 text-center text-primary">{quantity}</span>
+                  <span className="text-base md:text-lg font-bold w-8 text-center text-primary">{quantity}</span>
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 rounded-lg md:rounded-xl text-base md:text-lg"
+                    className="h-8 w-8 md:h-9 md:w-9 rounded-lg text-sm"
                   >
                     +
                   </Button>
@@ -312,123 +312,68 @@ const Product = () => {
               </div>
 
               {/* Add to Cart Button */}
-              <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <Button
-                  size="lg"
+                  size="default"
                   onClick={handleAddToCart}
                   disabled={!selectedVariant?.availableForSale}
-                  className="flex-1 h-12 md:h-14 lg:h-16 text-sm md:text-base lg:text-lg rounded-lg md:rounded-xl shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300"
+                  className="flex-1 h-10 md:h-11 text-xs md:text-sm rounded-lg shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300"
                 >
-                  <ShoppingCart className="mr-2 h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6" />
+                  <ShoppingCart className="mr-2 h-4 w-4" />
                   {selectedVariant?.availableForSale ? "Ajouter au panier" : "Rupture de stock"}
                 </Button>
                 
                 {/* Personalization Button */}
                 <Button
-                  size="lg"
+                  size="default"
                   variant="outline"
                   asChild
-                  className="flex-1 h-12 md:h-14 lg:h-16 text-sm md:text-base lg:text-lg rounded-lg md:rounded-xl border-2 border-primary/50 hover:border-primary hover:bg-primary/5 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300 group"
+                  className="flex-1 h-10 md:h-11 text-xs md:text-sm rounded-lg border-2 border-primary/50 hover:border-primary hover:bg-primary/5 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300 group"
                 >
                   <Link to="/personnalisation">
-                    <Palette className="mr-2 h-4 w-4 md:h-5 md:w-5 lg:h-6 lg:w-6 text-primary group-hover:scale-110 transition-transform" />
+                    <Palette className="mr-2 h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
                     <span>Personnaliser</span>
                   </Link>
                 </Button>
               </div>
 
-              {/* Size Guide Link */}
-              <Link
-                to="/guide-des-tailles"
-                className="flex items-center gap-2 md:gap-3 p-3 md:p-4 rounded-lg md:rounded-xl bg-primary/5 border border-primary/20 hover:bg-primary/10 hover:border-primary/40 transition-all duration-300 group"
-              >
-                <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
-                  <Ruler className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+              {/* Size Guide & Features - Compact Row */}
+              <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-border/50">
+                <Link
+                  to="/guide-des-tailles"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-all text-xs"
+                >
+                  <Ruler className="w-3.5 h-3.5 text-primary" />
+                  <span className="font-medium">Guide tailles</span>
+                </Link>
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-secondary/20 border border-border/30 text-xs">
+                  <span>🚚</span>
+                  <span className="font-medium">Livraison gratuite dès 50€</span>
                 </div>
-                <div className="min-w-0">
-                  <p className="font-semibold text-xs md:text-sm text-foreground">Besoin d'aide pour la taille ?</p>
-                  <p className="text-muted-foreground text-[10px] md:text-xs truncate">Consulte notre guide des tailles →</p>
-                </div>
-              </Link>
-
-              {/* Product Features */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4 pt-4 md:pt-6 border-t border-border/50">
-                <div className="flex items-center gap-2 md:gap-3 p-2.5 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all">
-                  <div className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-sm md:text-lg lg:text-xl flex-shrink-0">
-                    🚚
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-semibold text-[10px] md:text-xs lg:text-sm">Livraison gratuite</p>
-                    <p className="text-muted-foreground text-[9px] md:text-[10px] lg:text-xs">Dès 50€ d'achat</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 md:gap-3 p-2.5 md:p-4 lg:p-5 rounded-lg md:rounded-xl bg-secondary/20 border border-border/30 hover:shadow-[var(--shadow-soft)] transition-all">
-                  <div className="h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center text-sm md:text-lg lg:text-xl flex-shrink-0">
-                    🔄
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-semibold text-[10px] md:text-xs lg:text-sm">Retours faciles</p>
-                    <p className="text-muted-foreground text-[9px] md:text-[10px] lg:text-xs">30 jours</p>
-                  </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-secondary/20 border border-border/30 text-xs">
+                  <span>🔄</span>
+                  <span className="font-medium">Retours 30j</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Customer Reviews Section - Placeholder */}
-          <div className="mt-12 md:mt-16 lg:mt-20 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="border-t border-border/50 pt-8 md:pt-12">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 md:mb-8">Avis clients</h2>
-              
-              {/* Rating Summary */}
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8 p-4 md:p-6 rounded-xl bg-secondary/20 border border-border/50">
-                <div className="flex flex-col items-center">
-                  <div className="flex items-center gap-1 mb-2">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className="w-6 h-6 md:w-8 md:h-8 text-muted-foreground/30"
-                        strokeWidth={1.5}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-2xl md:text-3xl font-bold text-muted-foreground">0/5</p>
-                  <p className="text-xs md:text-sm text-muted-foreground">Basé sur 0 avis</p>
-                </div>
-                
-                {/* Rating Bars */}
-                <div className="flex-1 w-full space-y-2">
-                  {[5, 4, 3, 2, 1].map((rating) => (
-                    <div key={rating} className="flex items-center gap-2 md:gap-3">
-                      <span className="text-xs md:text-sm w-3 text-muted-foreground">{rating}</span>
-                      <Star className="w-3 h-3 md:w-4 md:h-4 text-muted-foreground/50" />
-                      <div className="flex-1 h-2 md:h-3 bg-border/50 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary/30 rounded-full" style={{ width: '0%' }} />
-                      </div>
-                      <span className="text-xs md:text-sm w-8 text-muted-foreground text-right">0%</span>
-                    </div>
-                  ))}
-                </div>
+          {/* Customer Reviews Section - Compact */}
+          <div className="mt-6 md:mt-8 animate-fade-in border-t border-border/50 pt-4 md:pt-6" style={{ animationDelay: '0.3s' }}>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-base md:text-lg font-bold">Avis clients</h2>
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="w-4 h-4 text-muted-foreground/30" strokeWidth={1.5} />
+                ))}
+                <span className="text-xs text-muted-foreground ml-1">0/5 (0 avis)</span>
               </div>
-
-              {/* Empty State */}
-              <div className="text-center py-12 md:py-16 px-4 rounded-xl border-2 border-dashed border-border/50 bg-secondary/10">
-                <div className="flex justify-center mb-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star
-                      key={star}
-                      className="w-8 h-8 md:w-10 md:h-10 text-muted-foreground/20"
-                      strokeWidth={1.5}
-                    />
-                  ))}
-                </div>
-                <h3 className="text-lg md:text-xl font-semibold text-muted-foreground mb-2">
-                  Aucun avis pour le moment
-                </h3>
-                <p className="text-sm md:text-base text-muted-foreground/70 max-w-md mx-auto">
-                  Sois le premier à partager ton expérience avec ce produit !
-                </p>
-              </div>
+            </div>
+            
+            <div className="text-center py-6 px-4 rounded-lg border border-dashed border-border/50 bg-secondary/10">
+              <p className="text-sm text-muted-foreground">
+                Aucun avis pour le moment. Sois le premier à partager ton expérience !
+              </p>
             </div>
           </div>
         </div>
