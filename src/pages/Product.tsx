@@ -7,7 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, Star } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, Star, Expand } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { getProductByHandle, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
@@ -245,11 +252,50 @@ const Product = () => {
               </div>
 
               {product.description && (
-                <div className="p-2 md:p-3 rounded-lg bg-secondary/30 border border-border/50">
-                  <p className="text-xs md:text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                    {product.description}
-                  </p>
-                </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button className="w-full text-left p-3 md:p-4 rounded-xl bg-gradient-to-br from-secondary/40 to-secondary/20 border border-border/50 hover:border-primary/30 hover:shadow-[0_4px_20px_rgba(var(--primary-rgb),0.15)] transition-all duration-300 group cursor-pointer relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="flex items-start justify-between gap-2 relative">
+                        <p className="text-xs md:text-sm text-muted-foreground leading-relaxed line-clamp-2 group-hover:text-foreground transition-colors">
+                          {product.description}
+                        </p>
+                        <div className="flex-shrink-0 p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+                          <Expand className="w-3.5 h-3.5 text-primary" />
+                        </div>
+                      </div>
+                      <span className="text-[10px] md:text-xs text-primary font-medium mt-2 inline-block group-hover:translate-x-1 transition-transform duration-300">
+                        Cliquez pour voir plus →
+                      </span>
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-lg md:max-w-2xl max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-lg md:text-xl font-bold text-primary flex items-center gap-2">
+                        <span className="p-2 rounded-lg bg-primary/10">📝</span>
+                        Description du produit
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="mt-4 space-y-4">
+                      <div className="p-4 md:p-6 rounded-xl bg-gradient-to-br from-secondary/30 to-background border border-border/50">
+                        <p className="text-sm md:text-base text-foreground leading-relaxed whitespace-pre-wrap">
+                          {product.description}
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        <Badge variant="secondary" className="text-xs">
+                          ✨ Design original
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          🎨 Impression haute qualité
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs">
+                          👕 Coton premium
+                        </Badge>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               )}
 
               {/* Product Options */}
