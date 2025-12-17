@@ -278,9 +278,16 @@ const Product = () => {
                     </DialogHeader>
                     <div className="mt-4 space-y-4">
                       <div className="p-4 md:p-6 rounded-xl bg-gradient-to-br from-secondary/30 to-background border border-border/50">
-                        <p className="text-sm md:text-base text-foreground leading-relaxed whitespace-pre-wrap">
-                          {product.description}
-                        </p>
+                        <div 
+                          className="text-sm md:text-base text-foreground leading-relaxed [&>p]:mb-3 [&>br]:block [&>br]:mb-2"
+                          dangerouslySetInnerHTML={{ 
+                            __html: product.description
+                              .replace(/\n/g, '<br/><br/>')
+                              .replace(/\. /g, '. <br/><br/>')
+                              .replace(/! /g, '! <br/><br/>')
+                              .replace(/\? /g, '? <br/><br/>')
+                          }}
+                        />
                       </div>
                       <div className="flex flex-wrap gap-2 pt-2">
                         <Badge variant="secondary" className="text-xs">
