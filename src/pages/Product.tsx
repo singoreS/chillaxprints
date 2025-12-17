@@ -251,7 +251,7 @@ const Product = () => {
                 </p>
               </div>
 
-              {product.description && (
+              {(product.descriptionHtml || product.description) && (
                 <Dialog>
                   <DialogTrigger asChild>
                     <button className="w-full text-left p-3 md:p-4 rounded-xl bg-gradient-to-br from-secondary/40 to-secondary/20 border border-border/50 hover:border-primary/30 hover:shadow-[0_4px_20px_rgba(var(--primary-rgb),0.15)] transition-all duration-300 group cursor-pointer relative overflow-hidden">
@@ -269,35 +269,48 @@ const Product = () => {
                       </span>
                     </button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-lg md:max-w-2xl max-h-[80vh] overflow-y-auto">
+                  <DialogContent className="max-w-lg md:max-w-2xl lg:max-w-3xl max-h-[85vh] overflow-y-auto">
                     <DialogHeader>
-                      <DialogTitle className="text-lg md:text-xl font-bold text-primary flex items-center gap-2">
-                        <span className="p-2 rounded-lg bg-primary/10">📝</span>
+                      <DialogTitle className="text-lg md:text-xl font-bold text-primary flex items-center gap-3">
+                        <span className="p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner">📝</span>
                         Description du produit
                       </DialogTitle>
                     </DialogHeader>
-                    <div className="mt-4 space-y-4">
-                      <div className="p-4 md:p-6 rounded-xl bg-gradient-to-br from-secondary/30 to-background border border-border/50">
+                    <div className="mt-6 space-y-6">
+                      {/* Main Description Content */}
+                      <div className="p-5 md:p-8 rounded-2xl bg-gradient-to-br from-secondary/20 via-background to-secondary/10 border border-border/30 shadow-inner">
                         <div 
-                          className="text-sm md:text-base text-foreground leading-relaxed [&>p]:mb-3 [&>br]:block [&>br]:mb-2"
+                          className="prose prose-sm md:prose-base max-w-none text-foreground
+                            [&>p]:mb-4 [&>p]:leading-relaxed [&>p]:text-muted-foreground
+                            [&>ul]:my-4 [&>ul]:space-y-2 [&>ul]:list-disc [&>ul]:pl-5
+                            [&>ol]:my-4 [&>ol]:space-y-2 [&>ol]:list-decimal [&>ol]:pl-5
+                            [&>li]:text-muted-foreground [&>li]:leading-relaxed
+                            [&>h1]:text-xl [&>h1]:font-bold [&>h1]:text-foreground [&>h1]:mb-4 [&>h1]:mt-6
+                            [&>h2]:text-lg [&>h2]:font-semibold [&>h2]:text-foreground [&>h2]:mb-3 [&>h2]:mt-5
+                            [&>h3]:text-base [&>h3]:font-semibold [&>h3]:text-foreground [&>h3]:mb-2 [&>h3]:mt-4
+                            [&>strong]:text-foreground [&>strong]:font-semibold
+                            [&>em]:italic
+                            [&>a]:text-primary [&>a]:underline [&>a]:hover:text-primary/80
+                            [&>br]:block [&>br]:h-2"
                           dangerouslySetInnerHTML={{ 
-                            __html: product.description
-                              .replace(/\n/g, '<br/><br/>')
-                              .replace(/\. /g, '. <br/><br/>')
-                              .replace(/! /g, '! <br/><br/>')
-                              .replace(/\? /g, '? <br/><br/>')
+                            __html: product.descriptionHtml || product.description 
                           }}
                         />
                       </div>
+                      
+                      {/* Product Features Tags */}
                       <div className="flex flex-wrap gap-2 pt-2">
-                        <Badge variant="secondary" className="text-xs">
+                        <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
                           ✨ Design original
                         </Badge>
-                        <Badge variant="secondary" className="text-xs">
+                        <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-green-500/10 to-green-500/5 border border-green-500/20">
                           🎨 Impression haute qualité
                         </Badge>
-                        <Badge variant="secondary" className="text-xs">
+                        <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-blue-500/10 to-blue-500/5 border border-blue-500/20">
                           👕 Coton premium
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-purple-500/10 to-purple-500/5 border border-purple-500/20">
+                          🚚 Livraison rapide
                         </Badge>
                       </div>
                     </div>
