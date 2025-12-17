@@ -36,11 +36,24 @@ const Shop = () => {
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
 
   // Mapping des types Shopify vers les catégories du site
-  const categoryMapping: Record<string, string[]> = {
-    "T-Shirts": ["T-Shirt", "Tee", "Tshirt"],
-    "Hoodies": ["Hoodie", "Sweatshirt", "Crewneck", "Pull", "Sweater"],
-    "Bonnets": ["Bonnet", "Beanie", "Hat", "Cap"],
-    "Chaussures": ["Shoes", "Sneakers", "Chaussures", "Footwear"],
+  // Ordre important: les exclusions sont vérifiées en premier
+  const categoryMapping: Record<string, { include: string[], exclude: string[] }> = {
+    "T-Shirts": { 
+      include: ["t-shirt", "tee", "tshirt"], 
+      exclude: ["sweatshirt", "hoodie", "pull", "sweater", "crewneck"] 
+    },
+    "Hoodies": { 
+      include: ["hoodie", "sweatshirt", "crewneck", "pull", "sweater"], 
+      exclude: [] 
+    },
+    "Bonnets": { 
+      include: ["bonnet", "beanie", "hat", "cap"], 
+      exclude: [] 
+    },
+    "Chaussures": { 
+      include: ["shoes", "sneakers", "chaussures", "footwear"], 
+      exclude: [] 
+    },
   };
 
   const categories = [
@@ -52,13 +65,20 @@ const Shop = () => {
   ];
 
   // Fonction pour vérifier si un produit appartient à une catégorie
-  const productMatchesCategory = (productType: string, category: string): boolean => {
-    const types = categoryMapping[category];
-    if (!types) return false;
-    return types.some(type => 
-      productType.toLowerCase().includes(type.toLowerCase()) ||
-      type.toLowerCase().includes(productType.toLowerCase())
-    );
+  const productMatchesCategory = (product: ShopifyProduct, category: string): boolean => {
+    const mapping = categoryMapping[category];
+    if (!mapping) return false;
+    
+    const productType = (product.node.productType || "").toLowerCase();
+    const productTitle = product.node.title.toLowerCase();
+    const searchText = `${productType} ${productTitle}`;
+    
+    // Vérifier les exclusions d'abord
+    const isExcluded = mapping.exclude.some(term => searchText.includes(term));
+    if (isExcluded) return false;
+    
+    // Puis vérifier les inclusions
+    return mapping.include.some(term => searchText.includes(term));
   };
 
   useEffect(() => {
@@ -82,7 +102,7 @@ const Shop = () => {
     // Filter by category using intelligent mapping
     if (selectedCategory !== "all") {
       result = result.filter(product => 
-        productMatchesCategory(product.node.productType || "", selectedCategory)
+        productMatchesCategory(product, selectedCategory)
       );
     }
 
