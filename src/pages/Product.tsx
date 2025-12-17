@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, Star } from "lucide-react";
 import { getProductByHandle, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
@@ -371,6 +371,63 @@ const Product = () => {
                     <p className="text-muted-foreground text-[9px] md:text-[10px] lg:text-xs">30 jours</p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Customer Reviews Section - Placeholder */}
+          <div className="mt-12 md:mt-16 lg:mt-20 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="border-t border-border/50 pt-8 md:pt-12">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 md:mb-8">Avis clients</h2>
+              
+              {/* Rating Summary */}
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8 p-4 md:p-6 rounded-xl bg-secondary/20 border border-border/50">
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center gap-1 mb-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className="w-6 h-6 md:w-8 md:h-8 text-muted-foreground/30"
+                        strokeWidth={1.5}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-2xl md:text-3xl font-bold text-muted-foreground">0/5</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">Basé sur 0 avis</p>
+                </div>
+                
+                {/* Rating Bars */}
+                <div className="flex-1 w-full space-y-2">
+                  {[5, 4, 3, 2, 1].map((rating) => (
+                    <div key={rating} className="flex items-center gap-2 md:gap-3">
+                      <span className="text-xs md:text-sm w-3 text-muted-foreground">{rating}</span>
+                      <Star className="w-3 h-3 md:w-4 md:h-4 text-muted-foreground/50" />
+                      <div className="flex-1 h-2 md:h-3 bg-border/50 rounded-full overflow-hidden">
+                        <div className="h-full bg-primary/30 rounded-full" style={{ width: '0%' }} />
+                      </div>
+                      <span className="text-xs md:text-sm w-8 text-muted-foreground text-right">0%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Empty State */}
+              <div className="text-center py-12 md:py-16 px-4 rounded-xl border-2 border-dashed border-border/50 bg-secondary/10">
+                <div className="flex justify-center mb-4">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      className="w-8 h-8 md:w-10 md:h-10 text-muted-foreground/20"
+                      strokeWidth={1.5}
+                    />
+                  ))}
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold text-muted-foreground mb-2">
+                  Aucun avis pour le moment
+                </h3>
+                <p className="text-sm md:text-base text-muted-foreground/70 max-w-md mx-auto">
+                  Sois le premier à partager ton expérience avec ce produit !
+                </p>
               </div>
             </div>
           </div>
