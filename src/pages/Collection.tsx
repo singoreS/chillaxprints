@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getProducts, ShopifyProduct } from "@/lib/shopify";
+import { getCollectionByHandle, getAllCollections, ShopifyProduct, ShopifyCollection } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
@@ -13,83 +13,36 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 
-interface CollectionInfo {
-  name: string;
-  slug: string;
-  description: string;
-  tagline: string;
-  emoji: string;
-  keywords: string[];
-}
-
-const collections: Record<string, CollectionInfo> = {
-  "no-rush-club": {
-    name: "NO RUSH CLUB",
-    slug: "no-rush-club",
-    description: "Pour ceux qui prennent leur temps et qui l'assument. Pas de stress, pas de pression, juste du chill.",
-    tagline: "Prends ton temps, le monde peut attendre 🐌",
-    emoji: "🐌",
-    keywords: ["no rush", "club", "slow", "chill", "relax"],
-  },
-  "tired-but-trying": {
-    name: "TIRED BUT TRYING",
-    slug: "tired-but-trying",
-    description: "Fatigué mais toujours debout. Pour les warriors du quotidien qui font de leur mieux.",
-    tagline: "Épuisé mais toujours là 💪",
-    emoji: "😴",
-    keywords: ["tired", "trying", "fatigue", "effort"],
-  },
-  "soft-chaos": {
-    name: "SOFT CHAOS",
-    slug: "soft-chaos",
-    description: "Le chaos organisé, version confortable. Quand le désordre devient un art de vivre.",
-    tagline: "Le chaos, mais en douceur ✨",
-    emoji: "🌀",
-    keywords: ["soft", "chaos", "messy", "creative"],
-  },
-};
-
 const Collection = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [collection, setCollection] = useState<ShopifyCollection | null>(null);
+  const [otherCollections, setOtherCollections] = useState<ShopifyCollection[]>([]);
   const [loading, setLoading] = useState(true);
   const addItemToCart = useCartStore((state) => state.addItem);
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
 
-  const collection = slug ? collections[slug] : null;
-
   useEffect(() => {
-    const loadProducts = async () => {
-      if (!collection) return;
+    const loadCollection = async () => {
+      if (!slug) return;
       
       setLoading(true);
       try {
-        const allProducts = await getProducts(50);
+        const [collectionData, allCollections] = await Promise.all([
+          getCollectionByHandle(slug),
+          getAllCollections()
+        ]);
         
-        // Filter products that match collection keywords
-        const filteredProducts = allProducts.filter((product) => {
-          const title = product.node.title.toLowerCase();
-          const description = product.node.description?.toLowerCase() || "";
-          const productType = product.node.handle?.toLowerCase() || "";
-          
-          return collection.keywords.some(
-            (keyword) =>
-              title.includes(keyword.toLowerCase()) ||
-              description.includes(keyword.toLowerCase()) ||
-              productType.includes(keyword.toLowerCase())
-          );
-        });
-        
-        setProducts(filteredProducts);
+        setCollection(collectionData);
+        setOtherCollections(allCollections.filter(c => c.handle !== slug));
       } catch (error) {
-        console.error("Error loading products:", error);
+        console.error("Error loading collection:", error);
       } finally {
         setLoading(false);
       }
     };
     
-    loadProducts();
-  }, [slug, collection]);
+    loadCollection();
+  }, [slug]);
 
   const handleAddToCart = (product: ShopifyProduct) => {
     const variant = product.node.variants.edges[0]?.node;
@@ -116,13 +69,15 @@ const Collection = () => {
     }
   };
 
-  if (!collection) {
+  const products = collection?.products?.edges || [];
+
+  if (!loading && !collection) {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1 container py-20 text-center">
           <h1 className="text-3xl font-bold mb-4">Collection non trouvée</h1>
-          <p className="text-muted-foreground mb-8">Cette collection n'existe pas.</p>
+          <p className="text-muted-foreground mb-8">Cette collection n'existe pas dans votre boutique Shopify.</p>
           <Button asChild>
             <Link to="/boutique">Retour à la boutique</Link>
           </Button>
@@ -135,9 +90,9 @@ const Collection = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title={`Collection ${collection.name}`}
-        description={collection.description}
-        keywords={`collection ${collection.name.toLowerCase()}, vêtements, ChillaxPrints, ${collection.keywords.join(", ")}`}
+        title={collection ? `Collection ${collection.title}` : "Collection"}
+        description={collection?.description || "Découvrez notre collection"}
+        keywords={`collection, vêtements, ChillaxPrints`}
         canonicalUrl={`/collection/${slug}`}
       />
       <Header />
@@ -153,19 +108,33 @@ const Collection = () => {
               Retour à l'accueil
             </Link>
             
-            <div className="max-w-3xl space-y-4">
-              <div className="text-6xl md:text-7xl">{collection.emoji}</div>
-              <Badge className="px-4 py-2">Collection</Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-                {collection.name}
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground">
-                {collection.tagline}
-              </p>
-              <p className="text-muted-foreground max-w-2xl">
-                {collection.description}
-              </p>
-            </div>
+            {loading ? (
+              <div className="max-w-3xl space-y-4">
+                <Skeleton className="h-16 w-16 rounded-full" />
+                <Skeleton className="h-8 w-32" />
+                <Skeleton className="h-12 w-2/3" />
+                <Skeleton className="h-6 w-1/2" />
+              </div>
+            ) : collection && (
+              <div className="max-w-3xl space-y-4">
+                {collection.image && (
+                  <img 
+                    src={collection.image.url} 
+                    alt={collection.image.altText || collection.title}
+                    className="w-24 h-24 rounded-lg object-cover"
+                  />
+                )}
+                <Badge className="px-4 py-2">Collection</Badge>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                  {collection.title}
+                </h1>
+                {collection.description && (
+                  <p className="text-xl md:text-2xl text-muted-foreground">
+                    {collection.description}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </section>
 
@@ -198,7 +167,7 @@ const Collection = () => {
               </div>
             ) : products.length === 0 ? (
               <div className="text-center py-16">
-                <div className="text-6xl mb-4">{collection.emoji}</div>
+                <div className="text-6xl mb-4">📦</div>
                 <h3 className="text-xl font-semibold mb-2">Collection en préparation</h3>
                 <p className="text-muted-foreground mb-6">
                   Les produits de cette collection arrivent bientôt !
@@ -271,36 +240,46 @@ const Collection = () => {
         </section>
 
         {/* Other Collections */}
-        <section className="py-12 md:py-16 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-              Autres Collections
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Object.entries(collections)
-                .filter(([key]) => key !== slug)
-                .map(([key, col]) => (
+        {otherCollections.length > 0 && (
+          <section className="py-12 md:py-16 bg-muted/30">
+            <div className="container px-4 md:px-6">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+                Autres Collections
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {otherCollections.slice(0, 3).map((col) => (
                   <Link 
-                    key={key} 
-                    to={`/collection/${key}`}
+                    key={col.id} 
+                    to={`/collection/${col.handle}`}
                     className="group"
                   >
                     <Card className="overflow-hidden border-2 hover:border-primary hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
-                      <CardContent className="p-6 md:p-8 text-center space-y-4">
-                        <div className="text-5xl">{col.emoji}</div>
+                      {col.image && (
+                        <div className="aspect-video overflow-hidden">
+                          <img 
+                            src={col.image.url} 
+                            alt={col.image.altText || col.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      )}
+                      <CardContent className="p-6 md:p-8 text-center space-y-2">
                         <h3 className="text-xl md:text-2xl font-bold group-hover:text-primary transition-colors">
-                          {col.name}
+                          {col.title}
                         </h3>
-                        <p className="text-muted-foreground text-sm">
-                          {col.tagline}
-                        </p>
+                        {col.description && (
+                          <p className="text-muted-foreground text-sm line-clamp-2">
+                            {col.description}
+                          </p>
+                        )}
                       </CardContent>
                     </Card>
                   </Link>
                 ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </main>
       <Footer />
     </div>
