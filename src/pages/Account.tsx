@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 import Header from "@/components/Header";
@@ -12,7 +12,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { Loader2, Package, MapPin, User as UserIcon, Plus, Trash2, LogOut } from "lucide-react";
+import { Loader2, Package, MapPin, User as UserIcon, Plus, Trash2, LogOut, Gift } from "lucide-react";
+import { LoyaltyCard, LoyaltyInfoCard } from "@/components/LoyaltyCard";
 
 interface Profile {
   id: string;
@@ -47,6 +48,7 @@ interface Order {
 
 const Account = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -54,6 +56,9 @@ const Account = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [showAddAddress, setShowAddAddress] = useState(false);
+  
+  // Get default tab from URL params
+  const defaultTab = searchParams.get("tab") || "profile";
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -216,12 +221,17 @@ const Account = () => {
             </Button>
           </div>
 
-          <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 h-auto">
+          <Tabs defaultValue={defaultTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-4 h-auto">
               <TabsTrigger value="profile" className="text-xs md:text-sm py-2 md:py-2.5 px-1 md:px-3">
                 <UserIcon className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
                 <span className="hidden sm:inline">Profil</span>
                 <span className="sm:hidden">Profil</span>
+              </TabsTrigger>
+              <TabsTrigger value="fidelite" className="text-xs md:text-sm py-2 md:py-2.5 px-1 md:px-3">
+                <Gift className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                <span className="hidden sm:inline">Fidélité</span>
+                <span className="sm:hidden">Pts</span>
               </TabsTrigger>
               <TabsTrigger value="orders" className="text-xs md:text-sm py-2 md:py-2.5 px-1 md:px-3">
                 <Package className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
@@ -264,6 +274,11 @@ const Account = () => {
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="fidelite" className="mt-4 md:mt-6 space-y-4 md:space-y-6">
+              <LoyaltyCard />
+              <LoyaltyInfoCard />
             </TabsContent>
 
             <TabsContent value="orders" className="mt-4 md:mt-6">
