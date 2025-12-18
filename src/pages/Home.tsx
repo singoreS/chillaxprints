@@ -95,11 +95,28 @@ const Home = () => {
     }
   };
 
-  const categories = [
-    { name: "T-Shirts", image: lazyTshirt, link: "/boutique?category=tshirts", emoji: "👕" },
-    { name: "Hoodies", image: chillHoodie, link: "/boutique?category=hoodies", emoji: "🧥" },
-    { name: "Bonnets", image: winterBonnet, link: "/boutique?category=bonnets", emoji: "🧢" },
-    { name: "Chaussures", image: lazyShoes, link: "/boutique?category=shoes", emoji: "👟" },
+  const collections = [
+    { 
+      name: "NO RUSH CLUB", 
+      description: "Prends ton temps, le monde peut attendre",
+      image: chillHoodie, 
+      link: "/collection/no-rush-club", 
+      emoji: "🐌" 
+    },
+    { 
+      name: "TIRED BUT TRYING", 
+      description: "Épuisé mais toujours là",
+      image: lazyTshirt, 
+      link: "/collection/tired-but-trying", 
+      emoji: "😴" 
+    },
+    { 
+      name: "SOFT CHAOS", 
+      description: "Le chaos, mais en douceur",
+      image: lifestyle1, 
+      link: "/collection/soft-chaos", 
+      emoji: "🌀" 
+    },
   ];
 
   const reasons = [
@@ -328,35 +345,40 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
+      {/* Collections Section */}
       <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container px-4 md:px-6">
           <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Explorer par Catégorie</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Explorer par Collection</h2>
             <p className="text-sm md:text-lg lg:text-xl text-muted-foreground">
-              Trouve ton style chill parfait
+              Découvre nos univers uniques
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
-            {categories.map((category, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+            {collections.map((collection, index) => (
               <Link
                 key={index}
-                to={category.link}
+                to={collection.link}
                 className="group block animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <Card className="overflow-hidden border-2 hover:border-primary hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
-                  <div className="relative h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden bg-muted">
+                  <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden bg-muted">
                     <img
-                      src={category.image}
-                      alt={category.name}
+                      src={collection.image}
+                      alt={collection.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 lg:p-6">
-                      <div className="text-2xl md:text-3xl lg:text-4xl mb-1 md:mb-2">{category.emoji}</div>
-                      <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground">{category.name}</h3>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8">
+                      <div className="text-3xl md:text-4xl lg:text-5xl mb-2 md:mb-3">{collection.emoji}</div>
+                      <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-1 md:mb-2">
+                        {collection.name}
+                      </h3>
+                      <p className="text-sm md:text-base text-muted-foreground">
+                        {collection.description}
+                      </p>
                     </div>
                   </div>
                 </Card>

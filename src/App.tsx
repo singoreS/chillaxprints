@@ -26,6 +26,7 @@ import SizeGuide from "./pages/SizeGuide";
 import FAQ from "./pages/FAQ";
 import Customization from "./pages/Customization";
 import Affiliate from "./pages/Affiliate";
+import Collection from "./pages/Collection";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
               <Route path="/faq" element={<FAQ />} />
               <Route path="/personnalisation" element={<Customization />} />
               <Route path="/affiliation" element={<Affiliate />} />
+              <Route path="/collection/:slug" element={<Collection />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
