@@ -148,7 +148,7 @@ const About = () => {
                 <CardContent className="p-6 text-center">
                   <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
                   <h3 className="font-bold mb-2">Production</h3>
-                  <p className="text-sm text-muted-foreground">Votre article est imprimé sur demande par nos partenaires certifiés</p>
+                  <p className="text-sm text-muted-foreground">Votre article est imprimé sur demande avec soin</p>
                 </CardContent>
               </Card>
               <Card>
@@ -200,15 +200,15 @@ const About = () => {
               </div>
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Qualité & Partenaires
+                  Notre Engagement Qualité
                 </h2>
                 <div className="space-y-4 text-lg text-muted-foreground">
                   <p>
-                    Nous travaillons avec <strong>Printify</strong>, l'un des leaders mondiaux du Print-on-Demand, 
-                    et leur réseau de fournisseurs certifiés pour garantir une qualité exceptionnelle.
+                    Nous travaillons avec des centres de production certifiés répartis dans le monde entier 
+                    pour garantir une qualité exceptionnelle sur chaque pièce.
                   </p>
                   <p>
-                    Nos partenaires de production sont sélectionnés pour leur expertise, 
+                    Nos centres de production sont sélectionnés pour leur expertise, 
                     leurs équipements de pointe et leur engagement qualité. Que ce soit aux États-Unis, 
                     en Europe ou ailleurs, chaque impression répond à nos standards exigeants.
                   </p>
