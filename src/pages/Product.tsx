@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, Star, Expand } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, Star, Expand, Box } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -15,10 +15,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProductByHandle, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
+import { Product3DViewer } from "@/components/Product3DViewer";
 
 const Product = () => {
   const { id } = useParams();
@@ -169,57 +171,82 @@ const Product = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8">
             {/* Product Images Gallery */}
             <div className="space-y-3 md:space-y-4 animate-fade-in">
-              <div className="aspect-square overflow-hidden rounded-xl md:rounded-2xl border-2 border-border/50 bg-secondary/20 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 relative group">
-                <img
-                  src={mainImage || "/placeholder.svg"}
-                  alt={product.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute top-2 right-2 md:top-4 md:right-4 h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 bg-background/90 hover:bg-background backdrop-blur-sm shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-110"
-                  onClick={() => {
-                    const productWrapper: ShopifyProduct = { node: product };
-                    if (isInWishlist(product.id)) {
-                      removeFromWishlist(product.id);
-                      toast.success("Retiré des favoris");
-                    } else {
-                      addToWishlist(productWrapper);
-                      toast.success("Ajouté aux favoris");
-                    }
-                  }}
-                >
-                  <Heart
-                    className={`w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-300 ${
-                      isInWishlist(product.id)
-                        ? "fill-accent text-accent scale-110"
-                        : "text-foreground"
-                    }`}
-                  />
-                </Button>
-              </div>
-              {product.images?.edges && product.images.edges.length > 1 && (
-                <div className="grid grid-cols-4 gap-2 md:gap-3">
-                  {product.images.edges.map((image, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setMainImage(image.node.url)}
-                      className={`aspect-square overflow-hidden rounded-lg md:rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
-                        mainImage === image.node.url
-                          ? "border-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] scale-105"
-                          : "border-border/50 hover:border-primary/50 shadow-[var(--shadow-soft)]"
-                      }`}
+              <Tabs defaultValue="image" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-3">
+                  <TabsTrigger value="image" className="text-xs md:text-sm">
+                    📷 Photos
+                  </TabsTrigger>
+                  <TabsTrigger value="3d" className="text-xs md:text-sm">
+                    <Box className="w-3.5 h-3.5 mr-1.5" />
+                    Vue 3D
+                  </TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="image" className="mt-0">
+                  <div className="aspect-square overflow-hidden rounded-xl md:rounded-2xl border-2 border-border/50 bg-secondary/20 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 relative group">
+                    <img
+                      src={mainImage || "/placeholder.svg"}
+                      alt={product.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute top-2 right-2 md:top-4 md:right-4 h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 bg-background/90 hover:bg-background backdrop-blur-sm shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 hover:scale-110"
+                      onClick={() => {
+                        const productWrapper: ShopifyProduct = { node: product };
+                        if (isInWishlist(product.id)) {
+                          removeFromWishlist(product.id);
+                          toast.success("Retiré des favoris");
+                        } else {
+                          addToWishlist(productWrapper);
+                          toast.success("Ajouté aux favoris");
+                        }
+                      }}
                     >
-                      <img
-                        src={image.node.url}
-                        alt={image.node.altText || `${product.title} ${index + 1}`}
-                        className="w-full h-full object-cover"
+                      <Heart
+                        className={`w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-300 ${
+                          isInWishlist(product.id)
+                            ? "fill-accent text-accent scale-110"
+                            : "text-foreground"
+                        }`}
                       />
-                    </button>
-                  ))}
-                </div>
-              )}
+                    </Button>
+                  </div>
+                  {product.images?.edges && product.images.edges.length > 1 && (
+                    <div className="grid grid-cols-4 gap-2 md:gap-3 mt-3">
+                      {product.images.edges.map((image, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setMainImage(image.node.url)}
+                          className={`aspect-square overflow-hidden rounded-lg md:rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+                            mainImage === image.node.url
+                              ? "border-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] scale-105"
+                              : "border-border/50 hover:border-primary/50 shadow-[var(--shadow-soft)]"
+                          }`}
+                        >
+                          <img
+                            src={image.node.url}
+                            alt={image.node.altText || `${product.title} ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </TabsContent>
+                
+                <TabsContent value="3d" className="mt-0">
+                  <Product3DViewer
+                    modelUrl={(product as any).model3dUrl}
+                    fallbackImage={mainImage}
+                    productTitle={product.title}
+                  />
+                  <p className="text-xs text-muted-foreground text-center mt-3">
+                    💡 Pour activer la vue 3D, ajoutez un fichier .glb/.gltf à vos métadonnées produit Shopify
+                  </p>
+                </TabsContent>
+              </Tabs>
             </div>
 
             {/* Product Info */}
