@@ -15,7 +15,7 @@ import {
   Clock,
   ChevronRight
 } from "lucide-react";
-import { useLoyaltyPoints, LOYALTY_TIERS, POINTS_TO_EURO } from "@/hooks/useLoyaltyPoints";
+import { useLoyaltyPoints, LOYALTY_TIERS, POINTS_TO_EURO, POINTS_PER_EURO } from "@/hooks/useLoyaltyPoints";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -79,7 +79,7 @@ export const LoyaltyCard = () => {
             <div>
               <h3 className={`font-bold ${tierConfig.color}`}>Membre {tierConfig.name}</h3>
               <p className="text-xs text-muted-foreground">
-                {tierConfig.pointsMultiplier}x points sur vos achats
+                {tierConfig.pointsMultiplier * POINTS_PER_EURO} points par € dépensé
               </p>
             </div>
           </div>
@@ -199,8 +199,8 @@ export const LoyaltyInfoCard = () => {
       </CardHeader>
       <CardContent className="space-y-6">
         <p className="text-muted-foreground">
-          Gagnez des points à chaque achat et débloquez des avantages exclusifs ! 
-          {POINTS_TO_EURO} points = 1€ de réduction.
+          Gagnez <strong>{POINTS_PER_EURO} points par euro dépensé</strong> et débloquez des avantages exclusifs ! 
+          {POINTS_TO_EURO} points = 1€ de réduction (10% de retour garanti).
         </p>
 
         <div className="grid gap-4">
@@ -214,7 +214,7 @@ export const LoyaltyInfoCard = () => {
                 <div>
                   <h4 className={`font-bold ${tier.color}`}>{tier.name}</h4>
                   <p className="text-xs text-muted-foreground">
-                    Dès {tier.minPoints} points cumulés
+                    Dès {tier.minSpend}€ d'achats cumulés
                   </p>
                 </div>
                 <Badge className="ml-auto" variant="secondary">

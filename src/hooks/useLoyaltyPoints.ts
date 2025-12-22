@@ -24,7 +24,10 @@ interface LoyaltyTransaction {
   created_at: string;
 }
 
-// Tier configuration
+// Configuration des points - 10 points par € dépensé (plus satisfaisant visuellement)
+export const POINTS_PER_EURO = 10;
+
+// Tier configuration - seuils accessibles inspirés des grandes marques
 export const LOYALTY_TIERS = {
   bronze: {
     name: "Bronze",
@@ -34,42 +37,46 @@ export const LOYALTY_TIERS = {
     bgColor: "bg-amber-100",
     borderColor: "border-amber-300",
     emoji: "🥉",
-    benefits: ["1 point par € dépensé", "Accès aux ventes privées"],
+    minSpend: 0,
+    benefits: ["10 points par € dépensé", "Accès aux ventes privées", "Cadeau d'anniversaire"],
   },
   silver: {
     name: "Silver",
-    minPoints: 500,
-    pointsMultiplier: 1.25,
+    minPoints: 1000, // 100€ dépensés
+    pointsMultiplier: 1.5,
     color: "text-gray-500",
     bgColor: "bg-gray-100",
     borderColor: "border-gray-300",
     emoji: "🥈",
-    benefits: ["1.25 points par € dépensé", "Livraison prioritaire", "-5% sur les soldes"],
+    minSpend: 100,
+    benefits: ["15 points par € dépensé", "Livraison offerte dès 30€", "-5% permanent", "Retours gratuits"],
   },
   gold: {
     name: "Gold",
-    minPoints: 2000,
-    pointsMultiplier: 1.5,
+    minPoints: 3000, // 300€ dépensés
+    pointsMultiplier: 2,
     color: "text-yellow-600",
     bgColor: "bg-yellow-100",
     borderColor: "border-yellow-400",
     emoji: "🥇",
-    benefits: ["1.5 points par € dépensé", "Livraison gratuite", "-10% permanent", "Accès anticipé nouveautés"],
+    minSpend: 300,
+    benefits: ["20 points par € dépensé", "Livraison gratuite", "-10% permanent", "Accès anticipé aux nouveautés", "Ventes privées exclusives"],
   },
   platinum: {
     name: "Platinum",
-    minPoints: 5000,
-    pointsMultiplier: 2,
+    minPoints: 7500, // 750€ dépensés
+    pointsMultiplier: 3,
     color: "text-purple-600",
     bgColor: "bg-purple-100",
     borderColor: "border-purple-400",
     emoji: "💎",
-    benefits: ["2 points par € dépensé", "Livraison express gratuite", "-15% permanent", "Cadeaux exclusifs", "Service VIP"],
+    minSpend: 750,
+    benefits: ["30 points par € dépensé", "Livraison express gratuite", "-15% permanent", "Cadeaux exclusifs", "Service client prioritaire", "Événements VIP"],
   },
 };
 
-// Points conversion rate
-export const POINTS_TO_EURO = 100; // 100 points = 1€ de réduction
+// Points conversion rate - 100 points = 1€ (donc 10€ dépensés = 1€ de réduction = 10% retour)
+export const POINTS_TO_EURO = 100;
 
 export const useLoyaltyPoints = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -184,11 +191,11 @@ export const useLoyaltyPoints = () => {
     },
   });
 
-  // Calculate points for a purchase
+  // Calculate points for a purchase - 10 points par € × multiplier du tier
   const calculateEarnedPoints = (amount: number): number => {
     const tier = loyaltyPoints?.tier || "bronze";
     const multiplier = LOYALTY_TIERS[tier].pointsMultiplier;
-    return Math.floor(amount * multiplier);
+    return Math.floor(amount * POINTS_PER_EURO * multiplier);
   };
 
   // Convert points to discount
