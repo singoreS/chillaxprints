@@ -199,8 +199,8 @@ export const LoyaltyInfoCard = () => {
       </CardHeader>
       <CardContent className="space-y-6">
         <p className="text-muted-foreground">
-          Gagnez <strong>{POINTS_PER_EURO} points par euro dépensé</strong> et débloquez des avantages exclusifs ! 
-          {POINTS_TO_EURO} points = 1€ de réduction (10% de retour garanti).
+          <strong>1€ dépensé = {POINTS_PER_EURO} points</strong>. Utilisez vos points pour des réductions : 
+          {POINTS_TO_EURO} points = 1€ de réduction.
         </p>
 
         <div className="grid gap-4">

@@ -24,10 +24,10 @@ interface LoyaltyTransaction {
   created_at: string;
 }
 
-// Configuration des points - 10 points par € dépensé (plus satisfaisant visuellement)
+// Configuration des points - 1€ dépensé = 10 points
 export const POINTS_PER_EURO = 10;
 
-// Tier configuration - seuils accessibles inspirés des grandes marques
+// Tier configuration - seuils simples et accessibles
 export const LOYALTY_TIERS = {
   bronze: {
     name: "Bronze",
@@ -38,7 +38,8 @@ export const LOYALTY_TIERS = {
     borderColor: "border-amber-300",
     emoji: "🥉",
     minSpend: 0,
-    benefits: ["10 points par € dépensé", "Accès aux ventes privées", "Cadeau d'anniversaire"],
+    discount: 0,
+    benefits: ["10 points par € dépensé"],
   },
   silver: {
     name: "Silver",
@@ -49,7 +50,8 @@ export const LOYALTY_TIERS = {
     borderColor: "border-gray-300",
     emoji: "🥈",
     minSpend: 100,
-    benefits: ["15 points par € dépensé", "Livraison offerte dès 30€", "-5% permanent", "Retours gratuits"],
+    discount: 5,
+    benefits: ["15 points par € dépensé", "-5% sur toutes vos commandes"],
   },
   gold: {
     name: "Gold",
@@ -60,7 +62,8 @@ export const LOYALTY_TIERS = {
     borderColor: "border-yellow-400",
     emoji: "🥇",
     minSpend: 300,
-    benefits: ["20 points par € dépensé", "Livraison gratuite", "-10% permanent", "Accès anticipé aux nouveautés", "Ventes privées exclusives"],
+    discount: 10,
+    benefits: ["20 points par € dépensé", "-10% sur toutes vos commandes", "Livraison offerte"],
   },
   platinum: {
     name: "Platinum",
@@ -71,11 +74,12 @@ export const LOYALTY_TIERS = {
     borderColor: "border-purple-400",
     emoji: "💎",
     minSpend: 750,
-    benefits: ["30 points par € dépensé", "Livraison express gratuite", "-15% permanent", "Cadeaux exclusifs", "Service client prioritaire", "Événements VIP"],
+    discount: 15,
+    benefits: ["30 points par € dépensé", "-15% sur toutes vos commandes", "Livraison express offerte"],
   },
 };
 
-// Points conversion rate - 100 points = 1€ (donc 10€ dépensés = 1€ de réduction = 10% retour)
+// 100 points = 1€ de réduction (donc 10€ dépensés = 1€ de réduction = 10% retour)
 export const POINTS_TO_EURO = 100;
 
 export const useLoyaltyPoints = () => {
