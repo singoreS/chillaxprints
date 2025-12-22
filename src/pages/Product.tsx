@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, Star, Expand, Box, ZoomIn } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowLeft, Heart, Ruler, Palette, Star, Expand, Box, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -266,17 +266,98 @@ const Product = () => {
               </div>
             </div>
 
-            {/* Image Zoom Modal */}
+            {/* Image Zoom Modal with Navigation */}
             <Dialog open={!!zoomedImage} onOpenChange={() => setZoomedImage(null)}>
               <DialogContent className="max-w-4xl w-full p-2 bg-background/95 backdrop-blur-xl">
-                <div className="relative aspect-square w-full overflow-hidden rounded-xl">
-                  {zoomedImage && (
-                    <img
-                      src={zoomedImage}
-                      alt={product.title}
-                      className="w-full h-full object-contain"
-                    />
+                <div className="relative w-full overflow-hidden rounded-xl">
+                  {/* Main zoomed image */}
+                  <div className="aspect-square w-full">
+                    {zoomedImage && (
+                      <img
+                        src={zoomedImage}
+                        alt={product.title}
+                        className="w-full h-full object-contain"
+                      />
+                    )}
+                  </div>
+                  
+                  {/* Navigation arrows */}
+                  {product.images?.edges && product.images.edges.length > 1 && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 h-10 w-10 bg-background/80 backdrop-blur-sm hover:bg-background shadow-lg"
+                        onClick={() => {
+                          const currentIndex = product.images?.edges?.findIndex(img => img.node.url === zoomedImage) ?? 0;
+                          const prevIndex = currentIndex === 0 ? (product.images?.edges?.length ?? 1) - 1 : currentIndex - 1;
+                          setZoomedImage(product.images?.edges?.[prevIndex]?.node.url ?? null);
+                        }}
+                      >
+                        <ChevronLeft className="h-6 w-6" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 bg-background/80 backdrop-blur-sm hover:bg-background shadow-lg"
+                        onClick={() => {
+                          const currentIndex = product.images?.edges?.findIndex(img => img.node.url === zoomedImage) ?? 0;
+                          const nextIndex = currentIndex === (product.images?.edges?.length ?? 1) - 1 ? 0 : currentIndex + 1;
+                          setZoomedImage(product.images?.edges?.[nextIndex]?.node.url ?? null);
+                        }}
+                      >
+                        <ChevronRight className="h-6 w-6" />
+                      </Button>
+                    </>
                   )}
+                  
+                  {/* Image indicator */}
+                  {product.images?.edges && product.images.edges.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 bg-background/80 backdrop-blur-sm rounded-full">
+                      {product.images.edges.map((img, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setZoomedImage(img.node.url)}
+                          className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                            zoomedImage === img.node.url 
+                              ? 'bg-primary w-4' 
+                              : 'bg-muted-foreground/50 hover:bg-muted-foreground'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                  
+                  {/* Image label */}
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 px-3 py-1 bg-background/80 backdrop-blur-sm rounded-full">
+                    <span className="text-xs font-medium text-foreground">
+                      {(() => {
+                        const currentIndex = product.images?.edges?.findIndex(img => img.node.url === zoomedImage) ?? 0;
+                        return `${currentIndex + 1} / ${product.images?.edges?.length ?? 0}`;
+                      })()}
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Thumbnail strip */}
+                <div className="flex gap-2 mt-3 justify-center overflow-x-auto pb-2">
+                  {product.images?.edges?.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setZoomedImage(img.node.url)}
+                      className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                        zoomedImage === img.node.url 
+                          ? 'border-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.3)]' 
+                          : 'border-border/50 hover:border-primary/50'
+                      }`}
+                    >
+                      <img
+                        src={img.node.url}
+                        alt={img.node.altText || `Vue ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
                 </div>
               </DialogContent>
             </Dialog>
