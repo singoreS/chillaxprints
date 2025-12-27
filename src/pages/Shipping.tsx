@@ -297,7 +297,7 @@ const Shipping = () => {
                     🏭 D'où sont expédiés les produits ?
                   </h4>
                   <p className="text-muted-foreground">
-                    Nos centres de production sont situés en Europe, aux États-Unis et dans 
+                    Nos partenaires de production sont situés en Europe, aux États-Unis et dans 
                     d'autres régions. Nous sélectionnons automatiquement le centre de production 
                     le plus proche de ton adresse pour réduire les délais et l'empreinte carbone.
                   </p>

@@ -17,7 +17,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
-import { getProducts, ShopifyProduct } from "@/lib/shopify";
+import { getProducts, getAllCollections, ShopifyProduct, ShopifyCollection } from "@/lib/shopify";
 import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -39,7 +39,9 @@ import winterBonnet from "@/assets/products/winter-chill-bonnet.jpg";
 
 const Home = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [loading, setLoading] = useState(true);
+  const [collectionsLoading, setCollectionsLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const addItemToCart = useCartStore((state) => state.addItem);
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlistStore();
@@ -70,6 +72,19 @@ const Home = () => {
     loadProducts();
   }, []);
 
+  useEffect(() => {
+    const loadCollections = async () => {
+      try {
+        const collectionsData = await getAllCollections();
+        setCollections(collectionsData);
+      } catch (error) {
+        console.error("Error loading collections:", error);
+      } finally {
+        setCollectionsLoading(false);
+      }
+    };
+    loadCollections();
+  }, []);
 
   const handleAddToCart = (product: ShopifyProduct) => {
     const variant = product.node.variants.edges[0]?.node;
@@ -319,6 +334,68 @@ const Home = () => {
               <CarouselPrevious className="left-2" />
               <CarouselNext className="right-2" />
             </Carousel>
+          )}
+        </div>
+      </section>
+
+      {/* Collections Section */}
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
+        <div className="container px-4 md:px-6">
+          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Explorer par Collection</h2>
+            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground">
+              Découvre nos univers uniques
+            </p>
+          </div>
+
+          {collectionsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+              {[...Array(3)].map((_, i) => (
+                <Card key={i} className="overflow-hidden border-2">
+                  <Skeleton className="h-48 sm:h-56 md:h-64 lg:h-72 w-full" />
+                </Card>
+              ))}
+            </div>
+          ) : collections.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Aucune collection disponible pour le moment.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+              {collections.slice(0, 3).map((collection, index) => (
+                <Link
+                  key={collection.id}
+                  to={`/collection/${collection.handle}`}
+                  className="group block animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <Card className="overflow-hidden border-2 hover:border-primary hover:shadow-[var(--shadow-elegant)] transition-all duration-300">
+                    <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden bg-muted">
+                      {collection.image ? (
+                        <img
+                          src={collection.image.url}
+                          alt={collection.image.altText || collection.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8">
+                        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-1 md:mb-2">
+                          {collection.title}
+                        </h3>
+                        {collection.description && (
+                          <p className="text-sm md:text-base text-muted-foreground line-clamp-2">
+                            {collection.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           )}
         </div>
       </section>

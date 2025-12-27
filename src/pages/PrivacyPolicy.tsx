@@ -80,16 +80,17 @@ const PrivacyPolicy = () => {
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">5. Partage des données</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Pour assurer la production et la livraison de vos commandes, nous partageons certaines données avec nos prestataires :
+                Pour assurer la production et la livraison de vos commandes, nous partageons certaines données avec nos partenaires :
               </p>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground mt-4">
                 <li><strong>Shopify :</strong> notre plateforme e-commerce pour le traitement des commandes et paiements</li>
-                <li><strong>Centres de production :</strong> nos centres de production reçoivent votre nom, adresse de livraison et détails de commande pour fabriquer et expédier vos produits</li>
+                <li><strong>Printify :</strong> notre partenaire principal de production Print-on-Demand. Ils reçoivent votre nom, adresse de livraison et détails de commande pour fabriquer et expédier vos produits</li>
+                <li><strong>Fournisseurs de production :</strong> Printify travaille avec un réseau mondial de fournisseurs d'impression (aux États-Unis, Europe, Asie) qui peuvent recevoir vos données de livraison pour produire et expédier localement</li>
                 <li><strong>Transporteurs :</strong> DHL, USPS, FedEx, La Poste, et autres transporteurs locaux pour la livraison de vos colis</li>
                 <li><strong>Prestataires de paiement :</strong> Shopify Payments, PayPal, Stripe pour le traitement sécurisé des paiements</li>
               </ul>
               <p className="text-muted-foreground leading-relaxed mt-4">
-                <strong>Important :</strong> Nos prestataires de production sont contractuellement tenus de protéger vos données et de les utiliser uniquement pour la production et l'expédition de vos commandes. Nous ne vendons jamais vos données personnelles à des tiers à des fins marketing.
+                <strong>Important :</strong> Nos partenaires Print-on-Demand (Printify et leurs fournisseurs) sont contractuellement tenus de protéger vos données et de les utiliser uniquement pour la production et l'expédition de vos commandes. Nous ne vendons jamais vos données personnelles à des tiers à des fins marketing.
               </p>
             </section>
 
