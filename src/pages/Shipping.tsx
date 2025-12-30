@@ -7,38 +7,18 @@ import { Badge } from "@/components/ui/badge";
 import { Truck, Package, Globe, Clock, MapPin, CheckCircle, Printer } from "lucide-react";
 
 const Shipping = () => {
-  const shippingZones = [
+  const deliveryInfo = [
     {
-      zone: "France métropolitaine",
-      icon: <MapPin className="h-5 w-5" />,
-      options: [
-        { name: "Livraison Standard", delay: "5-12 jours ouvrés", price: "4,99 €", free: "Gratuit dès 60€" },
-        { name: "Livraison Express", delay: "3-7 jours ouvrés", price: "9,99 €", free: null },
-      ]
+      title: "Production",
+      description: "Chaque article est fabriqué après ta commande par nos différents fournisseurs partenaires.",
+      delay: "2-7 jours ouvrés",
+      note: "Varie selon le type de produit et le fournisseur"
     },
     {
-      zone: "Union Européenne",
-      icon: <Globe className="h-5 w-5" />,
-      options: [
-        { name: "Livraison Standard", delay: "7-14 jours ouvrés", price: "7,99 €", free: "Gratuit dès 80€" },
-        { name: "Livraison Express", delay: "5-10 jours ouvrés", price: "14,99 €", free: null },
-      ]
-    },
-    {
-      zone: "États-Unis & Canada",
-      icon: <Globe className="h-5 w-5" />,
-      options: [
-        { name: "Livraison Standard", delay: "8-15 jours ouvrés", price: "9,99 €", free: "Gratuit dès 100€" },
-        { name: "Livraison Express", delay: "5-10 jours ouvrés", price: "19,99 €", free: null },
-      ]
-    },
-    {
-      zone: "International (Reste du monde)",
-      icon: <Truck className="h-5 w-5" />,
-      options: [
-        { name: "Livraison Standard", delay: "10-25 jours ouvrés", price: "14,99 €", free: null },
-        { name: "Livraison Express", delay: "7-15 jours ouvrés", price: "24,99 €", free: null },
-      ]
+      title: "Livraison",
+      description: "Le délai de livraison dépend de ta localisation et du fournisseur le plus proche.",
+      delay: "3-15 jours ouvrés",
+      note: "Calculé automatiquement au checkout"
     }
   ];
 
@@ -71,11 +51,11 @@ const Shipping = () => {
                   <Printer className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2">🎨 Impression à la demande</h3>
+                  <h3 className="font-semibold text-foreground mb-2">🎨 Fabrication à la demande</h3>
                   <p className="text-muted-foreground">
-                    Chaque article ChillaxPrints est <strong>imprimé spécialement pour toi</strong> après ta commande. 
-                    Ce modèle nous permet de réduire le gaspillage et de proposer des designs uniques ! 
-                    Les délais incluent le temps de production (2-5 jours) + la livraison.
+                    Chaque article ChillaxPrints est <strong>fabriqué spécialement pour toi</strong> après ta commande 
+                    par l'un de nos fournisseurs partenaires. Les délais et frais de livraison varient selon ta localisation 
+                    et sont calculés automatiquement au checkout.
                   </p>
                 </div>
               </div>
@@ -87,8 +67,8 @@ const Shipping = () => {
             <Card className="border-primary/20 bg-primary/5">
               <CardContent className="p-4 text-center">
                 <Package className="h-8 w-8 text-primary mx-auto mb-2" />
-                <p className="text-sm font-medium text-foreground">Livraison offerte</p>
-                <p className="text-xs text-muted-foreground">dès 60€ en France</p>
+                <p className="text-sm font-medium text-foreground">Frais calculés</p>
+                <p className="text-xs text-muted-foreground">au checkout</p>
               </CardContent>
             </Card>
             
@@ -112,53 +92,60 @@ const Shipping = () => {
               <CardContent className="p-4 text-center">
                 <Clock className="h-8 w-8 text-primary mx-auto mb-2" />
                 <p className="text-sm font-medium text-foreground">Production rapide</p>
-                <p className="text-xs text-muted-foreground">2-5 jours ouvrés</p>
+                <p className="text-xs text-muted-foreground">2-7 jours ouvrés</p>
               </CardContent>
             </Card>
           </div>
 
-          {/* Shipping Zones */}
+          {/* Delivery Timeline */}
           <div className="space-y-6 mb-12">
-            <h2 className="text-2xl font-semibold text-foreground">Zones de livraison & Tarifs</h2>
+            <h2 className="text-2xl font-semibold text-foreground">Délais estimés</h2>
             <p className="text-muted-foreground">
-              Les délais indiqués incluent le temps de production (2-5 jours) et l'expédition.
+              Les délais varient en fonction de ta localisation et du fournisseur sélectionné. 
+              Le prix et le délai exacts sont calculés automatiquement au moment du checkout.
             </p>
             
-            {shippingZones.map((zone) => (
-              <Card key={zone.zone}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    {zone.icon}
-                    {zone.zone}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {zone.options.map((option, idx) => (
-                      <div 
-                        key={idx} 
-                        className="flex flex-wrap items-center justify-between gap-2 p-3 bg-secondary/20 rounded-lg"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="font-medium text-foreground">{option.name}</span>
-                          <span className="text-sm text-muted-foreground">
-                            {option.delay}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-foreground">{option.price}</span>
-                          {option.free && (
-                            <Badge variant="secondary" className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                              {option.free}
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    ))}
+            <div className="grid md:grid-cols-2 gap-6">
+              {deliveryInfo.map((info, idx) => (
+                <Card key={idx} className="border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      {idx === 0 ? <Printer className="h-5 w-5 text-primary" /> : <Truck className="h-5 w-5 text-primary" />}
+                      {info.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4">{info.description}</p>
+                    <div className="flex items-center justify-between p-3 bg-secondary/20 rounded-lg">
+                      <span className="font-medium text-foreground">{info.delay}</span>
+                      <Badge variant="secondary" className="text-xs">
+                        {info.note}
+                      </Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Multi-supplier info */}
+            <Card className="border-accent/20 bg-accent/5">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-accent/10">
+                    <Globe className="h-6 w-6 text-accent-foreground" />
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-2">🌍 Plusieurs fournisseurs partenaires</h3>
+                    <p className="text-muted-foreground">
+                      Nous travaillons avec différents fournisseurs situés à travers le monde (Europe, États-Unis, Asie). 
+                      Pour chaque commande, nous sélectionnons automatiquement le fournisseur le plus proche de ton adresse 
+                      pour réduire les délais et les frais de livraison. C'est pourquoi les délais et tarifs exacts 
+                      sont affichés au moment du checkout.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           <Separator className="mb-8" />
@@ -230,12 +217,12 @@ const Shipping = () => {
               <Card>
                 <CardContent className="p-4">
                   <h4 className="font-medium text-foreground mb-2">
-                    ⏱️ Pourquoi les délais sont plus longs que d'autres boutiques ?
+                    ⏱️ Pourquoi les délais varient-ils ?
                   </h4>
                   <p className="text-muted-foreground">
-                    Chaque article est fabriqué spécialement pour toi après ta commande (print-on-demand). 
-                    Cela nous permet de proposer des designs uniques tout en évitant le gaspillage. 
-                    Le délai inclut 2-5 jours de production + le temps de livraison.
+                    Nous travaillons avec plusieurs fournisseurs partenaires situés à travers le monde. 
+                    Le délai dépend du fournisseur sélectionné (le plus proche de chez toi) et de ta localisation. 
+                    Les délais exacts sont calculés et affichés au moment du checkout.
                   </p>
                 </CardContent>
               </Card>
