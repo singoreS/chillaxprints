@@ -111,21 +111,16 @@ const TermsOfSale = () => {
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">Article 6 - Fabrication et Livraison</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                <strong>Délai de production :</strong> 2-5 jours ouvrés après réception de la commande.
+                <strong>Délai de production :</strong> 2-7 jours ouvrés après réception de la commande, selon le type de produit.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                <strong>Délais de livraison indicatifs (production incluse) :</strong>
+                <strong>Délais de livraison :</strong> Les délais varient selon votre localisation et le fournisseur sélectionné. 
+                Le délai et le tarif de livraison exacts sont calculés et affichés au moment du checkout.
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                <li><strong>France métropolitaine :</strong> 5-12 jours ouvrés</li>
-                <li><strong>Union Européenne :</strong> 7-14 jours ouvrés</li>
-                <li><strong>États-Unis & Canada :</strong> 8-15 jours ouvrés</li>
-                <li><strong>International :</strong> 10-25 jours ouvrés</li>
-              </ul>
               <p className="text-muted-foreground leading-relaxed mt-4">
-                <strong>Centres de production :</strong> Pour optimiser les délais et réduire l'empreinte 
-                carbone, vos produits sont fabriqués dans le centre de production le plus proche de 
-                votre adresse de livraison (Europe, États-Unis, ou autres régions).
+                <strong>Production à la demande :</strong> Vos produits sont fabriqués après votre commande par nos fournisseurs 
+                partenaires. Le fournisseur le plus proche de votre adresse est automatiquement sélectionné pour optimiser 
+                les délais et réduire l'empreinte carbone.
               </p>
               <p className="text-muted-foreground leading-relaxed mt-4">
                 ChillaxPrints ne peut être tenu responsable des retards de livraison imputables 
@@ -192,9 +187,8 @@ const TermsOfSale = () => {
                 de la commande concernée.
               </p>
               <p className="text-muted-foreground leading-relaxed mt-4">
-                Les produits sont fabriqués par nos partenaires de production selon des standards 
-                de qualité stricts. ChillaxPrints agit en tant que donneur d'ordre et reste 
-                votre interlocuteur unique pour toute question ou réclamation.
+                Les produits sont fabriqués selon des standards de qualité stricts. 
+                ChillaxPrints reste votre interlocuteur unique pour toute question ou réclamation.
               </p>
             </section>
 
@@ -203,7 +197,7 @@ const TermsOfSale = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Le traitement de vos données personnelles est décrit dans notre Politique de Confidentialité. 
                 En passant commande, vous acceptez que vos données soient traitées conformément à cette politique 
-                et partagées avec nos partenaires de production et de livraison dans le seul but de traiter 
+                et partagées avec nos prestataires de production et de livraison dans le seul but de traiter 
                 votre commande.
               </p>
             </section>

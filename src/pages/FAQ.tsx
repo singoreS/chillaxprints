@@ -42,7 +42,7 @@ const FAQ = () => {
         },
         {
           question: "Puis-je commander plusieurs articles différents ?",
-          answer: "Absolument ! Vous pouvez ajouter autant d'articles que vous le souhaitez à votre panier. Notez cependant que chaque article étant fabriqué individuellement, ils peuvent être expédiés séparément si produits par différents partenaires."
+          answer: "Absolument ! Vous pouvez ajouter autant d'articles que vous le souhaitez à votre panier. Notez cependant que chaque article étant fabriqué individuellement, ils peuvent être expédiés séparément selon le fournisseur."
         }
       ]
     },
@@ -76,15 +76,15 @@ const FAQ = () => {
       questions: [
         {
           question: "Quels sont les délais de livraison ?",
-          answer: "Les délais comprennent la production (2-5 jours ouvrés) + l'expédition. Pour la France : 5-10 jours ouvrés au total. Pour l'Europe : 7-14 jours ouvrés. Pour l'international : 10-20 jours ouvrés. Ces délais peuvent varier selon la période (fêtes, soldes) et le type de produit."
+          answer: "Les délais comprennent la production (2-7 jours ouvrés) + l'expédition. Les délais varient selon votre localisation et le fournisseur sélectionné. Le délai exact est calculé et affiché au moment du checkout."
         },
         {
-          question: "Pourquoi les délais sont-ils plus longs que sur d'autres sites ?",
-          answer: "Contrairement aux grandes enseignes qui stockent des milliers de produits en entrepôt, nous utilisons le print-on-demand. Chaque article est fabriqué spécialement pour vous après votre commande. C'est plus écologique (pas de surproduction) et garantit un produit frais et personnalisé !"
+          question: "Pourquoi les délais varient-ils ?",
+          answer: "Nous travaillons avec plusieurs fournisseurs situés à travers le monde. Le délai dépend du fournisseur sélectionné (le plus proche de chez vous) et de votre localisation. C'est plus écologique et garantit un produit frais !"
         },
         {
           question: "Livrez-vous à l'international ?",
-          answer: "Oui ! Nous livrons dans le monde entier. Les frais de port et délais varient selon la destination. Nos partenaires de production sont répartis globalement, ce qui nous permet souvent d'expédier depuis un site proche de chez vous."
+          answer: "Oui ! Nous livrons dans le monde entier. Les frais de port et délais varient selon la destination. Le fournisseur le plus proche de votre adresse est automatiquement sélectionné pour optimiser les délais."
         },
         {
           question: "Comment suivre ma commande ?",
@@ -92,11 +92,11 @@ const FAQ = () => {
         },
         {
           question: "Que faire si ma commande n'arrive pas ?",
-          answer: "Si votre colis n'est pas arrivé dans les délais estimés, vérifiez d'abord le suivi. En cas de problème, contactez-nous avec votre numéro de commande. Nous ferons le nécessaire avec notre partenaire logistique pour localiser votre colis ou vous proposer une solution."
+          answer: "Si votre colis n'est pas arrivé dans les délais estimés, vérifiez d'abord le suivi. En cas de problème, contactez-nous avec votre numéro de commande et nous ferons le nécessaire."
         },
         {
           question: "Les frais de port sont-ils offerts ?",
-          answer: "Les frais de port sont calculés en fonction du poids, de la taille de votre commande et de votre destination. Nous proposons régulièrement des offres de livraison gratuite, restez à l'affût de nos promotions !"
+          answer: "Les frais de port sont calculés en fonction du poids, de la taille de votre commande et de votre destination. Nous proposons régulièrement des offres de livraison gratuite !"
         }
       ]
     },
@@ -128,33 +128,29 @@ const FAQ = () => {
       ]
     },
     {
-      id: "printify",
-      title: "Print-on-Demand & Printify",
+      id: "production",
+      title: "Fabrication à la demande",
       icon: Printer,
       questions: [
         {
-          question: "Qu'est-ce que le print-on-demand ?",
-          answer: "Le print-on-demand (impression à la demande) est un modèle de production où chaque article est fabriqué uniquement après votre commande. Pas de stock, pas de gaspillage ! Votre t-shirt ou hoodie est imprimé spécialement pour vous, garantissant fraîcheur et qualité."
-        },
-        {
-          question: "Qui est Printify ?",
-          answer: "Printify est notre partenaire de production, l'un des leaders mondiaux du print-on-demand. Ils disposent d'un réseau de plus de 100 imprimeurs partenaires à travers le monde, ce qui nous permet de vous offrir une production de qualité et une livraison optimisée."
+          question: "Qu'est-ce que la fabrication à la demande ?",
+          answer: "La fabrication à la demande (print-on-demand) est un modèle de production où chaque article est fabriqué uniquement après votre commande. Pas de stock, pas de gaspillage ! Votre t-shirt ou hoodie est créé spécialement pour vous."
         },
         {
           question: "Pourquoi avoir choisi ce modèle ?",
-          answer: "Le print-on-demand nous permet de proposer des designs uniques sans surproduction ni gaspillage textile. C'est plus écologique, plus flexible et garantit que chaque pièce est fraîchement produite pour vous. Fini les vêtements qui traînent en entrepôt !"
+          answer: "Ce modèle nous permet de proposer des designs uniques sans surproduction ni gaspillage textile. C'est plus écologique, plus flexible et garantit que chaque pièce est fraîchement produite pour vous."
         },
         {
           question: "Quelle est la qualité des impressions ?",
-          answer: "Nos partenaires utilisent des techniques d'impression professionnelles : DTG (Direct-to-Garment) pour les textiles et sublimation pour certains accessoires. Les encres sont durables, résistantes aux lavages et respectueuses de l'environnement."
+          answer: "Nous utilisons des techniques d'impression professionnelles : DTG (Direct-to-Garment) pour les textiles et sublimation pour certains accessoires. Les encres sont durables, résistantes aux lavages et respectueuses de l'environnement."
         },
         {
           question: "Les vêtements sont-ils de bonne qualité ?",
-          answer: "Absolument ! Nous sélectionnons soigneusement les supports (t-shirts, hoodies, etc.) parmi les meilleures marques disponibles chez nos partenaires. Coton doux, coupes confortables, finitions soignées. Consultez les descriptions produits pour les détails de chaque article."
+          answer: "Absolument ! Nous sélectionnons soigneusement les supports (t-shirts, hoodies, etc.) parmi les meilleures marques disponibles. Coton doux, coupes confortables, finitions soignées. Consultez les descriptions produits pour les détails."
         },
         {
           question: "Pourquoi mes articles peuvent-ils arriver séparément ?",
-          answer: "Notre réseau de production est mondial. Si vous commandez plusieurs articles, ils peuvent être fabriqués par différents partenaires Printify selon leur spécialité et leur localisation. Cela optimise les délais et la qualité, mais signifie parfois des envois séparés."
+          answer: "Nous travaillons avec plusieurs fournisseurs situés à travers le monde. Si vous commandez plusieurs articles, ils peuvent être fabriqués par différents fournisseurs selon leur spécialité et leur localisation, ce qui peut entraîner des envois séparés."
         }
       ]
     },
@@ -187,8 +183,8 @@ const FAQ = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <SEO
         title="FAQ - Questions Fréquentes"
-        description="Trouvez les réponses à toutes vos questions sur les commandes, livraisons, retours et notre processus de production print-on-demand avec Printify."
-        keywords="FAQ, questions fréquentes, aide, commandes, livraison, retours, print-on-demand, Printify, ChillaxPrints"
+        description="Trouvez les réponses à toutes vos questions sur les commandes, livraisons, retours et notre processus de fabrication à la demande."
+        keywords="FAQ, questions fréquentes, aide, commandes, livraison, retours, print-on-demand, ChillaxPrints"
         canonicalUrl="/faq"
       />
       <Header />
