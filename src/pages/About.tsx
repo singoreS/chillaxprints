@@ -122,68 +122,177 @@ const About = () => {
           </div>
         </section>
 
-        {/* Story Section - Split Layout */}
+        {/* Founder Section - Personal Story */}
         <section className="py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-muted/30" />
           
           <div className="container relative">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Image side with fun decorations */}
               <MotionDiv
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-4">
-                    <img 
-                      src={lifestyle1}
-                      alt="ChillaxPrints style"
-                      className="rounded-2xl shadow-lg object-cover h-64 w-full"
-                    />
-                    <div className="bg-gradient-to-br from-primary to-accent p-6 rounded-2xl text-primary-foreground">
-                      <p className="text-4xl font-bold">2024</p>
-                      <p className="text-sm opacity-90">L'aventure commence</p>
+                <div className="relative max-w-md mx-auto">
+                  {/* Decorative background */}
+                  <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-accent/10 to-transparent rounded-3xl blur-2xl" />
+                  
+                  {/* Main image placeholder - stylized */}
+                  <div className="relative aspect-[3/4] rounded-3xl bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-dashed border-primary/30 flex items-center justify-center overflow-hidden">
+                    <div className="text-center p-8 space-y-4">
+                      <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-accent mx-auto flex items-center justify-center">
+                        <span className="text-5xl">👩‍🎨</span>
+                      </div>
+                      <p className="text-muted-foreground italic">La fondatrice en mode chill</p>
                     </div>
                   </div>
-                  <div className="pt-8">
-                    <img 
-                      src={lifestyle2}
-                      alt="ChillaxPrints community"
-                      className="rounded-2xl shadow-lg object-cover h-80 w-full"
-                    />
+                  
+                  {/* Floating badges */}
+                  <div className="absolute -top-4 -right-4 bg-card p-3 rounded-2xl shadow-xl border rotate-6">
+                    <span className="text-2xl">😴</span>
+                  </div>
+                  <div className="absolute -bottom-4 -left-4 bg-card p-4 rounded-2xl shadow-xl border -rotate-3">
+                    <p className="text-sm font-bold text-primary">Pro de la sieste</p>
+                  </div>
+                  <div className="absolute top-1/2 -right-6 bg-primary text-primary-foreground p-3 rounded-2xl shadow-xl rotate-12">
+                    <span className="text-lg">☕</span>
                   </div>
                 </div>
               </MotionDiv>
               
+              {/* Story side */}
               <MotionDiv
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
                 className="space-y-8"
               >
                 <div>
-                  <span className="text-primary font-semibold tracking-wider uppercase text-sm">Notre histoire</span>
+                  <span className="text-primary font-semibold tracking-wider uppercase text-sm">Qui suis-je ?</span>
                   <h2 className="text-4xl md:text-5xl font-bold mt-4 leading-tight">
-                    Né d'une envie de 
-                    <span className="text-primary"> décompresser</span>
+                    La fille derrière
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent"> ChillaxPrints</span>
                   </h2>
                 </div>
                 
                 <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    Pourquoi prendre la vie trop au sérieux quand on peut la vivre 
-                    avec humour et décontraction ? C'est la question qui a fait naître ChillaxPrints.
+                    Salut ! Moi c'est la fondatrice de ChillaxPrints, une jeune femme qui a 
+                    élevé l'art de <span className="font-semibold text-foreground">ne rien faire</span> au 
+                    rang de philosophie de vie. 🛋️
                   </p>
                   <p>
-                    Une passion pour les vêtements confortables et des phrases qui font sourire. 
-                    Une marque pour ceux qui considèrent le sarcasme comme un art de vivre.
+                    Ma vision ? <span className="italic">Pourquoi courir quand on peut marcher ? 
+                    Pourquoi marcher quand on peut s'asseoir ? Et pourquoi s'asseoir quand 
+                    on peut s'allonger ?</span> C'est ça, l'esprit Chillax.
+                  </p>
+                  <p>
+                    J'ai toujours adoré l'humour, le sarcasme et les phrases qui font 
+                    sourire (ou grincer des dents, c'est selon). Un jour, j'ai réalisé que 
+                    je n'étais pas la seule à préférer Netflix à la salle de sport, le 
+                    canapé aux randonnées, et les siestes aux réunions.
                   </p>
                   <p className="font-medium text-foreground">
-                    Aujourd'hui, c'est une communauté de personnes qui assument leur côté 
-                    paresseux avec fierté et style. 😎
+                    ChillaxPrints est né de cette révélation : il fallait une marque pour 
+                    nous, les paresseux assumés, les amateurs d'humour, les champions 
+                    du "je verrai demain". 😎
                   </p>
+                </div>
+                
+                {/* Fun facts */}
+                <div className="grid grid-cols-2 gap-4 pt-4">
+                  <div className="p-4 rounded-2xl bg-card border">
+                    <span className="text-2xl mb-2 block">☕</span>
+                    <p className="text-sm font-medium">Carburant préféré</p>
+                    <p className="text-xs text-muted-foreground">Café + playlist chill</p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-card border">
+                    <span className="text-2xl mb-2 block">🎯</span>
+                    <p className="text-sm font-medium">Super pouvoir</p>
+                    <p className="text-xs text-muted-foreground">Procrastiner avec style</p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-card border">
+                    <span className="text-2xl mb-2 block">❤️</span>
+                    <p className="text-sm font-medium">Passion secrète</p>
+                    <p className="text-xs text-muted-foreground">Créer des designs drôles</p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-card border">
+                    <span className="text-2xl mb-2 block">🏆</span>
+                    <p className="text-sm font-medium">Record personnel</p>
+                    <p className="text-xs text-muted-foreground">8 épisodes d'affilée</p>
+                  </div>
+                </div>
+              </MotionDiv>
+            </div>
+          </div>
+        </section>
+
+        {/* Story Section - Brand Origin */}
+        <section className="py-32 relative overflow-hidden bg-muted/20">
+          <div className="container relative">
+            <div className="max-w-4xl mx-auto text-center">
+              <MotionDiv
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <span className="text-primary font-semibold tracking-wider uppercase text-sm">L'histoire</span>
+                <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+                  Comment tout a commencé
+                </h2>
+                
+                <div className="space-y-6 text-lg text-muted-foreground leading-relaxed text-left md:text-center">
+                  <p>
+                    Un soir, affalée sur mon canapé avec mon hoodie préféré, je scrollais 
+                    sans but sur internet (comme d'hab). Et là, révélation : <span className="font-semibold text-foreground">
+                    pourquoi est-ce qu'il n'existe pas de marque qui célèbre vraiment 
+                    les gens comme moi ?</span>
+                  </p>
+                  <p>
+                    Pas les sportifs du dimanche. Pas les lève-tôt motivés. Non, les vrais : 
+                    ceux qui snooze 5 fois leur réveil, qui considèrent que "sortir" c'est 
+                    aller jusqu'à la boîte aux lettres, et qui ont une relation passionnelle 
+                    avec leur plaid.
+                  </p>
+                  <p className="font-medium text-foreground text-xl">
+                    Alors j'ai créé ChillaxPrints. Pour nous. Pour vous. 
+                    Pour tous les lazy legends de ce monde. 🌟
+                  </p>
+                </div>
+              </MotionDiv>
+              
+              {/* Timeline */}
+              <MotionDiv
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="mt-16 grid md:grid-cols-3 gap-8"
+              >
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent mx-auto flex items-center justify-center text-primary-foreground font-bold text-xl mb-4">
+                    1
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">L'idée 💡</h3>
+                  <p className="text-sm text-muted-foreground">Sur mon canapé, un soir de flemme légendaire</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent mx-auto flex items-center justify-center text-primary-foreground font-bold text-xl mb-4">
+                    2
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">La création 🎨</h3>
+                  <p className="text-sm text-muted-foreground">Des designs qui parlent à tous les lazy legends</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent mx-auto flex items-center justify-center text-primary-foreground font-bold text-xl mb-4">
+                    3
+                  </div>
+                  <h3 className="font-bold text-lg mb-2">Aujourd'hui 🚀</h3>
+                  <p className="text-sm text-muted-foreground">Une communauté de paresseux assumés et fiers !</p>
                 </div>
               </MotionDiv>
             </div>
