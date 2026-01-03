@@ -44,7 +44,7 @@ const THEMED_CONFIGS: Record<string, {
     icon: Moon,
     color: "from-blue-500/20 to-indigo-500/20",
     keywords: ["t-shirt lazy", "tee-shirt humour", "vêtement flemme", "mode détente", "t-shirt procrastination"],
-    searchQuery: "lazy OR flemme OR chill",
+    searchQuery: "title:*lazy*",
     metaDescription: "T-shirts pour procrastinateurs stylés. Designs sarcastiques et humoristiques. Confort premium pour journées détente. Collection lazy lifestyle.",
   },
   "funny-streetwear": {
