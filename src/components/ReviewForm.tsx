@@ -29,7 +29,7 @@ export const ReviewForm = ({ productId, onSuccess }: ReviewFormProps) => {
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
-  const [instagram, setInstagram] = useState("");
+  
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -119,7 +119,6 @@ export const ReviewForm = ({ productId, onSuccess }: ReviewFormProps) => {
           await supabase.from("customer_photos").insert({
             review_id: reviewData.id,
             customer_name: name.trim(),
-            customer_instagram: instagram.trim() || null,
             photo_url: publicUrl,
             caption: content.trim().substring(0, 200),
             is_approved: false,
@@ -216,7 +215,7 @@ export const ReviewForm = ({ productId, onSuccess }: ReviewFormProps) => {
           {errors.content && <p className="text-xs text-destructive mt-1">{errors.content}</p>}
         </div>
 
-        {/* Photo upload - compact */}
+        {/* Photo upload and submit */}
         <div className="flex items-center gap-2">
           <label className="flex-shrink-0 w-10 h-10 border border-dashed rounded-lg flex items-center justify-center cursor-pointer hover:border-primary transition-colors overflow-hidden">
             {photoPreview ? (
@@ -231,13 +230,7 @@ export const ReviewForm = ({ productId, onSuccess }: ReviewFormProps) => {
               className="hidden"
             />
           </label>
-          <Input
-            value={instagram}
-            onChange={(e) => setInstagram(e.target.value)}
-            placeholder="@instagram (optionnel)"
-            maxLength={50}
-            className="h-9 text-sm flex-1"
-          />
+          <span className="text-xs text-muted-foreground flex-1">Photo (optionnel)</span>
           <Button type="submit" disabled={loading} size="sm" className="gap-1.5">
             {loading ? "..." : <><Send className="w-3.5 h-3.5" /> Envoyer</>}
           </Button>
