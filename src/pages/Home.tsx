@@ -25,7 +25,6 @@ import { SEO } from "@/components/SEO";
 import { LoyaltyInfoCard } from "@/components/LoyaltyCard";
 import { useAffiliateTracking } from "@/hooks/useAffiliateTracking";
 import CustomerReviews from "@/components/CustomerReviews";
-import UGCGallery from "@/components/UGCGallery";
 import heroImage from "@/assets/hero-chill.jpg";
 import lifestyle1 from "@/assets/lifestyle-1.jpg";
 import lifestyle2 from "@/assets/lifestyle-2.jpg";
@@ -502,9 +501,6 @@ const Home = () => {
 
       {/* Customer Reviews Section */}
       <CustomerReviews showTitle={true} maxReviews={4} />
-
-      {/* UGC Gallery / Social Proof */}
-      <UGCGallery showTitle={true} showSubmitButton={true} />
 
       {/* Final CTA */}
       <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
