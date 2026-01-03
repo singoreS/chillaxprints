@@ -235,3 +235,43 @@ export const LoyaltyInfoCard = () => {
     </Card>
   );
 };
+
+// Compact version for homepage
+export const LoyaltyInfoCompact = () => {
+  return (
+    <Card className="bg-gradient-to-r from-primary/5 to-accent/5 border">
+      <CardContent className="p-4 md:p-6">
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
+          <div className="flex items-center gap-3 flex-1">
+            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <Gift className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-sm md:text-base">Programme Fidélité</h3>
+              <p className="text-xs text-muted-foreground">
+                {POINTS_TO_EURO} pts = 1€ • Jusqu'à x2 points
+              </p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
+            {Object.entries(LOYALTY_TIERS).map(([key, tier]) => (
+              <div 
+                key={key} 
+                className={`flex-shrink-0 px-2.5 py-1.5 rounded-full text-xs font-medium ${tier.bgColor} ${tier.color} border ${tier.borderColor}`}
+              >
+                {tier.emoji} {tier.name}
+              </div>
+            ))}
+          </div>
+          
+          <Button asChild size="sm" variant="outline" className="flex-shrink-0">
+            <Link to="/connexion">
+              Rejoindre <ArrowRight className="ml-1.5 w-3.5 h-3.5" />
+            </Link>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
