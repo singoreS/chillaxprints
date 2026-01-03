@@ -69,7 +69,7 @@ export const LOYALTY_TIERS = {
 };
 
 // Points conversion rate
-export const POINTS_TO_EURO = 100; // 100 points = 1€ de réduction
+export const POINTS_TO_EURO = 10; // 10 points = 1€ de réduction
 
 export const useLoyaltyPoints = () => {
   const [user, setUser] = useState<User | null>(null);
