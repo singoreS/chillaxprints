@@ -3,8 +3,6 @@ import { Star, Camera, Send, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -142,161 +140,110 @@ export const ReviewForm = ({ productId, onSuccess }: ReviewFormProps) => {
 
   if (submitted) {
     return (
-      <Card className="border-2 border-green-500/30 bg-green-500/5">
-        <CardContent className="py-12 text-center">
-          <div className="w-16 h-16 mx-auto bg-green-500/20 rounded-full flex items-center justify-center mb-4">
-            <Check className="w-8 h-8 text-green-600" />
-          </div>
-          <h3 className="text-xl font-bold mb-2">Merci pour votre avis !</h3>
-          <p className="text-muted-foreground">
-            Votre avis sera publié après validation par notre équipe.
-          </p>
-        </CardContent>
-      </Card>
+      <div className="p-4 rounded-lg border border-green-500/30 bg-green-500/5 text-center">
+        <div className="flex items-center justify-center gap-2 text-green-600">
+          <Check className="w-5 h-5" />
+          <span className="font-medium">Merci ! Avis en attente de validation.</span>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className="border-2">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Star className="w-5 h-5 text-yellow-500" />
-          Laisser un avis
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Rating */}
-          <div className="space-y-2">
-            <Label>Votre note *</Label>
-            <div className="flex gap-2">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <button
-                  key={star}
-                  type="button"
-                  onClick={() => setRating(star)}
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                  className="transition-transform hover:scale-110"
-                >
-                  <Star
-                    className={`w-8 h-8 ${
-                      star <= (hoverRating || rating)
-                        ? "fill-yellow-400 text-yellow-400"
-                        : "text-muted-foreground/30"
-                    }`}
-                  />
-                </button>
-              ))}
-            </div>
-            {errors.rating && <p className="text-sm text-destructive">{errors.rating}</p>}
+    <div className="p-4 rounded-lg border bg-card">
+      <form onSubmit={handleSubmit} className="space-y-3">
+        {/* Rating inline */}
+        <div className="flex items-center gap-3 flex-wrap">
+          <span className="text-sm font-medium">Note :</span>
+          <div className="flex gap-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                type="button"
+                onClick={() => setRating(star)}
+                onMouseEnter={() => setHoverRating(star)}
+                onMouseLeave={() => setHoverRating(0)}
+                className="transition-transform hover:scale-110"
+              >
+                <Star
+                  className={`w-5 h-5 ${
+                    star <= (hoverRating || rating)
+                      ? "fill-yellow-400 text-yellow-400"
+                      : "text-muted-foreground/30"
+                  }`}
+                />
+              </button>
+            ))}
           </div>
+          {errors.rating && <p className="text-xs text-destructive">{errors.rating}</p>}
+        </div>
 
-          {/* Name & Email */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Votre prénom *</Label>
-              <Input
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Marie"
-                maxLength={50}
-              />
-              {errors.customer_name && <p className="text-sm text-destructive">{errors.customer_name}</p>}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Votre email *</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="marie@example.com"
-                maxLength={255}
-              />
-              {errors.customer_email && <p className="text-sm text-destructive">{errors.customer_email}</p>}
-            </div>
-          </div>
-
-          {/* Title */}
-          <div className="space-y-2">
-            <Label htmlFor="title">Titre de l'avis (optionnel)</Label>
+        {/* Name & Email - compact grid */}
+        <div className="grid grid-cols-2 gap-2">
+          <div>
             <Input
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Super produit !"
-              maxLength={100}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Prénom *"
+              maxLength={50}
+              className="h-9 text-sm"
             />
+            {errors.customer_name && <p className="text-xs text-destructive mt-1">{errors.customer_name}</p>}
           </div>
-
-          {/* Content */}
-          <div className="space-y-2">
-            <Label htmlFor="content">Votre avis *</Label>
-            <Textarea
-              id="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Partagez votre expérience avec ce produit..."
-              rows={4}
-              maxLength={1000}
+          <div>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email *"
+              maxLength={255}
+              className="h-9 text-sm"
             />
-            <p className="text-xs text-muted-foreground text-right">{content.length}/1000</p>
-            {errors.content && <p className="text-sm text-destructive">{errors.content}</p>}
+            {errors.customer_email && <p className="text-xs text-destructive mt-1">{errors.customer_email}</p>}
           </div>
+        </div>
 
-          {/* Photo Upload */}
-          <div className="space-y-2">
-            <Label>Ajouter une photo (optionnel)</Label>
-            <div className="flex items-start gap-4">
-              <label className="flex-shrink-0 w-24 h-24 border-2 border-dashed rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-colors">
-                {photoPreview ? (
-                  <img src={photoPreview} alt="Preview" className="w-full h-full object-cover rounded-xl" />
-                ) : (
-                  <>
-                    <Camera className="w-6 h-6 text-muted-foreground" />
-                    <span className="text-xs text-muted-foreground mt-1">Photo</span>
-                  </>
-                )}
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp"
-                  onChange={handlePhotoChange}
-                  className="hidden"
-                />
-              </label>
-              <div className="flex-1 space-y-2">
-                <Input
-                  value={instagram}
-                  onChange={(e) => setInstagram(e.target.value)}
-                  placeholder="@votre_instagram (optionnel)"
-                  maxLength={50}
-                />
-                <p className="text-xs text-muted-foreground">
-                  Partagez votre Instagram pour être crédité si votre photo est publiée !
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* Content - smaller textarea */}
+        <div>
+          <Textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Votre avis... *"
+            rows={2}
+            maxLength={1000}
+            className="text-sm resize-none"
+          />
+          {errors.content && <p className="text-xs text-destructive mt-1">{errors.content}</p>}
+        </div>
 
-          <Button type="submit" disabled={loading} className="w-full gap-2">
-            {loading ? (
-              "Envoi en cours..."
+        {/* Photo upload - compact */}
+        <div className="flex items-center gap-2">
+          <label className="flex-shrink-0 w-10 h-10 border border-dashed rounded-lg flex items-center justify-center cursor-pointer hover:border-primary transition-colors overflow-hidden">
+            {photoPreview ? (
+              <img src={photoPreview} alt="Preview" className="w-full h-full object-cover" />
             ) : (
-              <>
-                <Send className="w-4 h-4" />
-                Envoyer mon avis
-              </>
+              <Camera className="w-4 h-4 text-muted-foreground" />
             )}
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handlePhotoChange}
+              className="hidden"
+            />
+          </label>
+          <Input
+            value={instagram}
+            onChange={(e) => setInstagram(e.target.value)}
+            placeholder="@instagram (optionnel)"
+            maxLength={50}
+            className="h-9 text-sm flex-1"
+          />
+          <Button type="submit" disabled={loading} size="sm" className="gap-1.5">
+            {loading ? "..." : <><Send className="w-3.5 h-3.5" /> Envoyer</>}
           </Button>
-
-          <p className="text-xs text-muted-foreground text-center">
-            Votre avis sera visible après validation par notre équipe. Votre email ne sera pas publié.
-          </p>
-        </form>
-      </CardContent>
-    </Card>
+        </div>
+      </form>
+    </div>
   );
 };
 
