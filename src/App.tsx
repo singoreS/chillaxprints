@@ -27,6 +27,8 @@ import FAQ from "./pages/FAQ";
 import Customization from "./pages/Customization";
 import Affiliate from "./pages/Affiliate";
 import Collection from "./pages/Collection";
+import Collections from "./pages/Collections";
+import ThemedCollection from "./pages/ThemedCollection";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +61,8 @@ const App = () => (
               <Route path="/faq" element={<FAQ />} />
               <Route path="/personnalisation" element={<Customization />} />
               <Route path="/affiliation" element={<Affiliate />} />
+              <Route path="/collections" element={<Collections />} />
+              <Route path="/collections/:themeId" element={<ThemedCollection />} />
               <Route path="/collection/:slug" element={<Collection />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

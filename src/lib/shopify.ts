@@ -325,9 +325,13 @@ export async function storefrontApiRequest(query: string, variables: any = {}) {
   return data;
 }
 
-export async function getProducts(count: number = 20): Promise<ShopifyProduct[]> {
-  const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: count });
-  return data.data.products.edges;
+export async function getProducts(count: number = 20, query?: string): Promise<ShopifyProduct[]> {
+  const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: count, query: query || null });
+  return data?.data?.products?.edges || [];
+}
+
+export async function searchProducts(searchQuery: string, count: number = 20): Promise<ShopifyProduct[]> {
+  return getProducts(count, searchQuery);
 }
 
 export async function getProductByHandle(handle: string): Promise<ShopifyProduct['node'] | null> {

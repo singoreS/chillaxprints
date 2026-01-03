@@ -33,10 +33,10 @@ const Header = () => {
   const navLinks = [
     { to: "/", label: "Accueil" },
     { to: "/boutique", label: "Boutique" },
+    { to: "/collections", label: "Collections" },
     { to: "/personnalisation", label: "Personnalisation" },
     { to: "/a-propos", label: "À Propos" },
     { to: "/contact", label: "Contact" },
-    { to: "/suivi-commande", label: "Suivi" },
   ];
 
   return (
