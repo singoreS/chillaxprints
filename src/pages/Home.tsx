@@ -168,8 +168,8 @@ const Home = () => {
             </h1>
             
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-lg">
-              Le confort rencontre l'humour. Des vêtements pour ceux qui assument leur flemme avec style. 
-              Parce que pourquoi se presser quand on peut rester chill? 😎
+              Streetwear humoristique pour amateurs de détente, café et style lazy. 
+              Hoodies, t-shirts, accessoires. Créé pour les procrastinateurs stylés.
             </p>
 
             <div className="flex flex-wrap gap-2 md:gap-3">
