@@ -190,6 +190,95 @@ export type Database = {
         }
         Relationships: []
       }
+      customer_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          customer_instagram: string | null
+          customer_name: string
+          id: string
+          is_approved: boolean | null
+          photo_url: string
+          review_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          customer_instagram?: string | null
+          customer_name: string
+          id?: string
+          is_approved?: boolean | null
+          photo_url: string
+          review_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          customer_instagram?: string | null
+          customer_name?: string
+          id?: string
+          is_approved?: boolean | null
+          photo_url?: string
+          review_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "customer_photos_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "customer_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      customer_reviews: {
+        Row: {
+          content: string
+          created_at: string
+          customer_email: string
+          customer_name: string
+          id: string
+          is_approved: boolean | null
+          is_verified_purchase: boolean | null
+          product_id: string | null
+          rating: number
+          title: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          id?: string
+          is_approved?: boolean | null
+          is_verified_purchase?: boolean | null
+          product_id?: string | null
+          rating: number
+          title?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          id?: string
+          is_approved?: boolean | null
+          is_verified_purchase?: boolean | null
+          product_id?: string | null
+          rating?: number
+          title?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       loyalty_points: {
         Row: {
           created_at: string | null

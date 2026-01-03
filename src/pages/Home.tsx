@@ -24,12 +24,12 @@ import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
 import { LoyaltyInfoCard } from "@/components/LoyaltyCard";
 import { useAffiliateTracking } from "@/hooks/useAffiliateTracking";
+import CustomerReviews from "@/components/CustomerReviews";
+import UGCGallery from "@/components/UGCGallery";
 import heroImage from "@/assets/hero-chill.jpg";
 import lifestyle1 from "@/assets/lifestyle-1.jpg";
 import lifestyle2 from "@/assets/lifestyle-2.jpg";
 import lifestyle3 from "@/assets/lifestyle-3.jpg";
-import social1 from "@/assets/social-1.jpg";
-import social2 from "@/assets/social-2.jpg";
 import chillHoodie from "@/assets/products/chill-mode-hoodie.jpg";
 import lazyTshirt from "@/assets/products/lazy-legendary-tshirt.jpg";
 import lazyShoes from "@/assets/products/lazy-steps-shoes.jpg";
@@ -500,46 +500,11 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Instagram / Social Proof */}
-      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background to-primary/5">
-        <div className="container px-4 md:px-6">
-          <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-2 md:space-y-4">
-            <Instagram className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 mx-auto text-primary" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Rejoins la Communauté</h2>
-            <p className="text-sm md:text-lg lg:text-xl text-muted-foreground">
-              Partage ton style chill avec #ChillaxPrints
-            </p>
-          </div>
+      {/* Customer Reviews Section */}
+      <CustomerReviews showTitle={true} maxReviews={4} />
 
-          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-4 mb-6 md:mb-8">
-            {[social1, social2, lifestyle1, lifestyle2, lifestyle3, heroImage].map((img, index) => (
-              <div
-                key={index}
-                className="relative aspect-square overflow-hidden rounded-lg md:rounded-2xl group cursor-pointer animate-fade-in"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <img
-                  src={img}
-                  alt={`Community ${index + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Instagram className="w-6 h-6 md:w-10 md:h-10 lg:w-12 lg:h-12 text-background" />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button asChild size="default" variant="outline" className="text-sm md:text-base">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <Instagram className="mr-2 w-4 h-4 md:w-5 md:h-5" />
-                Suivre sur Instagram
-              </a>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* UGC Gallery / Social Proof */}
+      <UGCGallery showTitle={true} showSubmitButton={true} />
 
       {/* Final CTA */}
       <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">

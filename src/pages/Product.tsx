@@ -15,10 +15,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getProductByHandle, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { toast } from "sonner";
+import CustomerReviews from "@/components/CustomerReviews";
+import ReviewForm from "@/components/ReviewForm";
 
 const Product = () => {
   const { id } = useParams();
@@ -424,23 +427,29 @@ const Product = () => {
             </div>
           </div>
 
-          {/* Customer Reviews Section - Compact */}
-          <div className="mt-6 md:mt-8 animate-fade-in border-t border-border/50 pt-4 md:pt-6" style={{ animationDelay: '0.3s' }}>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-base md:text-lg font-bold">Avis clients</h2>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star key={star} className="w-4 h-4 text-muted-foreground/30" strokeWidth={1.5} />
-                ))}
-                <span className="text-xs text-muted-foreground ml-1">0/5 (0 avis)</span>
-              </div>
-            </div>
-            
-            <div className="text-center py-6 px-4 rounded-lg border border-dashed border-border/50 bg-secondary/10">
-              <p className="text-sm text-muted-foreground">
-                Aucun avis pour le moment. Sois le premier à partager ton expérience !
-              </p>
-            </div>
+          {/* Customer Reviews Section */}
+          <div className="mt-8 md:mt-12 animate-fade-in border-t border-border/50 pt-6 md:pt-8" style={{ animationDelay: '0.3s' }}>
+            <Tabs defaultValue="reviews" className="w-full">
+              <TabsList className="w-full grid grid-cols-2 mb-6">
+                <TabsTrigger value="reviews" className="gap-2">
+                  <Star className="w-4 h-4" />
+                  Avis clients
+                </TabsTrigger>
+                <TabsTrigger value="write-review" className="gap-2">
+                  ✍️ Laisser un avis
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="reviews">
+                <CustomerReviews productId={product?.id} showTitle={false} maxReviews={4} />
+              </TabsContent>
+              
+              <TabsContent value="write-review">
+                <div className="max-w-2xl mx-auto">
+                  <ReviewForm productId={product?.id} />
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </main>
