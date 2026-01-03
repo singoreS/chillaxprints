@@ -72,6 +72,18 @@ const Footer = () => {
                   FAQ
                 </Link>
               </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    // Trigger cookie consent popup by removing the stored preference
+                    localStorage.removeItem('cookieConsent');
+                    window.location.reload();
+                  }}
+                  className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block text-left"
+                >
+                  Gérer les cookies
+                </button>
+              </li>
             </ul>
           </div>
 

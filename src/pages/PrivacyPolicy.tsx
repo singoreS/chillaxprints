@@ -124,20 +124,92 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-foreground mb-4">8. Cookies</h2>
+              <h2 className="text-2xl font-semibold text-foreground mb-4">8. Politique de Cookies</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Les cookies sont de petits fichiers texte stockés sur votre appareil lorsque vous visitez notre site. 
+                Nous utilisons différents types de cookies pour améliorer votre expérience.
+              </p>
+              
+              <h3 className="text-xl font-medium text-foreground mt-6 mb-3">8.1 Types de cookies utilisés</h3>
+              <ul className="list-disc pl-6 space-y-3 text-muted-foreground">
+                <li>
+                  <strong>Cookies strictement nécessaires :</strong> Indispensables au fonctionnement du site 
+                  (panier d'achat, connexion à votre compte, sécurité). Ces cookies ne nécessitent pas votre 
+                  consentement car le site ne peut pas fonctionner sans eux.
+                </li>
+                <li>
+                  <strong>Cookies analytiques :</strong> Nous aident à comprendre comment les visiteurs 
+                  interagissent avec notre site (pages visitées, temps passé, taux de rebond). 
+                  Ces données sont anonymisées.
+                </li>
+                <li>
+                  <strong>Cookies marketing :</strong> Utilisés pour vous proposer des publicités pertinentes 
+                  sur d'autres sites. Ils permettent également de mesurer l'efficacité de nos campagnes.
+                </li>
+                <li>
+                  <strong>Cookies de réseaux sociaux :</strong> Permettent le partage sur les réseaux sociaux 
+                  (Instagram, TikTok, Pinterest) et peuvent être utilisés à des fins de publicité ciblée par ces plateformes.
+                </li>
+              </ul>
+              
+              <h3 className="text-xl font-medium text-foreground mt-6 mb-3">8.2 Gestion de vos préférences cookies</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Lors de votre première visite, une bannière de consentement vous permet de choisir quels cookies vous acceptez. 
+                Vous pouvez à tout moment modifier vos préférences en cliquant sur le lien "Gérer les cookies" 
+                présent dans le footer de notre site ou via les paramètres de votre navigateur.
+              </p>
+              
+              <h3 className="text-xl font-medium text-foreground mt-6 mb-3">8.3 Durée de conservation des cookies</h3>
+              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+                <li><strong>Cookies de session :</strong> Supprimés à la fermeture du navigateur</li>
+                <li><strong>Cookies persistants :</strong> Maximum 13 mois conformément aux recommandations de la CNIL</li>
+                <li><strong>Votre choix de consentement :</strong> Conservé 6 mois</li>
+              </ul>
+              
+              <h3 className="text-xl font-medium text-foreground mt-6 mb-3">8.4 Comment désactiver les cookies ?</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Nous utilisons des cookies pour améliorer votre expérience. Pour plus d'informations, 
-                consultez notre bannière de gestion des cookies lors de votre première visite.
+                Vous pouvez configurer votre navigateur pour refuser tous les cookies ou pour vous alerter 
+                lorsqu'un cookie est envoyé. Voici comment faire selon votre navigateur :
               </p>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground mt-4">
-                <li><strong>Cookies essentiels :</strong> nécessaires au fonctionnement du site</li>
-                <li><strong>Cookies analytiques :</strong> pour comprendre l'utilisation du site</li>
-                <li><strong>Cookies marketing :</strong> pour personnaliser les publicités (avec consentement)</li>
+                <li><strong>Chrome :</strong> Paramètres → Confidentialité et sécurité → Cookies</li>
+                <li><strong>Firefox :</strong> Options → Vie privée et sécurité → Cookies</li>
+                <li><strong>Safari :</strong> Préférences → Confidentialité → Cookies</li>
+                <li><strong>Edge :</strong> Paramètres → Cookies et autorisations de site</li>
+              </ul>
+              <p className="text-muted-foreground leading-relaxed mt-4">
+                <strong>Note :</strong> La désactivation de certains cookies peut affecter votre expérience sur notre site 
+                (impossibilité de conserver le panier, de se connecter, etc.).
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-foreground mb-4">9. Consentement RGPD</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Conformément au Règlement Général sur la Protection des Données (RGPD) et à la directive ePrivacy, 
+                nous recueillons votre consentement avant de :
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+                <li>Déposer des cookies non essentiels sur votre appareil</li>
+                <li>Vous envoyer des communications marketing (newsletter, promotions)</li>
+                <li>Partager vos données avec des partenaires publicitaires</li>
+                <li>Utiliser vos données à des fins de profilage publicitaire</li>
+              </ul>
+              
+              <h3 className="text-xl font-medium text-foreground mt-6 mb-3">Retrait du consentement</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Vous pouvez retirer votre consentement à tout moment, sans justification. Ce retrait ne remet 
+                pas en cause la légalité du traitement effectué avant le retrait. Pour retirer votre consentement :
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-muted-foreground mt-4">
+                <li><strong>Pour les cookies :</strong> Utilisez le gestionnaire de cookies accessible depuis le footer</li>
+                <li><strong>Pour la newsletter :</strong> Cliquez sur le lien de désinscription présent dans chaque email</li>
+                <li><strong>Pour toute autre demande :</strong> Contactez-nous à contact@chillaxprints.com</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-foreground mb-4">9. Sécurité</h2>
+              <h2 className="text-2xl font-semibold text-foreground mb-4">10. Sécurité</h2>
               <p className="text-muted-foreground leading-relaxed">
                 Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos données :
                 connexions sécurisées HTTPS, chiffrement des données sensibles, accès restreint aux données personnelles.
@@ -145,7 +217,7 @@ const PrivacyPolicy = () => {
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-foreground mb-4">10. Contact</h2>
+              <h2 className="text-2xl font-semibold text-foreground mb-4">11. Contact</h2>
               <p className="text-muted-foreground leading-relaxed">
                 Pour toute question concernant cette politique ou vos données personnelles :
               </p>
