@@ -14,6 +14,7 @@ interface CookiePreferences {
     facebook: boolean;
     instagram: boolean;
     tiktok: boolean;
+    pinterest: boolean;
   };
   ecommercePartners: {
     printify: boolean;
@@ -36,6 +37,7 @@ export const CookieConsent = () => {
       facebook: false,
       instagram: false,
       tiktok: false,
+      pinterest: false,
     },
     ecommercePartners: {
       printify: false,
@@ -62,6 +64,7 @@ export const CookieConsent = () => {
         facebook: true,
         instagram: true,
         tiktok: true,
+        pinterest: true,
       },
       ecommercePartners: {
         printify: true,
@@ -81,6 +84,7 @@ export const CookieConsent = () => {
         facebook: false,
         instagram: false,
         tiktok: false,
+        pinterest: false,
       },
       ecommercePartners: {
         printify: false,
@@ -115,6 +119,9 @@ export const CookieConsent = () => {
     }
     if (prefs.socialMedia.tiktok) {
       console.log("TikTok data sharing enabled");
+    }
+    if (prefs.socialMedia.pinterest) {
+      console.log("Pinterest data sharing enabled");
     }
     if (prefs.ecommercePartners.printify) {
       console.log("Printify data sharing enabled");
@@ -319,6 +326,27 @@ export const CookieConsent = () => {
                         setPreferences(prev => ({ 
                           ...prev, 
                           socialMedia: { ...prev.socialMedia, tiktok: checked }
+                        }))
+                      }
+                    />
+                  </div>
+
+                  {/* Pinterest */}
+                  <div className="flex items-start justify-between gap-4 p-3 bg-secondary/20 rounded-lg ml-2">
+                    <div className="flex-1">
+                      <Label className="font-medium text-foreground text-sm">
+                        Pinterest
+                      </Label>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Partage des données avec Pinterest pour des publicités ciblées.
+                      </p>
+                    </div>
+                    <Switch 
+                      checked={preferences.socialMedia.pinterest}
+                      onCheckedChange={(checked) => 
+                        setPreferences(prev => ({ 
+                          ...prev, 
+                          socialMedia: { ...prev.socialMedia, pinterest: checked }
                         }))
                       }
                     />
