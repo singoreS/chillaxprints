@@ -15,46 +15,6 @@ interface Review {
   is_verified_purchase: boolean;
 }
 
-// Placeholder reviews for when there are no real reviews yet
-const placeholderReviews: Review[] = [
-  {
-    id: "placeholder-1",
-    customer_name: "Marie L.",
-    rating: 5,
-    title: "Trop confortable !",
-    content: "Mon hoodie 'Pas Pressé' est devenu mon uniforme de télétravail. Doux, drôle, et parfait pour les réunions Zoom où seul le haut est visible 😂",
-    created_at: new Date().toISOString(),
-    is_verified_purchase: true,
-  },
-  {
-    id: "placeholder-2",
-    customer_name: "Thomas B.",
-    rating: 5,
-    title: "Qualité au top",
-    content: "Le t-shirt 'Le sarcasme est mon cardio' fait rire tout le monde au bureau. L'impression est nickel même après plusieurs lavages. Je recommande !",
-    created_at: new Date().toISOString(),
-    is_verified_purchase: true,
-  },
-  {
-    id: "placeholder-3",
-    customer_name: "Emma P.",
-    rating: 5,
-    title: "Livraison rapide",
-    content: "Commandé le lundi, reçu le vendredi. Le bonnet est super chaud et le design 'Winter Chill Mode' est trop stylé. Ma nouvelle pièce préférée !",
-    created_at: new Date().toISOString(),
-    is_verified_purchase: true,
-  },
-  {
-    id: "placeholder-4",
-    customer_name: "Lucas M.",
-    rating: 4,
-    title: "Très satisfait",
-    content: "Super qualité pour les sneakers Lazy Steps. Confortables pour traîner à la maison comme pour sortir. Le seul bémol : j'en veux d'autres couleurs !",
-    created_at: new Date().toISOString(),
-    is_verified_purchase: true,
-  },
-];
-
 interface CustomerReviewsProps {
   productId?: string;
   showTitle?: boolean;
@@ -84,11 +44,10 @@ export const CustomerReviews = ({ productId, showTitle = true, maxReviews = 4 }:
 
         if (error) throw error;
 
-        // Use placeholder reviews if no real reviews exist
-        setReviews(data && data.length > 0 ? data : placeholderReviews);
+        setReviews(data || []);
       } catch (error) {
         console.error("Error fetching reviews:", error);
-        setReviews(placeholderReviews);
+        setReviews([]);
       } finally {
         setLoading(false);
       }
@@ -128,6 +87,32 @@ export const CustomerReviews = ({ productId, showTitle = true, maxReviews = 4 }:
           <div className="h-32 bg-muted rounded max-w-2xl mx-auto" />
         </div>
       </div>
+    );
+  }
+
+  // Don't render section if no reviews
+  if (reviews.length === 0) {
+    return (
+      <section className="py-12 md:py-16 lg:py-20">
+        <div className="container px-4 md:px-6">
+          {showTitle && (
+            <div className="text-center mb-8 space-y-2">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20">
+                <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                <span className="text-sm font-medium text-yellow-600">Avis Clients</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+                Avis clients
+              </h2>
+            </div>
+          )}
+          <div className="text-center py-8">
+            <p className="text-muted-foreground">
+              Aucun avis pour le moment. Soyez le premier à donner votre avis !
+            </p>
+          </div>
+        </div>
+      </section>
     );
   }
 
