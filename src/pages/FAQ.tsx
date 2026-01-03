@@ -24,25 +24,129 @@ import { Button } from "@/components/ui/button";
 const FAQ = () => {
   const faqCategories = [
     {
+      id: "livraison",
+      title: "Livraison",
+      icon: Truck,
+      questions: [
+        {
+          question: "Quels sont les délais de livraison ?",
+          answer: "🇫🇷 France : 5-10 jours ouvrés • 🇪🇺 Europe : 7-14 jours ouvrés • 🌍 International : 10-20 jours ouvrés. Ces délais incluent la production + l'expédition. Le délai exact est affiché au checkout."
+        },
+        {
+          question: "Livrez-vous partout dans le monde ?",
+          answer: "Oui ! Nous livrons dans le monde entier. Les frais et délais varient selon la destination. Nous sélectionnons automatiquement le centre de production le plus proche de chez vous pour réduire les délais et l'empreinte carbone."
+        },
+        {
+          question: "Comment suivre ma commande ?",
+          answer: "Dès l'expédition, vous recevez un email avec votre numéro de suivi. Vous pouvez aussi suivre votre colis depuis notre page \"Suivi de commande\" ou votre espace client."
+        },
+        {
+          question: "Les frais de port sont-ils offerts ?",
+          answer: "Les frais de port sont calculés selon le poids et la destination. Nous proposons régulièrement des offres de livraison gratuite - suivez-nous sur les réseaux pour ne rien rater !"
+        },
+        {
+          question: "Ma commande n'arrive pas, que faire ?",
+          answer: "Vérifiez d'abord le suivi de votre colis. Si le délai estimé est dépassé, contactez-nous avec votre numéro de commande. Nous ferons le nécessaire pour résoudre le problème rapidement."
+        }
+      ]
+    },
+    {
+      id: "production",
+      title: "Production & Délais",
+      icon: Printer,
+      questions: [
+        {
+          question: "Combien de temps pour fabriquer ma commande ?",
+          answer: "La production prend 2-5 jours ouvrés. Chaque article est fabriqué spécialement pour vous après votre commande. Ce n'est pas du stock, c'est du sur-mesure !"
+        },
+        {
+          question: "Qu'est-ce que le print-on-demand ?",
+          answer: "C'est de la fabrication à la demande : votre article est créé uniquement après votre commande. Pas de stock, pas de gaspillage ! C'est plus écologique et garantit un produit frais."
+        },
+        {
+          question: "Pourquoi ce modèle ?",
+          answer: "Ce modèle nous permet de proposer des designs uniques sans surproduction ni gaspillage textile. Chaque pièce est fraîchement produite pour vous, avec des impressions de qualité professionnelle."
+        },
+        {
+          question: "Quelle est la qualité des impressions ?",
+          answer: "Nous utilisons l'impression DTG (Direct-to-Garment) pour les textiles : encres durables, résistantes aux lavages, et respectueuses de l'environnement. Les couleurs restent vives lavage après lavage."
+        },
+        {
+          question: "Pourquoi mes articles arrivent-ils séparément ?",
+          answer: "Nous travaillons avec plusieurs centres de production à travers le monde. Si vous commandez plusieurs articles, ils peuvent être fabriqués à différents endroits pour optimiser les délais. Donc parfois, plusieurs colis !"
+        }
+      ]
+    },
+    {
+      id: "tailles",
+      title: "Choisir sa taille",
+      icon: Ruler,
+      questions: [
+        {
+          question: "Comment choisir la bonne taille ?",
+          answer: "Consultez notre Guide des tailles ! Prenez vos mesures (tour de poitrine, longueur) et comparez avec nos tableaux. C'est la méthode la plus fiable pour éviter les mauvaises surprises."
+        },
+        {
+          question: "J'hésite entre deux tailles, laquelle choisir ?",
+          answer: "En cas de doute : prenez la taille au-dessus pour un look décontracté (surtout pour les hoodies), ou la taille en-dessous pour un style plus ajusté. N'hésitez pas à nous contacter si vous doutez !"
+        },
+        {
+          question: "Les tailles sont-elles standard ?",
+          answer: "Nos produits suivent les standards européens. Cependant, chaque modèle peut avoir une coupe différente (regular, fitted, oversized) - c'est toujours indiqué dans la description du produit."
+        },
+        {
+          question: "Les vêtements rétrécissent-ils au lavage ?",
+          answer: "Nos textiles sont pré-rétrécis pour minimiser ce risque. Respectez les instructions : lavage à 30°C, pas de sèche-linge, et vos vêtements garderont leur forme !"
+        },
+        {
+          question: "Où trouver le guide des tailles ?",
+          answer: "Sur chaque page produit, cliquez sur \"Guide des tailles\". Vous pouvez aussi accéder à notre guide complet depuis le footer du site. On y détaille toutes les mesures !"
+        }
+      ]
+    },
+    {
       id: "commandes",
-      title: "Commandes",
+      title: "Modifier ma commande",
       icon: ShoppingBag,
       questions: [
         {
-          question: "Comment passer une commande ?",
-          answer: "C'est super simple ! Parcourez notre boutique, sélectionnez vos articles préférés, choisissez la taille et la couleur, puis ajoutez-les au panier. Une fois prêt, passez à la caisse et suivez les étapes pour finaliser votre achat. Vous recevrez un email de confirmation dès que votre commande sera validée."
+          question: "Puis-je modifier ma commande ?",
+          answer: "⏰ Vous avez 2 heures après l'achat pour demander une modification (taille, couleur, adresse). Passé ce délai, la production est lancée et nous ne pouvons plus intervenir. Contactez-nous vite via la page Contact !"
         },
         {
-          question: "Puis-je modifier ou annuler ma commande ?",
-          answer: "Comme nos produits sont fabriqués à la demande, nous lançons la production dès réception de votre commande. Vous disposez d'un délai de 2 heures après votre achat pour demander une modification ou une annulation. Passé ce délai, nous ne pourrons malheureusement plus intervenir. Contactez-nous rapidement via notre page Contact si besoin."
+          question: "Puis-je annuler ma commande ?",
+          answer: "Comme pour les modifications : vous disposez de 2 heures après l'achat pour demander une annulation. Après ce délai, votre article est déjà en production. Contactez-nous rapidement si besoin !"
         },
         {
-          question: "Comment savoir si ma commande a bien été enregistrée ?",
-          answer: "Dès que votre paiement est confirmé, vous recevez un email de confirmation à l'adresse indiquée lors de votre achat. Si vous ne le voyez pas, vérifiez vos spams. Vous pouvez également suivre votre commande depuis votre espace client ou via le lien de suivi que nous vous envoyons."
+          question: "Je me suis trompé d'adresse, que faire ?",
+          answer: "Contactez-nous immédiatement avec votre numéro de commande et la nouvelle adresse. Si la production n'est pas encore lancée, nous pourrons corriger. Sinon, le colis partira à l'adresse initiale."
         },
         {
-          question: "Puis-je commander plusieurs articles différents ?",
-          answer: "Absolument ! Vous pouvez ajouter autant d'articles que vous le souhaitez à votre panier. Notez cependant que chaque article étant fabriqué individuellement, ils peuvent être expédiés séparément selon le fournisseur."
+          question: "Comment savoir si ma commande est bien passée ?",
+          answer: "Vous recevez un email de confirmation dès que le paiement est validé. Pas d'email ? Vérifiez vos spams ou connectez-vous à votre espace client pour voir l'état de votre commande."
+        }
+      ]
+    },
+    {
+      id: "retours",
+      title: "Retours & Problèmes",
+      icon: RotateCcw,
+      questions: [
+        {
+          question: "Puis-je retourner un article ?",
+          answer: "Nos produits étant fabriqués sur mesure, les retours pour changement d'avis ne sont pas acceptés. En revanche, si votre article est défectueux ou ne correspond pas à la commande, nous vous remplaçons ou remboursons."
+        },
+        {
+          question: "J'ai reçu un article défectueux, que faire ?",
+          answer: "Contactez-nous dans les 14 jours avec des photos du problème + votre numéro de commande. Nous vous envoyons un nouvel article ou vous remboursons, sans frais supplémentaires."
+        },
+        {
+          question: "La taille ne me va pas, c'est possible d'échanger ?",
+          answer: "Malheureusement non, car chaque article est fabriqué à la demande. C'est pourquoi nous insistons sur l'importance de consulter le guide des tailles avant de commander. En cas d'erreur de notre part, bien sûr, on échange !"
+        },
+        {
+          question: "Combien de temps pour un remboursement ?",
+          answer: "Une fois votre demande validée, le remboursement est effectué sous 5-10 jours ouvrés sur votre moyen de paiement d'origine. Vous recevez un email de confirmation."
         }
       ]
     },
@@ -53,127 +157,15 @@ const FAQ = () => {
       questions: [
         {
           question: "Quels moyens de paiement acceptez-vous ?",
-          answer: "Nous acceptons les principales cartes bancaires (Visa, Mastercard, American Express), PayPal, Apple Pay et Google Pay. Tous les paiements sont sécurisés et cryptés pour protéger vos informations."
+          answer: "Cartes bancaires (Visa, Mastercard, American Express), PayPal, Apple Pay et Google Pay. Tous les paiements sont sécurisés et cryptés."
         },
         {
           question: "Le paiement est-il sécurisé ?",
-          answer: "Oui, totalement ! Nous utilisons Shopify Payments qui garantit un niveau de sécurité bancaire. Vos données de paiement sont cryptées et nous ne stockons jamais vos informations de carte bancaire."
-        },
-        {
-          question: "Quand suis-je débité ?",
-          answer: "Le montant de votre commande est débité immédiatement lors de la validation de votre achat. C'est ce qui déclenche la production de vos articles."
+          answer: "100% sécurisé ! Nous utilisons Shopify Payments avec cryptage bancaire. Nous ne stockons jamais vos informations de carte."
         },
         {
           question: "Les prix incluent-ils les taxes ?",
-          answer: "Les prix affichés incluent la TVA pour les clients européens. Pour les clients hors UE, les taxes locales et droits de douane éventuels sont à la charge du destinataire et peuvent être appliqués à la livraison."
-        }
-      ]
-    },
-    {
-      id: "livraison",
-      title: "Livraison & Délais",
-      icon: Truck,
-      questions: [
-        {
-          question: "Quels sont les délais de livraison ?",
-          answer: "Les délais comprennent la production (2-7 jours ouvrés) + l'expédition. Les délais varient selon votre localisation et le fournisseur sélectionné. Le délai exact est calculé et affiché au moment du checkout."
-        },
-        {
-          question: "Pourquoi les délais varient-ils ?",
-          answer: "Nous travaillons avec plusieurs fournisseurs situés à travers le monde. Le délai dépend du fournisseur sélectionné (le plus proche de chez vous) et de votre localisation. C'est plus écologique et garantit un produit frais !"
-        },
-        {
-          question: "Livrez-vous à l'international ?",
-          answer: "Oui ! Nous livrons dans le monde entier. Les frais de port et délais varient selon la destination. Le fournisseur le plus proche de votre adresse est automatiquement sélectionné pour optimiser les délais."
-        },
-        {
-          question: "Comment suivre ma commande ?",
-          answer: "Dès que votre commande est expédiée, vous recevez un email avec un numéro de suivi. Vous pouvez également suivre votre colis depuis notre page Suivi de commande ou votre espace client."
-        },
-        {
-          question: "Que faire si ma commande n'arrive pas ?",
-          answer: "Si votre colis n'est pas arrivé dans les délais estimés, vérifiez d'abord le suivi. En cas de problème, contactez-nous avec votre numéro de commande et nous ferons le nécessaire."
-        },
-        {
-          question: "Les frais de port sont-ils offerts ?",
-          answer: "Les frais de port sont calculés en fonction du poids, de la taille de votre commande et de votre destination. Nous proposons régulièrement des offres de livraison gratuite !"
-        }
-      ]
-    },
-    {
-      id: "retours",
-      title: "Retours & Remboursements",
-      icon: RotateCcw,
-      questions: [
-        {
-          question: "Puis-je retourner un article ?",
-          answer: "Comme nos produits sont fabriqués sur mesure pour vous, les retours pour simple changement d'avis ne sont pas acceptés. Cependant, si vous recevez un article défectueux, endommagé ou différent de votre commande, nous vous proposons un remplacement ou un remboursement."
-        },
-        {
-          question: "Que faire si je reçois un article défectueux ?",
-          answer: "Contactez-nous dans les 14 jours suivant la réception avec des photos claires du défaut et votre numéro de commande. Notre équipe examinera votre demande et vous proposera un remplacement gratuit ou un remboursement."
-        },
-        {
-          question: "Et si la taille ne me convient pas ?",
-          answer: "Nous vous encourageons vivement à consulter notre Guide des tailles avant de commander. Les mesures y sont détaillées pour chaque type de produit. En cas d'erreur de taille de notre part, nous procéderons bien sûr à un échange."
-        },
-        {
-          question: "Combien de temps pour obtenir un remboursement ?",
-          answer: "Une fois votre demande validée, le remboursement est effectué sous 5-10 jours ouvrés sur le moyen de paiement utilisé lors de l'achat. Vous recevrez un email de confirmation."
-        },
-        {
-          question: "Qui paie les frais de retour ?",
-          answer: "En cas de produit défectueux ou d'erreur de notre part, nous prenons en charge les frais de retour. Dans les rares cas où un retour est accepté pour une autre raison, les frais restent à la charge du client."
-        }
-      ]
-    },
-    {
-      id: "production",
-      title: "Fabrication à la demande",
-      icon: Printer,
-      questions: [
-        {
-          question: "Qu'est-ce que la fabrication à la demande ?",
-          answer: "La fabrication à la demande (print-on-demand) est un modèle de production où chaque article est fabriqué uniquement après votre commande. Pas de stock, pas de gaspillage ! Votre t-shirt ou hoodie est créé spécialement pour vous."
-        },
-        {
-          question: "Pourquoi avoir choisi ce modèle ?",
-          answer: "Ce modèle nous permet de proposer des designs uniques sans surproduction ni gaspillage textile. C'est plus écologique, plus flexible et garantit que chaque pièce est fraîchement produite pour vous."
-        },
-        {
-          question: "Quelle est la qualité des impressions ?",
-          answer: "Nous utilisons des techniques d'impression professionnelles : DTG (Direct-to-Garment) pour les textiles et sublimation pour certains accessoires. Les encres sont durables, résistantes aux lavages et respectueuses de l'environnement."
-        },
-        {
-          question: "Les vêtements sont-ils de bonne qualité ?",
-          answer: "Absolument ! Nous sélectionnons soigneusement les supports (t-shirts, hoodies, etc.) parmi les meilleures marques disponibles. Coton doux, coupes confortables, finitions soignées. Consultez les descriptions produits pour les détails."
-        },
-        {
-          question: "Pourquoi mes articles peuvent-ils arriver séparément ?",
-          answer: "Nous travaillons avec plusieurs fournisseurs situés à travers le monde. Si vous commandez plusieurs articles, ils peuvent être fabriqués par différents fournisseurs selon leur spécialité et leur localisation, ce qui peut entraîner des envois séparés."
-        }
-      ]
-    },
-    {
-      id: "tailles",
-      title: "Tailles & Mesures",
-      icon: Ruler,
-      questions: [
-        {
-          question: "Comment choisir ma taille ?",
-          answer: "Consultez notre Guide des tailles détaillé ! Vous y trouverez les mesures exactes pour chaque type de produit (t-shirts, hoodies, bonnets, chaussures). Prenez vos mesures et comparez-les avec nos tableaux pour un choix optimal."
-        },
-        {
-          question: "Les tailles sont-elles standard ?",
-          answer: "Nos produits suivent généralement les standards européens, mais nous recommandons toujours de consulter le guide des tailles. Certains articles peuvent avoir des coupes légèrement différentes (regular, fitted, oversized) - c'est indiqué dans la description."
-        },
-        {
-          question: "Que faire si j'hésite entre deux tailles ?",
-          answer: "Si vous êtes entre deux tailles, nous recommandons généralement de prendre la taille supérieure pour plus de confort, surtout pour les hoodies. Pour un look plus ajusté, optez pour la taille inférieure. N'hésitez pas à nous contacter si vous avez un doute !"
-        },
-        {
-          question: "Les vêtements rétrécissent-ils au lavage ?",
-          answer: "Nos textiles sont pré-rétrécis pour minimiser ce risque. Suivez les instructions d'entretien (lavage à 30°, pas de sèche-linge) pour préserver la taille et la qualité de vos vêtements."
+          answer: "Les prix affichés incluent la TVA pour les clients européens. Pour les clients hors UE, des taxes locales peuvent s'appliquer à la réception du colis."
         }
       ]
     }
