@@ -25,16 +25,10 @@ import { SEO } from "@/components/SEO";
 import { LoyaltyInfoCompact } from "@/components/LoyaltyCard";
 import { useAffiliateTracking } from "@/hooks/useAffiliateTracking";
 import CustomerReviews from "@/components/CustomerReviews";
-import heroImage from "@/assets/hero-chill.jpg";
+import heroBanner from "@/assets/hero-banner.png";
 import lifestyle1 from "@/assets/lifestyle-1.jpg";
 import lifestyle2 from "@/assets/lifestyle-2.jpg";
 import lifestyle3 from "@/assets/lifestyle-3.jpg";
-import chillHoodie from "@/assets/products/chill-mode-hoodie.jpg";
-import lazyTshirt from "@/assets/products/lazy-legendary-tshirt.jpg";
-import lazyShoes from "@/assets/products/lazy-steps-shoes.jpg";
-import pasPresse from "@/assets/products/pas-presse-hoodie.jpg";
-import sarcasmTshirt from "@/assets/products/sarcasm-cardio-tshirt.jpg";
-import winterBonnet from "@/assets/products/winter-chill-bonnet.jpg";
 
 const Home = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -145,70 +139,15 @@ const Home = () => {
       />
       <Header />
       <main className="flex-1">
-      {/* Hero Section */}
-      <section className="relative min-h-[70vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
-        <div className="absolute inset-0 opacity-20">
-          <img src={heroImage} alt="Hero" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-transparent" />
-        
-        <div className="container relative z-10 grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center py-8 md:py-12 lg:py-20 px-4 md:px-6">
-          {/* Left: Text Content */}
-          <div className="space-y-4 md:space-y-6 lg:space-y-8 animate-fade-in">
-            <div className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-              <span className="text-xs md:text-sm font-medium text-primary">Nouveauté : Collection Hiver 2025</span>
-            </div>
-            
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-              Lazy but{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Legendary
-              </span>
-            </h1>
-            
-            <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-lg">
-              Streetwear humoristique pour amateurs de détente, café et style lazy. 
-              Hoodies, t-shirts, accessoires. Créé pour les procrastinateurs stylés.
-            </p>
-
-            <div className="flex flex-wrap gap-2 md:gap-3">
-              <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
-                🌍 Livraison Internationale
-              </Badge>
-              <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
-                ✨ Qualité Premium
-              </Badge>
-              <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
-                😊 Satisfaction Garantie
-              </Badge>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
-              <Button asChild size="default" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 w-full sm:w-auto">
-                <Link to="/boutique">
-                  Découvrir la Boutique <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
-                </Link>
-              </Button>
-              <Button asChild size="default" variant="outline" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 w-full sm:w-auto">
-                <a href="#best-sellers">Voir les Best Sellers</a>
-              </Button>
-            </div>
-          </div>
-
-          {/* Right: Floating Images - Hidden on mobile, visible on tablet+ */}
-          <div className="relative hidden md:block h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] animate-scale-in">
-            <div className="absolute top-0 right-0 w-48 md:w-56 lg:w-72 xl:w-80 h-60 md:h-72 lg:h-80 xl:h-96 rounded-2xl overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105">
-              <img src={heroImage} alt="Chill lifestyle" className="w-full h-full object-cover" />
-            </div>
-            <div className="absolute bottom-0 left-0 w-36 md:w-44 lg:w-56 xl:w-64 h-48 md:h-56 lg:h-72 xl:h-80 rounded-2xl overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <img src={lifestyle1} alt="Lifestyle" className="w-full h-full object-cover" />
-            </div>
-            <div className="absolute top-1/2 right-1/4 w-28 md:w-36 lg:w-44 xl:w-48 h-28 md:h-36 lg:h-44 xl:h-48 rounded-full overflow-hidden shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-elegant)] transition-all duration-500 hover:scale-105 animate-fade-in border-4 border-background hidden lg:block" style={{ animationDelay: "0.4s" }}>
-              <img src={lifestyle2} alt="Coffee time" className="w-full h-full object-cover" />
-            </div>
-          </div>
-        </div>
+      {/* Hero Section - Banner */}
+      <section className="w-full">
+        <Link to="/boutique" className="block w-full">
+          <img 
+            src={heroBanner} 
+            alt="ChillaxPrints - Exclusive Custom-Designed Clothing" 
+            className="w-full h-auto object-cover"
+          />
+        </Link>
       </section>
 
 
@@ -478,7 +417,7 @@ const Home = () => {
       <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={heroImage}
+            src={heroBanner}
             alt="CTA Background"
             className="w-full h-full object-cover"
           />
