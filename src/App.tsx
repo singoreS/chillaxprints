@@ -24,9 +24,10 @@ import ReturnPolicy from "./pages/ReturnPolicy";
 import Shipping from "./pages/Shipping";
 import SizeGuide from "./pages/SizeGuide";
 import FAQ from "./pages/FAQ";
-
 import Affiliate from "./pages/Affiliate";
 import Collection from "./pages/Collection";
+import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,8 @@ const App = () => (
               
               <Route path="/affiliation" element={<Affiliate />} />
               <Route path="/collection/:slug" element={<Collection />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogArticle />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
