@@ -10,6 +10,7 @@ import { SEO } from "@/components/SEO";
 import { getArticleBySlug, getRelatedArticles, BlogArticle } from "@/data/blogArticles";
 import ReactMarkdown from "react-markdown";
 import { motion } from "framer-motion";
+import { ReadingProgress } from "@/components/ReadingProgress";
 
 const BlogArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -84,6 +85,7 @@ const BlogArticlePage = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      <ReadingProgress />
       <Header />
       
       <main className="flex-1">

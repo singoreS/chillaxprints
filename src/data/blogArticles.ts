@@ -16,10 +16,10 @@ export const blogArticles: BlogArticle[] = [
   {
     id: "1",
     slug: "comment-choisir-son-hoodie-parfait",
-    title: "Comment Choisir Son Hoodie Parfait : Guide Complet 2025",
+    title: "Comment Choisir Son Hoodie Parfait : Guide Complet 2026",
     excerpt: "Découvrez tous nos conseils pour trouver le hoodie idéal selon votre morphologie, style et usage. Oversize, fitted, zippé... on vous dit tout !",
     content: `
-# Comment Choisir Son Hoodie Parfait : Guide Complet 2025
+# Comment Choisir Son Hoodie Parfait : Guide Complet 2026
 
 Le hoodie est devenu un incontournable du dressing moderne. Que vous soyez adepte du style streetwear décontracté ou fan de looks plus sophistiqués, il existe forcément un hoodie fait pour vous. Voici notre guide ultime pour faire le bon choix.
 
@@ -73,18 +73,18 @@ Le hoodie parfait est celui qui vous ressemble. Prenez le temps d'essayer diffé
     tags: ["hoodie", "guide d'achat", "streetwear", "conseils mode"],
     image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&auto=format&fit=crop",
     author: "ChillaxPrints",
-    publishedAt: "2025-01-10",
+    publishedAt: "2026-01-10",
     readTime: 6
   },
   {
     id: "2",
     slug: "tendances-streetwear-2025",
-    title: "Tendances Streetwear 2025 : Les Styles Qui Vont Marquer l'Année",
-    excerpt: "Lazy luxury, prints humoristiques, oversize assumé... Découvrez les tendances mode streetwear incontournables de 2025.",
+    title: "Tendances Streetwear 2026 : Les Styles Qui Vont Marquer l'Année",
+    excerpt: "Lazy luxury, prints humoristiques, oversize assumé... Découvrez les tendances mode streetwear incontournables de 2026.",
     content: `
-# Tendances Streetwear 2025 : Les Styles Qui Vont Marquer l'Année
+# Tendances Streetwear 2026 : Les Styles Qui Vont Marquer l'Année
 
-L'année 2025 s'annonce riche en nouveautés pour le streetwear. Entre retour aux sources et innovations créatives, voici les tendances à adopter dès maintenant.
+L'année 2026 s'annonce riche en nouveautés pour le streetwear. Entre retour aux sources et innovations créatives, voici les tendances à adopter dès maintenant.
 
 ## 1. Le "Lazy Luxury" - La Paresse Version Premium
 
@@ -139,13 +139,13 @@ Les bonnets, écharpes et gants ne sont plus de simples accessoires pratiques ma
 3. Privilégiez les marques qui correspondent à vos valeurs
 4. Mixez pièces tendance et classiques intemporels
 
-En 2025, le streetwear c'est avant tout une attitude : décontractée, authentique et sans prise de tête. Exactement ce que propose ChillaxPrints !
+En 2026, le streetwear c'est avant tout une attitude : décontractée, authentique et sans prise de tête. Exactement ce que propose ChillaxPrints !
     `,
     category: "Tendances",
     tags: ["streetwear", "tendances 2025", "mode", "style"],
     image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=800&auto=format&fit=crop",
     author: "ChillaxPrints",
-    publishedAt: "2025-01-08",
+    publishedAt: "2026-01-08",
     readTime: 7
   },
   {
@@ -227,7 +227,7 @@ Le print on demand représente une évolution positive vers une mode plus consci
     tags: ["print on demand", "mode durable", "éco-responsable", "POD"],
     image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&auto=format&fit=crop",
     author: "ChillaxPrints",
-    publishedAt: "2025-01-05",
+    publishedAt: "2026-01-05",
     readTime: 8
   },
   {
@@ -324,7 +324,7 @@ Portez-le avec confiance, c'est le meilleur accessoire !
     tags: ["t-shirt", "style", "looks", "conseils mode"],
     image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&auto=format&fit=crop",
     author: "ChillaxPrints",
-    publishedAt: "2025-01-03",
+    publishedAt: "2026-01-03",
     readTime: 5
   },
   {
@@ -425,18 +425,18 @@ Et rappelez-vous : un vêtement confortable est un vêtement que vous porterez s
     tags: ["guide des tailles", "achat en ligne", "conseils", "sizing"],
     image: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=800&auto=format&fit=crop",
     author: "ChillaxPrints",
-    publishedAt: "2024-12-28",
+    publishedAt: "2026-01-01",
     readTime: 6
   },
   {
     id: "6",
     slug: "accessoires-streetwear-indispensables",
-    title: "Les Accessoires Streetwear Indispensables pour 2025",
+    title: "Les Accessoires Streetwear Indispensables pour 2026",
     excerpt: "Bonnets, sneakers, bijoux... Découvrez les accessoires qui feront la différence dans vos looks streetwear cette année.",
     content: `
-# Les Accessoires Streetwear Indispensables pour 2025
+# Les Accessoires Streetwear Indispensables pour 2026
 
-Un look streetwear réussi repose souvent sur les détails. Les accessoires bien choisis peuvent transformer une tenue basique en statement mode. Voici les indispensables de 2025.
+Un look streetwear réussi repose souvent sur les détails. Les accessoires bien choisis peuvent transformer une tenue basique en statement mode. Voici les indispensables de 2026.
 
 ## 1. Le Bonnet Brodé
 
@@ -451,11 +451,11 @@ Le bonnet n'est plus seulement un accessoire d'hiver. Porté légèrement en arr
 
 ## 2. Les Sneakers Statement
 
-Les chaussures sont le fondement de tout look streetwear. En 2025, on ose les modèles colorés et originaux.
+Les chaussures sont le fondement de tout look streetwear. En 2026, on ose les modèles colorés et originaux.
 
 **Notre pick :** Les **"High Top Sneakers Certified Cuteness"** - trendy streetwear avec une touche féminine.
 
-### Les Tendances Sneakers 2025
+### Les Tendances Sneakers 2026
 - Retour des high-tops
 - Couleurs vives et contrastées
 - Semelles chunky
@@ -492,7 +492,7 @@ Pratique et stylé, le sac porté en travers du corps est devenu incontournable.
 
 Oui, les chaussettes sont devenues un accessoire mode ! Portées avec des sneakers basses, elles apportent une touche de couleur.
 
-### Tendances Chaussettes 2025
+### Tendances Chaussettes 2026
 - Logos visibles
 - Couleurs vives
 - Motifs graphiques
@@ -535,7 +535,7 @@ Rappelez-vous : le streetwear, c'est avant tout une attitude. Portez vos accesso
     tags: ["accessoires", "streetwear", "bonnet", "sneakers", "style"],
     image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&auto=format&fit=crop",
     author: "ChillaxPrints",
-    publishedAt: "2024-12-20",
+    publishedAt: "2025-12-28",
     readTime: 7
   }
 ];
