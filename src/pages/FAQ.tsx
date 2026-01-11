@@ -1,4 +1,5 @@
 import { SEO } from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
@@ -171,6 +172,14 @@ const FAQ = () => {
     }
   ];
 
+  // Flatten all FAQ items for structured data
+  const allFaqItems = faqCategories.flatMap(category => 
+    category.questions.map(q => ({
+      question: q.question,
+      answer: q.answer
+    }))
+  );
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEO
@@ -179,6 +188,7 @@ const FAQ = () => {
         keywords="FAQ, questions fréquentes, aide, commandes, livraison, retours, print-on-demand, ChillaxPrints"
         canonicalUrl="/faq"
       />
+      <StructuredData type="FAQPage" items={allFaqItems} />
       <Header />
 
       <main className="flex-1">

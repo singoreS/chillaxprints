@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { LoyaltyInfoCompact } from "@/components/LoyaltyCard";
 import { useAffiliateTracking } from "@/hooks/useAffiliateTracking";
 import CustomerReviews from "@/components/CustomerReviews";
@@ -143,6 +144,8 @@ const Home = () => {
         keywords="vêtements confortables, t-shirts humoristiques, hoodies drôles, mode lazy lifestyle, ChillaxPrints, vêtements sarcastiques, streetwear décontracté"
         canonicalUrl="/"
       />
+      <StructuredData type="Organization" />
+      <StructuredData type="WebSite" />
       <Header />
       <main className="flex-1">
       {/* Hero Section */}
