@@ -7,6 +7,7 @@ import { HelmetProvider } from "@/components/SEO";
 import { NewsletterPopup } from "@/components/NewsletterPopup";
 import { CookieConsent } from "@/components/CookieConsent";
 import { NotificationProvider } from "@/components/NotificationProvider";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
@@ -38,6 +39,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <NotificationProvider>
             <NewsletterPopup />
             <CookieConsent />
