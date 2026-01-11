@@ -392,17 +392,21 @@ const Product = () => {
                   {selectedVariant?.availableForSale ? "Ajouter au panier" : "Rupture de stock"}
                 </Button>
                 
-                {/* Personalization Button */}
+                {/* Personalization Button - Teeinblue on Shopify */}
                 <Button
                   size="default"
                   variant="outline"
                   asChild
                   className="flex-1 h-10 md:h-11 text-xs md:text-sm rounded-lg border-2 border-primary/50 hover:border-primary hover:bg-primary/5 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300 group"
                 >
-                  <Link to="/personnalisation">
+                  <a 
+                    href={`https://lazy-legend-store-dbhdg.myshopify.com/products/${id}?teeinblue=true`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Palette className="mr-2 h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
                     <span>Personnaliser</span>
-                  </Link>
+                  </a>
                 </Button>
               </div>
 
