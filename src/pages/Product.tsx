@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -155,6 +156,24 @@ const Product = () => {
         keywords={`${product.title}, ${product.productType || 'vêtement'}, ChillaxPrints, achat en ligne`}
         canonicalUrl={`/produit/${id}`}
         ogType="product"
+      />
+      <StructuredData
+        type="Product"
+        name={product.title}
+        description={product.description || `Découvrez ${product.title} - Vêtement confortable et humoristique ChillaxPrints.`}
+        image={product.images?.edges?.[0]?.node?.url || '/placeholder.svg'}
+        price={selectedVariant?.price?.amount || product.priceRange.minVariantPrice.amount}
+        currency="EUR"
+        availability={selectedVariant?.availableForSale ? 'InStock' : 'OutOfStock'}
+        sku={id}
+      />
+      <StructuredData
+        type="BreadcrumbList"
+        items={[
+          { name: 'Accueil', url: '/' },
+          { name: 'Boutique', url: '/boutique' },
+          { name: product.title, url: `/produit/${id}` }
+        ]}
       />
       <Header />
       

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -202,6 +203,18 @@ const Shop = () => {
         description="Découvrez notre collection de vêtements humoristiques et confortables. T-shirts sarcastiques, hoodies lazy lifestyle, bonnets et chaussures. Livraison gratuite dès 50€."
         keywords="acheter t-shirt humoristique, hoodie confortable, bonnet original, chaussures streetwear, boutique vêtements drôles, mode lazy"
         canonicalUrl="/boutique"
+      />
+      <StructuredData 
+        type="CollectionPage" 
+        name="Boutique ChillaxPrints" 
+        description="Collection complète de vêtements humoristiques et confortables. T-shirts, hoodies, bonnets et chaussures avec des designs originaux."
+      />
+      <StructuredData 
+        type="BreadcrumbList" 
+        items={[
+          { name: 'Accueil', url: '/' },
+          { name: 'Boutique', url: '/boutique' }
+        ]}
       />
       <Header />
       
