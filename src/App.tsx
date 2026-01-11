@@ -24,7 +24,7 @@ import ReturnPolicy from "./pages/ReturnPolicy";
 import Shipping from "./pages/Shipping";
 import SizeGuide from "./pages/SizeGuide";
 import FAQ from "./pages/FAQ";
-import Customization from "./pages/Customization";
+
 import Affiliate from "./pages/Affiliate";
 import Collection from "./pages/Collection";
 
@@ -57,7 +57,7 @@ const App = () => (
               <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
               <Route path="/guide-des-tailles" element={<SizeGuide />} />
               <Route path="/faq" element={<FAQ />} />
-              <Route path="/personnalisation" element={<Customization />} />
+              
               <Route path="/affiliation" element={<Affiliate />} />
               <Route path="/collection/:slug" element={<Collection />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
