@@ -3,11 +3,11 @@ import { X, Copy, Clock, Tag, Sparkles, Truck, Gift } from "lucide-react";
 import { toast } from "sonner";
 
 const STORAGE_KEY = "promo-banner-dismissed";
-const PROMO_CODE = "CHILL10";
-const PROMO_END_DATE = new Date("2025-12-31T23:59:59");
+const PROMO_CODE = "CHILLAX15";
+const PROMO_END_DATE = new Date("2026-12-31T23:59:59");
 
 const promoMessages = [
-  { icon: Tag, text: "🎉 -10% sur ta 1ère commande avec le code" },
+  { icon: Tag, text: "🎉 -15% sur ta 1ère commande avec le code" },
   { icon: Truck, text: "🚚 Livraison OFFERTE dès 50€ d'achat" },
   { icon: Gift, text: "🎁 Un cadeau surprise dans chaque commande" },
 ];
