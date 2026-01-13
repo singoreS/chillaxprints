@@ -300,11 +300,24 @@ const Shop = () => {
                       <div className="relative">
                         <Link to={`/produit/${product.node.handle}`}>
                           <div className="aspect-[3/4] bg-secondary/20 overflow-hidden relative">
+                            {/* Image principale */}
                             {product.node.images?.edges?.[0]?.node && (
                               <img
                                 src={product.node.images.edges[0].node.url}
                                 alt={product.node.title}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                                  product.node.images?.edges?.[1]?.node 
+                                    ? "group-hover:opacity-0 group-hover:scale-105" 
+                                    : "group-hover:scale-110"
+                                }`}
+                              />
+                            )}
+                            {/* Image secondaire (dos du produit) au survol */}
+                            {product.node.images?.edges?.[1]?.node && (
+                              <img
+                                src={product.node.images.edges[1].node.url}
+                                alt={`${product.node.title} - vue arrière`}
+                                className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 scale-105 group-hover:scale-100 transition-all duration-500"
                               />
                             )}
                             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
