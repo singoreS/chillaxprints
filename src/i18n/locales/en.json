@@ -1,0 +1,168 @@
+{
+  "common": {
+    "home": "Home",
+    "shop": "Shop",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact",
+    "myAccount": "My Account",
+    "login": "Login",
+    "logout": "Logout",
+    "search": "Search...",
+    "addToCart": "Add",
+    "addedToCart": "Product added to cart!",
+    "addedToWishlist": "Added to wishlist",
+    "removedFromWishlist": "Removed from wishlist",
+    "viewProduct": "View product",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "currency": "€",
+    "allRightsReserved": "All rights reserved"
+  },
+  "hero": {
+    "badge": "New: Winter 2025 Collection",
+    "title": "Lazy but",
+    "titleHighlight": "Legendary",
+    "description": "Humorous streetwear for relaxation lovers, coffee addicts, and lazy style enthusiasts. Hoodies, t-shirts, accessories. Made for stylish procrastinators.",
+    "internationalShipping": "🌍 Worldwide Shipping",
+    "premiumQuality": "✨ Premium Quality",
+    "satisfactionGuaranteed": "😊 Satisfaction Guaranteed",
+    "discoverShop": "Discover the Shop",
+    "viewBestSellers": "View Best Sellers"
+  },
+  "whyUs": {
+    "title": "Why",
+    "titleHighlight": "ChillaxPrints",
+    "subtitle": "Because we understand that comfort and humor are the real luxuries in life",
+    "uniqueDesigns": "Unique Designs",
+    "uniqueDesignsDesc": "Sarcastic and humorous vibes you won't find anywhere else",
+    "internationalShipping": "Worldwide Shipping",
+    "internationalShippingDesc": "We deliver your comfort all around the world 🌍",
+    "premiumQuality": "Premium Quality",
+    "premiumQualityDesc": "Soft, comfortable, and made to last... even if you don't leave the couch",
+    "satisfactionGuaranteed": "Satisfaction Guaranteed",
+    "satisfactionGuaranteedDesc": "Not satisfied? We'll refund you. No stress, just chill."
+  },
+  "bestSellers": {
+    "badge": "🔥 Popular Products",
+    "title": "Best Sellers",
+    "subtitle": "Community favorites from the chill gang"
+  },
+  "collections": {
+    "title": "Browse by Collection",
+    "subtitle": "Discover our unique universes",
+    "noCollections": "No collections available at the moment."
+  },
+  "lifestyle": {
+    "title": "Chill",
+    "titleHighlight": "Lifestyle",
+    "subtitle": "Join the community of lazy legends",
+    "followUs": "Follow us on Instagram"
+  },
+  "loyalty": {
+    "title": "ChillaxPrints",
+    "titleHighlight": "Loyalty Program",
+    "subtitle": "Earn points on every purchase and unlock exclusive rewards",
+    "joinProgram": "Join the Program"
+  },
+  "newsletter": {
+    "title": "Stay in the",
+    "titleHighlight": "mood",
+    "subtitle": "Subscribe to receive our latest products, exclusive deals, and chill content",
+    "placeholder": "your@email.com",
+    "subscribe": "Subscribe",
+    "subscribed": "Thanks! You're now subscribed 🎉"
+  },
+  "cta": {
+    "title": "Ready to become a chill legend?",
+    "subtitle": "Join the ChillaxPrints community and embrace your lazy side in style",
+    "discoverCollection": "Discover the Collection"
+  },
+  "footer": {
+    "tagline": "Clothing for witty and lazy minds. Lazy but Legendary 🎯",
+    "navigation": "Navigation",
+    "information": "Information",
+    "sizeGuide": "Size Guide",
+    "shipping": "Shipping",
+    "returns": "Returns",
+    "termsOfSale": "Terms of Sale",
+    "privacy": "Privacy Policy",
+    "faq": "FAQ",
+    "manageCookies": "Manage Cookies",
+    "followUs": "Follow Us"
+  },
+  "shop": {
+    "title": "Shop",
+    "metaDescription": "Discover our collection of humorous and comfortable clothing. T-shirts, hoodies, beanies, and shoes with unique designs. Worldwide shipping.",
+    "allProducts": "All Products",
+    "filters": "Filters",
+    "sortBy": "Sort by",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low",
+    "nameAsc": "Name A-Z",
+    "nameDesc": "Name Z-A",
+    "newest": "Newest",
+    "noProducts": "No products found",
+    "productsCount": "{{count}} product(s)",
+    "category": "Category",
+    "allCategories": "All",
+    "priceRange": "Price Range",
+    "resetFilters": "Reset"
+  },
+  "product": {
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock",
+    "description": "Description",
+    "details": "Details",
+    "reviews": "Reviews",
+    "relatedProducts": "Related Products",
+    "backView": "back view"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Checkout",
+    "remove": "Remove"
+  },
+  "account": {
+    "title": "My Account",
+    "profile": "Profile",
+    "orders": "Orders",
+    "addresses": "Addresses",
+    "wishlist": "Wishlist",
+    "loyalty": "Loyalty",
+    "settings": "Settings",
+    "orderNumber": "Order #{{number}}",
+    "orderDate": "Placed on"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "signupTitle": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "or": "or"
+  },
+  "promo": {
+    "code": "CHILLAX15",
+    "discount": "-15% off everything",
+    "endDate": "Until"
+  }
+}

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Heart } from "lucide-react";
 import logo from "@/assets/logo.png";
@@ -9,11 +10,13 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { SearchBar } from "@/components/SearchBar";
 import { PromoBanner } from "@/components/PromoBanner";
 import { NotificationCenter } from "@/components/NotificationCenter";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { supabase } from "@/integrations/supabase/client";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { useWishlistStore } from "@/stores/wishlistStore";
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const wishlistItems = useWishlistStore(state => state.items);
@@ -31,11 +34,11 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { to: "/", label: "Accueil" },
-    { to: "/boutique", label: "Boutique" },
-    { to: "/blog", label: "Blog" },
-    { to: "/a-propos", label: "À Propos" },
-    { to: "/contact", label: "Contact" },
+    { to: "/", label: t("common.home") },
+    { to: "/boutique", label: t("common.shop") },
+    { to: "/blog", label: t("common.blog") },
+    { to: "/a-propos", label: t("common.about") },
+    { to: "/contact", label: t("common.contact") },
   ];
 
   return (
@@ -71,6 +74,7 @@ const Header = () => {
 
         {/* Actions */}
         <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2">
+          <LanguageSwitcher />
           {user && <NotificationCenter />}
           <Link to={user ? "/compte" : "/connexion"} className="hidden sm:block">
             <Button variant="ghost" size="icon" className="h-8 w-8 md:h-10 md:w-10">
@@ -123,7 +127,7 @@ const Header = () => {
                   className="text-lg font-medium transition-colors hover:text-primary flex items-center gap-2"
                 >
                   <User className="h-5 w-5" />
-                  {user ? "Mon Compte" : "Connexion"}
+                  {user ? t("common.myAccount") : t("common.login")}
                 </Link>
               </div>
             </SheetContent>
