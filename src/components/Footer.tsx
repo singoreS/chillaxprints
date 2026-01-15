@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Linkedin, Instagram } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="border-t-2 border-border/50 bg-gradient-to-b from-background to-muted/30">
       <div className="container py-8 md:py-12 lg:py-16 px-4 md:px-6">
@@ -14,86 +17,85 @@ const Footer = () => {
               className="h-10 sm:h-12 md:h-14 w-auto max-w-[140px] sm:max-w-[160px] md:max-w-none object-contain mb-3 md:mb-4"
             />
             <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-              Des vêtements pour les esprits drôles et paresseux. Lazy but Legendary 🎯
+              {t("footer.tagline")}
             </p>
           </div>
 
           <div>
-            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">Navigation</h4>
+            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">{t("footer.navigation")}</h4>
             <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm">
               <li>
                 <Link to="/boutique" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Boutique
+                  {t("common.shop")}
                 </Link>
               </li>
               <li>
                 <Link to="/blog" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Blog
+                  {t("common.blog")}
                 </Link>
               </li>
               <li>
                 <Link to="/a-propos" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  À Propos
+                  {t("common.about")}
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Contact
+                  {t("common.contact")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">Informations</h4>
+            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">{t("footer.information")}</h4>
             <ul className="space-y-1.5 md:space-y-2 text-xs md:text-sm">
               <li>
                 <Link to="/guide-des-tailles" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Guide des Tailles
+                  {t("footer.sizeGuide")}
                 </Link>
               </li>
               <li>
                 <Link to="/livraison" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Livraison
+                  {t("footer.shipping")}
                 </Link>
               </li>
               <li>
                 <Link to="/retours" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Retours
+                  {t("footer.returns")}
                 </Link>
               </li>
               <li>
                 <Link to="/cgv" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  CGV
+                  {t("footer.termsOfSale")}
                 </Link>
               </li>
               <li>
                 <Link to="/politique-confidentialite" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  Confidentialité
+                  {t("footer.privacy")}
                 </Link>
               </li>
               <li>
                 <Link to="/faq" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block">
-                  FAQ
+                  {t("footer.faq")}
                 </Link>
               </li>
               <li>
                 <button 
                   onClick={() => {
-                    // Trigger cookie consent popup by removing the stored preference
                     localStorage.removeItem('cookieConsent');
                     window.location.reload();
                   }}
                   className="text-muted-foreground hover:text-primary transition-all duration-300 hover:translate-x-1 inline-block text-left"
                 >
-                  Gérer les cookies
+                  {t("footer.manageCookies")}
                 </button>
               </li>
             </ul>
           </div>
 
           <div className="col-span-2 md:col-span-1">
-            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">Suivez-nous</h4>
+            <h4 className="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-4 text-foreground">{t("footer.followUs")}</h4>
             <div className="flex space-x-3 md:space-x-4">
               <a
                 href="https://linkedin.com"
@@ -126,7 +128,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t text-center text-xs md:text-sm text-muted-foreground">
-          <p>© 2024 ChillaxPrints. Tous droits réservés.</p>
+          <p>© 2024 ChillaxPrints. {t("common.allRightsReserved")}</p>
         </div>
       </div>
     </footer>

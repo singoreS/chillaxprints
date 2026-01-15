@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ArrowRight, Sparkles, Truck, Heart, Shield, Instagram, ShoppingBag, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -38,6 +39,7 @@ import sarcasmTshirt from "@/assets/products/sarcasm-cardio-tshirt.jpg";
 import winterBonnet from "@/assets/products/winter-chill-bonnet.jpg";
 
 const Home = () => {
+  const { t } = useTranslation();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [collections, setCollections] = useState<ShopifyCollection[]>([]);
   const [loading, setLoading] = useState(true);
@@ -97,17 +99,17 @@ const Home = () => {
         quantity: 1,
         selectedOptions: variant.selectedOptions,
       });
-      toast.success("Produit ajouté au panier !", { position: "top-center" });
+      toast.success(t("common.addedToCart"), { position: "top-center" });
     }
   };
 
   const handleToggleWishlist = (product: ShopifyProduct) => {
     if (isInWishlist(product.node.id)) {
       removeFromWishlist(product.node.id);
-      toast.success("Retiré des favoris");
+      toast.success(t("common.removedFromWishlist"));
     } else {
       addToWishlist(product);
-      toast.success("Ajouté aux favoris");
+      toast.success(t("common.addedToWishlist"));
     }
   };
 
@@ -115,23 +117,23 @@ const Home = () => {
   const reasons = [
     {
       icon: Sparkles,
-      title: "Designs Uniques",
-      description: "Des vibes sarcastiques et humoristiques que tu trouveras nulle part ailleurs",
+      title: t("whyUs.uniqueDesigns"),
+      description: t("whyUs.uniqueDesignsDesc"),
     },
     {
       icon: Truck,
-      title: "Livraison Internationale",
-      description: "On livre ton confort partout dans le monde 🌍",
+      title: t("whyUs.internationalShipping"),
+      description: t("whyUs.internationalShippingDesc"),
     },
     {
       icon: Shield,
-      title: "Qualité Premium",
-      description: "Doux, confortable, et fait pour durer... même si tu bouges pas du canapé",
+      title: t("whyUs.premiumQuality"),
+      description: t("whyUs.premiumQualityDesc"),
     },
     {
       icon: Heart,
-      title: "Satisfaction Garantie",
-      description: "Pas satisfait ? On te rembourse. Pas de stress, que du chill.",
+      title: t("whyUs.satisfactionGuaranteed"),
+      description: t("whyUs.satisfactionGuaranteedDesc"),
     },
   ];
 
@@ -160,41 +162,40 @@ const Home = () => {
           <div className="space-y-4 md:space-y-6 lg:space-y-8 animate-fade-in">
             <div className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-primary/10 border border-primary/20">
               <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-              <span className="text-xs md:text-sm font-medium text-primary">Nouveauté : Collection Hiver 2025</span>
+              <span className="text-xs md:text-sm font-medium text-primary">{t("hero.badge")}</span>
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-              Lazy but{" "}
+              {t("hero.title")}{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Legendary
+                {t("hero.titleHighlight")}
               </span>
             </h1>
             
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-lg">
-              Streetwear humoristique pour amateurs de détente, café et style lazy. 
-              Hoodies, t-shirts, accessoires. Créé pour les procrastinateurs stylés.
+              {t("hero.description")}
             </p>
 
             <div className="flex flex-wrap gap-2 md:gap-3">
               <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
-                🌍 Livraison Internationale
+                {t("hero.internationalShipping")}
               </Badge>
               <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
-                ✨ Qualité Premium
+                {t("hero.premiumQuality")}
               </Badge>
               <Badge variant="secondary" className="px-2 md:px-4 py-1 md:py-2 text-xs md:text-sm">
-                😊 Satisfaction Garantie
+                {t("hero.satisfactionGuaranteed")}
               </Badge>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4">
               <Button asChild size="default" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 w-full sm:w-auto">
                 <Link to="/boutique">
-                  Découvrir la Boutique <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
+                  {t("hero.discoverShop")} <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
                 </Link>
               </Button>
               <Button asChild size="default" variant="outline" className="text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 w-full sm:w-auto">
-                <a href="#best-sellers">Voir les Best Sellers</a>
+                <a href="#best-sellers">{t("hero.viewBestSellers")}</a>
               </Button>
             </div>
           </div>
