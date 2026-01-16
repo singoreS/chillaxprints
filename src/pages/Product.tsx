@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -26,6 +27,7 @@ import ReviewForm from "@/components/ReviewForm";
 
 const Product = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
   const [product, setProduct] = useState<ShopifyProduct['node'] | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
@@ -110,7 +112,7 @@ const Product = () => {
     };
     
     addItem(cartItem);
-    toast.success("Ajouté au panier !", {
+    toast.success(t('common.addedToCart'), {
       description: `${product.title} - ${quantity}x`,
     });
   };
@@ -133,12 +135,12 @@ const Product = () => {
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center space-y-4">
-            <h1 className="text-2xl font-bold">Produit non trouvé</h1>
-            <p className="text-muted-foreground">Ce produit n'existe pas ou a été retiré</p>
+            <h1 className="text-2xl font-bold">{t('productPage.notFound')}</h1>
+            <p className="text-muted-foreground">{t('productPage.notFoundDesc')}</p>
             <Link to="/boutique">
               <Button>
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Retour à la boutique
+                {t('productPage.backToShop')}
               </Button>
             </Link>
           </div>
@@ -181,9 +183,9 @@ const Product = () => {
         <div className="container px-4 md:px-6">
           {/* Breadcrumb */}
           <div className="mb-3 md:mb-4 text-xs md:text-sm text-muted-foreground">
-            <Link to="/" className="hover:text-primary transition-colors">Accueil</Link>
+            <Link to="/" className="hover:text-primary transition-colors">{t('common.home')}</Link>
             {" / "}
-            <Link to="/boutique" className="hover:text-primary transition-colors">Boutique</Link>
+            <Link to="/boutique" className="hover:text-primary transition-colors">{t('common.shop')}</Link>
             {" / "}
             <span className="text-foreground line-clamp-1">{product.title}</span>
           </div>
@@ -205,10 +207,10 @@ const Product = () => {
                     const productWrapper: ShopifyProduct = { node: product };
                     if (isInWishlist(product.id)) {
                       removeFromWishlist(product.id);
-                      toast.success("Retiré des favoris");
+                      toast.success(t('common.removedFromWishlist'));
                     } else {
                       addToWishlist(productWrapper);
-                      toast.success("Ajouté aux favoris");
+                      toast.success(t('common.addedToWishlist'));
                     }
                   }}
                 >
@@ -254,9 +256,9 @@ const Product = () => {
                     </Badge>
                   )}
                   {selectedVariant?.availableForSale ? (
-                    <Badge className="text-[10px] md:text-xs px-2 py-0.5 bg-green-500 shadow-[var(--shadow-soft)]">En stock</Badge>
+                    <Badge className="text-[10px] md:text-xs px-2 py-0.5 bg-green-500 shadow-[var(--shadow-soft)]">{t('product.inStock')}</Badge>
                   ) : (
-                    <Badge variant="destructive" className="text-[10px] md:text-xs px-2 py-0.5 shadow-[var(--shadow-soft)]">Rupture de stock</Badge>
+                    <Badge variant="destructive" className="text-[10px] md:text-xs px-2 py-0.5 shadow-[var(--shadow-soft)]">{t('product.outOfStock')}</Badge>
                   )}
                 </div>
                 <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight">{product.title}</h1>
@@ -287,7 +289,7 @@ const Product = () => {
                         </div>
                       </div>
                       <span className="text-[10px] md:text-xs text-primary font-medium mt-2 inline-block group-hover:translate-x-1 transition-transform duration-300">
-                        Cliquez pour voir plus →
+                        {t('productPage.clickToSeeMore')} →
                       </span>
                     </button>
                   </DialogTrigger>
@@ -295,7 +297,7 @@ const Product = () => {
                     <DialogHeader>
                       <DialogTitle className="text-lg md:text-xl font-bold text-primary flex items-center gap-3">
                         <span className="p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 shadow-inner">📝</span>
-                        Description du produit
+                        {t('product.description')}
                       </DialogTitle>
                     </DialogHeader>
                     <div className="mt-6 space-y-6">
@@ -323,16 +325,16 @@ const Product = () => {
                       {/* Product Features Tags */}
                       <div className="flex flex-wrap gap-2 pt-2">
                         <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
-                          ✨ Design original
+                          ✨ {t('productPage.originalDesign')}
                         </Badge>
                         <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-green-500/10 to-green-500/5 border border-green-500/20">
-                          🎨 Impression haute qualité
+                          🎨 {t('productPage.highQualityPrint')}
                         </Badge>
                         <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-blue-500/10 to-blue-500/5 border border-blue-500/20">
-                          👕 Coton premium
+                          👕 {t('productPage.premiumCotton')}
                         </Badge>
                         <Badge variant="secondary" className="text-xs px-3 py-1.5 bg-gradient-to-r from-purple-500/10 to-purple-500/5 border border-purple-500/20">
-                          🚚 Livraison rapide
+                          🚚 {t('productPage.fastShipping')}
                         </Badge>
                       </div>
                     </div>
@@ -377,7 +379,7 @@ const Product = () => {
 
               {/* Quantity */}
               <div className="flex items-center gap-3 p-2 md:p-3 rounded-lg bg-secondary/20 border border-border/50">
-                <Label className="text-xs md:text-sm font-semibold">Quantité:</Label>
+                <Label className="text-xs md:text-sm font-semibold">{t('product.quantity')}:</Label>
                 <div className="flex items-center gap-2">
                   <Button
                     variant="outline"
@@ -408,7 +410,7 @@ const Product = () => {
                   className="flex-1 h-10 md:h-11 text-xs md:text-sm rounded-lg shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all duration-300"
                 >
                   <ShoppingCart className="mr-2 h-4 w-4" />
-                  {selectedVariant?.availableForSale ? "Ajouter au panier" : "Rupture de stock"}
+                  {selectedVariant?.availableForSale ? t('product.addToCart') : t('product.outOfStock')}
                 </Button>
                 
                 {/* Personalization Button - Teeinblue on Shopify */}
@@ -424,7 +426,7 @@ const Product = () => {
                     rel="noopener noreferrer"
                   >
                     <Palette className="mr-2 h-4 w-4 text-primary group-hover:scale-110 transition-transform" />
-                    <span>Personnaliser</span>
+                    <span>{t('productPage.customize')}</span>
                   </a>
                 </Button>
               </div>
@@ -436,15 +438,15 @@ const Product = () => {
                   className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-all text-xs"
                 >
                   <Ruler className="w-3.5 h-3.5 text-primary" />
-                  <span className="font-medium">Guide tailles</span>
+                  <span className="font-medium">{t('productPage.sizeGuide')}</span>
                 </Link>
                 <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-secondary/20 border border-border/30 text-xs">
                   <span>🚚</span>
-                  <span className="font-medium">Livraison gratuite dès 50€</span>
+                  <span className="font-medium">{t('productPage.freeShipping')}</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-secondary/20 border border-border/30 text-xs">
                   <span>🔄</span>
-                  <span className="font-medium">Retours 30j</span>
+                  <span className="font-medium">{t('productPage.returns30days')}</span>
                 </div>
               </div>
             </div>
@@ -456,10 +458,10 @@ const Product = () => {
               <TabsList className="w-full grid grid-cols-2 mb-6">
                 <TabsTrigger value="reviews" className="gap-2">
                   <Star className="w-4 h-4" />
-                  Avis clients
+                  {t('productPage.customerReviews')}
                 </TabsTrigger>
                 <TabsTrigger value="write-review" className="gap-2">
-                  ✍️ Laisser un avis
+                  ✍️ {t('productPage.leaveReview')}
                 </TabsTrigger>
               </TabsList>
               
