@@ -111,6 +111,13 @@
     "priceRange": "Price Range",
     "resetFilters": "Reset"
   },
+  "shopPage": {
+    "ourShop": "Our",
+    "heroSubtitle": "No need to rush, but this collection won't last forever 😴",
+    "promoCode": "-15% on your first order with code: CHILL15",
+    "default": "Default",
+    "variantNotAvailable": "Variant not available"
+  },
   "product": {
     "size": "Size",
     "color": "Color",
@@ -123,6 +130,22 @@
     "reviews": "Reviews",
     "relatedProducts": "Related Products",
     "backView": "back view"
+  },
+  "productPage": {
+    "notFound": "Product not found",
+    "notFoundDesc": "This product doesn't exist or has been removed",
+    "backToShop": "Back to shop",
+    "clickToSeeMore": "Click to see more",
+    "originalDesign": "Original design",
+    "highQualityPrint": "High quality print",
+    "premiumCotton": "Premium cotton",
+    "fastShipping": "Fast shipping",
+    "sizeGuide": "Size guide",
+    "freeShipping": "Free shipping from 50€",
+    "returns30days": "30-day returns",
+    "customerReviews": "Customer reviews",
+    "leaveReview": "Leave a review",
+    "customize": "Customize"
   },
   "cart": {
     "title": "Cart",

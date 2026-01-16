@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SEO } from "@/components/SEO";
@@ -23,6 +24,7 @@ import { toast } from "sonner";
 import { ShoppingCart, Loader2, Heart, ArrowUpDown } from "lucide-react";
 
 const Shop = () => {
+  const { t } = useTranslation();
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
@@ -164,7 +166,7 @@ const Shop = () => {
   const handleAddToCart = (product: ShopifyProduct) => {
     const firstVariant = product.node.variants.edges[0]?.node;
     if (!firstVariant) {
-      toast.error("Variante non disponible");
+      toast.error(t('shopPage.variantNotAvailable'));
       return;
     }
 
@@ -178,16 +180,16 @@ const Shop = () => {
     };
 
     addToCart(cartItem);
-    toast.success("Produit ajouté au panier");
+    toast.success(t('common.addedToCart'));
   };
 
   const handleToggleWishlist = (product: ShopifyProduct) => {
     if (isInWishlist(product.node.id)) {
       removeFromWishlist(product.node.id);
-      toast.success("Retiré des favoris");
+      toast.success(t('common.removedFromWishlist'));
     } else {
       addToWishlist(product);
-      toast.success("Ajouté aux favoris");
+      toast.success(t('common.addedToWishlist'));
     }
   };
 
@@ -225,13 +227,13 @@ const Shop = () => {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(24_100%_50%/0.08),transparent_60%)]" />
           <div className="container px-4 md:px-6 text-center relative z-10">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              Notre <span className="text-primary">Boutique</span>
+              {t('shopPage.ourShop')} <span className="text-primary">{t('shop.title')}</span>
             </h1>
             <p className="text-sm md:text-lg lg:text-xl text-muted-foreground mb-4 md:mb-6 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-150">
-              Pas besoin de courir, mais cette collection ne dure pas éternellement 😴
+              {t('shopPage.heroSubtitle')}
             </p>
             <Badge variant="secondary" className="text-xs md:text-sm py-1.5 md:py-2 px-3 md:px-4 shadow-[var(--shadow-soft)] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-              🎉 -15% sur votre première commande avec le code: CHILL15
+              🎉 {t('shopPage.promoCode')}
             </Badge>
           </div>
         </section>
@@ -266,14 +268,14 @@ const Shop = () => {
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-auto min-w-[140px] md:min-w-[180px] text-xs md:text-sm">
                     <ArrowUpDown className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" />
-                    <SelectValue placeholder="Trier par" />
+                    <SelectValue placeholder={t('shop.sortBy')} />
                   </SelectTrigger>
                   <SelectContent className="bg-background border shadow-lg z-50">
-                    <SelectItem value="default">Par défaut</SelectItem>
-                    <SelectItem value="price-asc">Prix croissant</SelectItem>
-                    <SelectItem value="price-desc">Prix décroissant</SelectItem>
-                    <SelectItem value="name-asc">Nom A-Z</SelectItem>
-                    <SelectItem value="name-desc">Nom Z-A</SelectItem>
+                    <SelectItem value="default">{t('shopPage.default')}</SelectItem>
+                    <SelectItem value="price-asc">{t('shop.priceAsc')}</SelectItem>
+                    <SelectItem value="price-desc">{t('shop.priceDesc')}</SelectItem>
+                    <SelectItem value="name-asc">{t('shop.nameAsc')}</SelectItem>
+                    <SelectItem value="name-desc">{t('shop.nameDesc')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -286,7 +288,7 @@ const Shop = () => {
               </div>
             ) : filteredProducts.length === 0 ? (
               <div className="text-center py-16 md:py-20">
-                <p className="text-base md:text-xl text-muted-foreground">Aucun produit trouvé</p>
+                <p className="text-base md:text-xl text-muted-foreground">{t('shop.noProducts')}</p>
               </div>
             ) : (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
@@ -353,7 +355,7 @@ const Shop = () => {
                           className="w-full text-[10px] md:text-xs py-1.5 md:py-2 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-hover)] hover:scale-[1.02] transition-all"
                         >
                           <ShoppingCart className="w-3 h-3 mr-1" />
-                          Ajouter
+                          {t('common.addToCart')}
                         </Button>
                       </div>
                     </CardContent>

@@ -111,6 +111,13 @@
     "priceRange": "Fourchette de prix",
     "resetFilters": "Réinitialiser"
   },
+  "shopPage": {
+    "ourShop": "Notre",
+    "heroSubtitle": "Pas besoin de courir, mais cette collection ne dure pas éternellement 😴",
+    "promoCode": "-15% sur votre première commande avec le code: CHILL15",
+    "default": "Par défaut",
+    "variantNotAvailable": "Variante non disponible"
+  },
   "product": {
     "size": "Taille",
     "color": "Couleur",
@@ -123,6 +130,22 @@
     "reviews": "Avis",
     "relatedProducts": "Produits similaires",
     "backView": "vue arrière"
+  },
+  "productPage": {
+    "notFound": "Produit non trouvé",
+    "notFoundDesc": "Ce produit n'existe pas ou a été retiré",
+    "backToShop": "Retour à la boutique",
+    "clickToSeeMore": "Cliquez pour voir plus",
+    "originalDesign": "Design original",
+    "highQualityPrint": "Impression haute qualité",
+    "premiumCotton": "Coton premium",
+    "fastShipping": "Livraison rapide",
+    "sizeGuide": "Guide tailles",
+    "freeShipping": "Livraison gratuite dès 50€",
+    "returns30days": "Retours 30j",
+    "customerReviews": "Avis clients",
+    "leaveReview": "Laisser un avis",
+    "customize": "Personnaliser"
   },
   "cart": {
     "title": "Panier",
