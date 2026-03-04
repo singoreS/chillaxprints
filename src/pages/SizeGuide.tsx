@@ -27,7 +27,7 @@ const SizeGuide = () => {
             </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Trouve ta taille parfaite pour être à l'aise dans ton mode chill. 
-              Nos produits sont fabriqués par des partenaires Printify avec des standards de qualité élevés.
+              Nos produits sont fabriqués à la demande avec des standards de qualité élevés.
             </p>
           </div>
 
@@ -389,9 +389,9 @@ const SizeGuide = () => {
           {/* Additional Info */}
           <div className="mt-12 grid md:grid-cols-2 gap-6">
             <div className="bg-card border border-border rounded-2xl p-6">
-              <h3 className="font-semibold text-foreground mb-3">🏭 Fabrication Printify</h3>
+              <h3 className="font-semibold text-foreground mb-3">🏭 Fabrication à la demande</h3>
               <p className="text-muted-foreground text-sm">
-                Nos produits sont fabriqués à la demande par les partenaires de production Printify. 
+                Nos produits sont fabriqués à la demande par nos partenaires de production. 
                 Les tailles peuvent varier légèrement selon le fournisseur, mais restent dans les tolérances indiquées.
               </p>
             </div>
